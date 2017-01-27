@@ -8,7 +8,7 @@
     <!--<welcome-file>/login.xhtml</welcome-file>-->
     <!--</welcome-file-list>-->
     <listener>
-    <listener-class>Initializer</listener-class>
+    <listener-class>initialize.Initializer</listener-class>
     </listener>
 
     <servlet>

@@ -2,5 +2,4 @@
 *.iml
 .idea
 out
-/Test.iml
 /target/

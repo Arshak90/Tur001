@@ -5,17 +5,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="root" class="Root" scope="singleton" />
+    <bean id="root" class="Core.Root" scope="singleton" />
 
-    <bean id="projectEditForm" class="ProjectEditForm" scope="session"/>
+    <bean id="projectEditForm" class="Beans.ProjectEditForm" scope="session"/>
 
-    <bean id="dashboardForm" class="DashboardForm" scope="session" />
+    <bean id="dashboardForm" class="dashboard.DashboardForm" scope="session" />
 
-    <bean id="portfolioForm" class="PortfolioForm" scope="session" >
+    <bean id="portfolioForm" class="portfolio.PortfolioForm" scope="session" >
         <property name="root" ref="root"/>
     </bean>
 
-    <bean id="hotelForm" class="HotelForm" scope="session" >
+    <bean id="hotelForm" class="hotel.HotelForm" scope="session" >
         <property name="root" ref="root"/>
     </bean>
 

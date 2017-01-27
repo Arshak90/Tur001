@@ -16,7 +16,7 @@
 	</application>
 	<converter>
 		<converter-id>IdConvertor</converter-id>
-		<converter-class>IdConvertor</converter-class>
+		<converter-class>Convertors.IdConvertor</converter-class>
 	</converter>
 
 </faces-config>
