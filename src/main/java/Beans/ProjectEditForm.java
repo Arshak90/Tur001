@@ -52,11 +52,12 @@ public class ProjectEditForm {
             "      }";
 
     public String getMapWorld() throws ClassNotFoundException {
-        YearDao yearDao = new YearDao();
-        Year year = new Year();
-        year.setId(2040);
-        year.setYear(2800);
-        yearDao.delete(year.getId());
+//        YearDao yearDao = new YearDao();
+//        Year year = new Year();
+//        year.setId(2024);
+//        year.setYear(2024);
+//        yearDao.insert(year);
+//        System.out.println(year + "Year inserted");
 
 //        FacesContext.getCurrentInstance();
         return this.mapWorld;

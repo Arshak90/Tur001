@@ -25,18 +25,19 @@ public class Initializer implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-//		Properties prop = new Properties();
-		String url = "jdbc:sqlite:C:\\Users\\ArtStyle\\Desktop\\GIT\\Tur001\\src\\main\\resources\\db.sqlite";
-//		try {
-//			InputStream input = new FileInputStream("config.properties");
-//			prop.load(input);
-//			url = prop.getProperty("db.name");
-//
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		Properties prop = new Properties();
+		String url = "";
+		try {
+
+			InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+			prop.load(input);
+			url = prop.getProperty("db.name");
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		try  {
 			Class.forName("org.sqlite.JDBC");
