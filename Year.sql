@@ -1,0 +1,14 @@
+UPDATE Year SET year = 2011 WHERE id = 201;
+UPDATE Year SET year = 2010 WHERE id = 2010;
+UPDATE Year SET year = 2012 WHERE id = 2012;
+UPDATE Year SET year = 2013 WHERE id = 2013;
+UPDATE Year SET year = 2014 WHERE id = 2014;
+UPDATE Year SET year = 2015 WHERE id = 2015;
+UPDATE Year SET year = 2016 WHERE id = 2016;
+UPDATE Year SET year = 2017 WHERE id = 2017;
+UPDATE Year SET year = 2018 WHERE id = 2018;
+UPDATE Year SET year = 2019 WHERE id = 2019;
+UPDATE Year SET year = 2020 WHERE id = 2020;
+UPDATE Year SET year = 2021 WHERE id = 2021;
+UPDATE Year SET year = 2022 WHERE id = 2022;
+UPDATE Year SET year = 2023 WHERE id = 2023;
