@@ -10,6 +10,7 @@ import java.util.List;
 public class HotelForm {
     private Root root;
     private List<Hotel> hotels;
+    private Hotel hotel;
 
     public Root getRoot() {
         return root;
@@ -30,5 +31,12 @@ public class HotelForm {
         this.hotels = hotels;
     }
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
 
 }

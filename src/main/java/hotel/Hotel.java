@@ -7,6 +7,7 @@ public class Hotel {
 
     private Integer id;
     private String name;
+    private Integer hotelType;
     private String address;
     private String phoneNumber;
     private String mobilePhoneNumber;
@@ -121,5 +122,13 @@ public class Hotel {
 
     public void setPhotoWay(String photoWay) {
         this.photoWay = photoWay;
+    }
+
+    public Integer getHotelType() {
+        return hotelType;
+    }
+
+    public void setHotelType(Integer hotelType) {
+        this.hotelType = hotelType;
     }
 }
