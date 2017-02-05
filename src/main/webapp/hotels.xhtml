@@ -391,7 +391,7 @@
                             <div class="row-col">
                                 <div class="row-row">
                                     <div class="row-body">
-                                        <h:panelGroup id="contentId" styleClass="row-inner"  style="max-width: 700px; margin: 10% auto 0;">
+                                        <h:panelGroup id="contentId" styleClass="row-inner"  style="max-width: 700px; margin: 10% auto 0;" layout="block">
                                             <h:panelGroup class="padding">
                                                 <h:form id="formId">
                                                     <div class="row-col h-auto mrgb28">
@@ -473,10 +473,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <!--<h:commandButton value="Պահպանել" styleClass="btn btn-info btn-sm" actionListener="#{hotelForm.saveHotel()}">-->
-                                                            <!--<f:ajax render="formId"/>-->
-                                                        <!--</h:commandButton>-->
-                                                        <p:commandLink value="Պահպանել" styleClass="btn btn-info btn-sm" actionListener="#{hotelForm.saveHotel}">
+                                                        <p:commandLink value="Պահպանել" styleClass="btn btn-info btn-sm" action="#{hotelForm.saveHotel}" update="@form">
 
                                                         </p:commandLink>
                                                     </div>
@@ -502,7 +499,10 @@
 
     <!-- build:js scripts/app.html.js -->
     <!-- jQuery -->
-    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=6.0"></script>
+    <script type="text/javascript" src="/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=6.0"></script>
+    <script type="text/javascript" src="/javax.faces.resource/core.js.xhtml?ln=primefaces&amp;v=6.0"></script>
+    <script type="text/javascript" src="/javax.faces.resource/components.js.xhtml?ln=primefaces&amp;v=6.0"></script>
     <!-- Bootstrap -->
     <script src="../libs/jquery/tether/dist/js/tether.min.js"></script>
     <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
@@ -527,8 +527,8 @@
     <script src="scripts/app.js"></script>
 
     <!-- ajax -->
-    <script src="../libs/jquery/jquery-pjax/jquery.pjax.js"></script>
-    <script src="scripts/ajax.js"></script>
+    <!--<script src="../libs/jquery/jquery-pjax/jquery.pjax.js"></script>-->
+    <!--<script src="scripts/ajax.js"></script>-->
     <!-- endbuild -->
 
 </h:body>

@@ -2,6 +2,7 @@ package hotel;
 
 import Core.Root;
 
+import javax.faces.event.ActionEvent;
 import java.io.Serializable;
 import java.util.List;
 
@@ -57,5 +58,10 @@ public class HotelForm implements Serializable {
 //            this.hotel = new Hotel();
         System.out.println(this.hotel.getAddress());
         this.hotel = new Hotel();
+    }
+
+
+    public void buttonAction(ActionEvent actionEvent) {
+        System.out.println("Welcome to Primefaces!!");
     }
 }

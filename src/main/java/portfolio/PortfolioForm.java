@@ -12,7 +12,7 @@ public class PortfolioForm {
 
     private Root root;
     private List<Year> years;
-    private Year selectedYear;
+    private String selectedYear;
 
     public Root getRoot() {
         return root;
@@ -33,11 +33,11 @@ public class PortfolioForm {
         this.years = years;
     }
 
-    public Year getSelectedYear() {
+    public String getSelectedYear() {
         return selectedYear;
     }
 
-    public void setSelectedYear(Year selectedYear) {
+    public void setSelectedYear(String selectedYear) {
         this.selectedYear = selectedYear;
     }
 

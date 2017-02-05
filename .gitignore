@@ -5,3 +5,5 @@ out
 /target/
 /Test.iml
 WebContent/
+/src/main/resources/config.properties
+/src/main/resources/db.sqlite

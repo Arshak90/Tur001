@@ -181,14 +181,7 @@
 
         <!-- content -->
         <div id="content" class="app-content box-shadow-z0" role="main">
-            <h:form prependId="false">
-                <p:selectOneMenu id="year" value="#{portfolioForm.selectedYear}" style="width: 165px; z-index: 1000000000" converter="IdConvertor"
-                                 styleClass="input-sm form-control inline v-middle">
-                    <p:ajax event="change" process="@this" update="@this" />
-                    <f:selectItem itemLabel="Select One" itemValue="" />
-                    <f:selectItems value="#{portfolioForm.years}" var="year" itemValue="#{year}" itemLabel="#{year}"/>
 
-                </p:selectOneMenu>
 
             <div class="app-header white box-shadow">
                 <div class="navbar">
@@ -219,7 +212,6 @@
                     <!-- / navbar collapse -->
                 </div>
             </div>
-            </h:form>
             <div class="app-footer">
                 <div class="p-a text-xs">
                     <div class="pull-right text-muted">
@@ -411,7 +403,7 @@
 
     <!-- build:js scripts/app.html.js -->
     <!-- jQuery -->
-    <!--<script src="../libs/jquery/jquery/dist/jquery.js"></script>-->
+    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
     <!-- Bootstrap -->
     <script src="../libs/jquery/tether/dist/js/tether.min.js"></script>
     <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
@@ -436,7 +428,7 @@
     <script src="scripts/app.js"></script>
 
     <!-- ajax -->
-    <script src="../libs/jquery/jquery-pjax/jquery.pjax.js"></script>
+    <!--<script src="../libs/jquery/jquery-pjax/jquery.pjax.js"></script>-->
     <script src="scripts/ajax.js"></script>
     <!-- endbuild -->
 
