@@ -21,8 +21,8 @@ public class QuarterDao implements Dao<Quarter> {
     }
 
     @Override
-    public void insert(Quarter item) {
-
+    public boolean insert(Quarter item) {
+        return false;
     }
 
     @Override

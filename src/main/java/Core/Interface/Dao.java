@@ -17,7 +17,7 @@ public interface Dao<T> {
 
     public T getById(Integer id);
 
-    public void insert(T item);
+    public boolean insert(T item);
 
     public boolean update(T item);
 

@@ -2,15 +2,17 @@ package hotel;
 
 import Core.Root;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by arshak.askaryan on 1/25/2017.
  */
-public class HotelForm {
+public class HotelForm implements Serializable {
     private Root root;
     private List<Hotel> hotels;
-    private Hotel hotel;
+    private Hotel hotel =new Hotel();
+    private List<HotelType> hotelTypes;
 
     public Root getRoot() {
         return root;
@@ -39,4 +41,21 @@ public class HotelForm {
         this.hotel = hotel;
     }
 
+    public List<HotelType> getHotelTypes() {
+        if (this.hotelTypes == null){
+            this.hotelTypes = getRoot().getHotelDao().getHotelTypes();
+        }
+        return hotelTypes;
+    }
+
+    public void setHotelTypes(List<HotelType> hotelTypes) {
+        this.hotelTypes = hotelTypes;
+    }
+
+    public void saveHotel(){
+//        if (getRoot().getHotelDao().insert(this.hotel));
+//            this.hotel = new Hotel();
+        System.out.println(this.hotel.getAddress());
+        this.hotel = new Hotel();
+    }
 }

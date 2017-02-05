@@ -21,8 +21,8 @@ public class CityDao implements Dao<City> {
     }
 
     @Override
-    public void insert(City item) {
-
+    public boolean insert(City item) {
+        return false;
     }
 
     @Override

@@ -37,6 +37,11 @@ public class HotelDao implements Dao<Hotel> {
                 hotel.setBedCount(res.getInt("bedCount"));
                 hotel.setHotel(res.getInt("isHotel"));
                 hotel.setPhotoWay(res.getString("photoWay"));
+                hotel.setEmail(res.getString("email"));
+                hotel.setSite(res.getString("site"));
+                hotel.setDirectorFullName(res.getString("directorFullName"));
+                hotel.setLegalName(res.getString("legalName"));
+                hotel.setRate(res.getInt("rate"));
                 hotels.add(hotel);
             }
         }catch (SQLException e) {
@@ -76,6 +81,11 @@ public class HotelDao implements Dao<Hotel> {
                 hotel.setBedCount(rs.getInt("bedCount"));
                 hotel.setHotel(rs.getInt("isHotel"));
                 hotel.setPhotoWay(rs.getString("photoWay"));
+                hotel.setEmail(rs.getString("email"));
+                hotel.setSite(rs.getString("site"));
+                hotel.setDirectorFullName(rs.getString("directorFullName"));
+                hotel.setLegalName(rs.getString("legalName"));
+                hotel.setRate(rs.getInt("rate"));
 
                 return hotel;
             }
@@ -95,7 +105,7 @@ public class HotelDao implements Dao<Hotel> {
     public List<HotelType> getHotelTypes(){
 
         List<HotelType> hotelTypes = new ArrayList<>();
-        String sql = "SELECT * FROM Hotel";
+        String sql = "SELECT * FROM HotelType";
 
         try(Connection conn = this.connect();
             Statement stat = conn.createStatement();
@@ -117,7 +127,9 @@ public class HotelDao implements Dao<Hotel> {
 
     @Override
     public boolean update(Hotel item) {
-        String sql = "UPDATE Hotel SET name = ?, address = ?, phoneNumber = ?, mobilePhoneNumber = ?, singleRoom = ?, doubleRoom = ?, tripleRoom = ?, otherRoom = ?, roomCount = ?, bedCount = ?, isHotel = ?, photoWay = ?, hotelType = ? WHERE id = ?";
+        String sql = "UPDATE Hotel SET name = ?, address = ?, phoneNumber = ?, mobilePhoneNumber = ?, singleRoom = ?," +
+        " doubleRoom = ?, tripleRoom = ?, otherRoom = ?, roomCount = ?, bedCount = ?, isHotel = ?, photoWay = ?," +
+        " hotelType = ?, email=?,site=?,directorFullName=?,legalName=?,rate=? WHERE id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -136,7 +148,13 @@ public class HotelDao implements Dao<Hotel> {
             pstmt.setInt(11, item.getHotel());
             pstmt.setString(12, item.getPhotoWay());
             pstmt.setInt(13, item.getHotelType());
-            pstmt.setInt(14, item.getId());
+            pstmt.setString(14, item.getEmail());
+            pstmt.setString(15, item.getSite());
+            pstmt.setString(16, item.getDirectorFullName());
+            pstmt.setString(17, item.getLegalName());
+            pstmt.setInt(18, item.getRate());
+            pstmt.setInt(19, item.getId());
+
 
             // update
             pstmt.executeUpdate();
@@ -149,8 +167,9 @@ public class HotelDao implements Dao<Hotel> {
     }
 
     @Override
-    public void insert(Hotel item) {
-        String sql = "INSERT INTO Hotel(name,address,phoneNumber,mobilePhoneNumber,singleRoom,doubleRoom,tripleRoom,otherRoom,roomCount,bedCount,isHotel,photoWay,hotelType) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public boolean insert(Hotel item) {
+        String sql = "INSERT INTO Hotel(name,address,phoneNumber,mobilePhoneNumber,singleRoom,doubleRoom,tripleRoom," +
+        "otherRoom,roomCount,bedCount,isHotel,photoWay,hotelType,email,site,directorFullName,legalName,rate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -158,19 +177,27 @@ public class HotelDao implements Dao<Hotel> {
             pstmt.setString(2, item.getAddress());
             pstmt.setString(3, item.getPhoneNumber());
             pstmt.setString(4, item.getMobilePhoneNumber());
-            pstmt.setInt(5, item.getSingleRoom());
-            pstmt.setInt(6, item.getDoubleRoom());
-            pstmt.setInt(7, item.getTripleRoom());
-            pstmt.setInt(8, item.getOtherRoom());
-            pstmt.setInt(9, item.getRoomCount());
-            pstmt.setInt(10, item.getBedCount());
-            pstmt.setInt(11, item.getHotel());
+            pstmt.setObject(5, item.getSingleRoom());
+            pstmt.setObject(6, item.getDoubleRoom());
+            pstmt.setObject(7, item.getTripleRoom());
+            pstmt.setObject(8, item.getOtherRoom());
+            pstmt.setObject(9, item.getRoomCount());
+            pstmt.setObject(10, item.getBedCount());
+            pstmt.setObject(11, item.getHotel());
             pstmt.setString(12, item.getPhotoWay());
-            pstmt.setInt(13, item.getHotelType());
+            pstmt.setObject(13, item.getHotelType());
+            pstmt.setString(14, item.getEmail());
+            pstmt.setString(15, item.getSite());
+            pstmt.setString(16, item.getDirectorFullName());
+            pstmt.setString(17, item.getLegalName());
+            pstmt.setObject(18, item.getRate());
             pstmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+
         }
+        return false;
     }
 
     @Override

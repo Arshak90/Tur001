@@ -19,6 +19,11 @@ public class Hotel {
     private Integer bedCount;
     private Integer isHotel;
     private String photoWay;
+    private String email;
+    private String site;
+    private String directorFullName;
+    private String legalName;
+    private Integer rate;
 
     public Integer getId() {
         return id;
@@ -130,5 +135,53 @@ public class Hotel {
 
     public void setHotelType(Integer hotelType) {
         this.hotelType = hotelType;
+    }
+
+    public Integer getIsHotel() {
+        return isHotel;
+    }
+
+    public void setIsHotel(Integer isHotel) {
+        this.isHotel = isHotel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getDirectorFullName() {
+        return directorFullName;
+    }
+
+    public void setDirectorFullName(String directorFullName) {
+        this.directorFullName = directorFullName;
+    }
+
+    public String getLegalName() {
+        return legalName;
+    }
+
+    public void setLegalName(String legalName) {
+        this.legalName = legalName;
+    }
+
+    public Integer getRate() {
+        return rate;
+    }
+
+    public void setRate(Integer rate) {
+        this.rate = rate;
     }
 }

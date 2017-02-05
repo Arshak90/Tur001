@@ -19,8 +19,8 @@ public class PortfolioDao implements Dao<Portfolio>{
     }
 
     @Override
-    public void insert(Portfolio item) {
-
+    public boolean insert(Portfolio item) {
+       return false;
     }
 
     @Override

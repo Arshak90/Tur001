@@ -21,8 +21,8 @@ public class RegionDao implements Dao<Region> {
     }
 
     @Override
-    public void insert(Region item) {
-
+    public boolean insert(Region item) {
+        return false;
     }
 
     @Override

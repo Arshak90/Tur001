@@ -69,16 +69,18 @@ public class YearDao implements Dao<Year> {
     }
 
     @Override
-    public void insert(Year item) {
+    public boolean insert(Year item) {
         String sql = "INSERT INTO Year(year) VALUES(?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, item.getYear());
             pstmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
     @Override

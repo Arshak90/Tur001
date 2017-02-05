@@ -21,8 +21,8 @@ public class CountryDao implements Dao<Country> {
     }
 
     @Override
-    public void insert(Country item) {
-
+    public boolean insert(Country item) {
+        return false;
     }
 
     @Override
