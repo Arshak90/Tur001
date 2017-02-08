@@ -102,6 +102,56 @@ public class HotelDao implements Dao<Hotel> {
         return null;
     }
 
+    public List<Hotel> getHotelsByTypeId(Integer id) {
+        List<Hotel> hotels = new ArrayList<>();
+        String sql = "SELECT * FROM Hotel WHERE hotelType = ?";
+        ResultSet rs = null;
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setInt(1, id);
+
+            // update
+            rs  = pstmt.executeQuery();
+            while ( rs.next() ) {
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt("id"));
+                hotel.setHotelType(rs.getInt("HotelType"));
+                hotel.setName(rs.getString("name"));
+                hotel.setAddress(rs.getString("address"));
+                hotel.setPhoneNumber(rs.getString("phoneNumber"));
+                hotel.setMobilePhoneNumber(rs.getString("mobilePhoneNumber"));
+                hotel.setSingleRoom(rs.getInt("singleRoom"));
+                hotel.setDoubleRoom(rs.getInt("doubleRoom"));
+                hotel.setTripleRoom(rs.getInt("tripleRoom"));
+                hotel.setOtherRoom(rs.getInt("otherRoom"));
+                hotel.setRoomCount(rs.getInt("roomCount"));
+                hotel.setBedCount(rs.getInt("bedCount"));
+                hotel.setHotel(rs.getInt("isHotel"));
+                hotel.setPhotoWay(rs.getString("photoWay"));
+                hotel.setEmail(rs.getString("email"));
+                hotel.setSite(rs.getString("site"));
+                hotel.setDirectorFullName(rs.getString("directorFullName"));
+                hotel.setLegalName(rs.getString("legalName"));
+                hotel.setRate(rs.getInt("rate"));
+                hotels.add(hotel);
+
+            }
+            return hotels;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     public List<HotelType> getHotelTypes(){
 
         List<HotelType> hotelTypes = new ArrayList<>();
@@ -192,6 +242,7 @@ public class HotelDao implements Dao<Hotel> {
             pstmt.setString(17, item.getLegalName());
             pstmt.setObject(18, item.getRate());
             pstmt.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

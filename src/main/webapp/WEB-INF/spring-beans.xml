@@ -7,6 +7,8 @@
 
     <bean id="root" class="Core.Root" scope="singleton" />
 
+    <bean id="hotel" class="hotel.Hotel" scope="session"/>
+
     <bean id="projectEditForm" class="Beans.ProjectEditForm" scope="session"/>
 
     <bean id="dashboardForm" class="dashboard.DashboardForm" scope="session" />
@@ -17,6 +19,7 @@
 
     <bean id="hotelForm" class="hotel.HotelForm" scope="session" >
         <property name="root" ref="root"/>
+        <property name="hotel" ref="hotel"/>
     </bean>
 
 </beans>

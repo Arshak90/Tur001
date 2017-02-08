@@ -1,8 +1,10 @@
 package hotel;
 
 import Core.Root;
+import Core.Util;
 
-import javax.faces.event.ActionEvent;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,8 +14,10 @@ import java.util.List;
 public class HotelForm implements Serializable {
     private Root root;
     private List<Hotel> hotels;
-    private Hotel hotel =new Hotel();
+    private Hotel hotel;
     private List<HotelType> hotelTypes;
+    private Integer hotelTypeIdForFind = 1;
+    private List<Hotel> hotelsWithType;
 
     public Root getRoot() {
         return root;
@@ -49,19 +53,69 @@ public class HotelForm implements Serializable {
         return hotelTypes;
     }
 
+    public Integer getHotelTypeIdForFind() {
+        return hotelTypeIdForFind;
+    }
+
+    public void setHotelTypeIdForFind(Integer hotelTypeIdForFind) {
+        this.hotelTypeIdForFind = hotelTypeIdForFind;
+    }
+
+    public List<Hotel> getHotelsWithType() {
+        if (this.hotelsWithType == null){
+            this.hotelsWithType = getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind);
+        }
+        return hotelsWithType;
+    }
+
+    public void setHotelsWithType(List<Hotel> hotelsWithType) {
+        this.hotelsWithType = hotelsWithType;
+    }
+
     public void setHotelTypes(List<HotelType> hotelTypes) {
         this.hotelTypes = hotelTypes;
     }
 
     public void saveHotel(){
-//        if (getRoot().getHotelDao().insert(this.hotel));
-//            this.hotel = new Hotel();
-        System.out.println(this.hotel.getAddress());
+        if (this.hotel.getId()!= null){
+            if (getRoot().getHotelDao().update(this.hotel)){
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+                FacesMessage facesMessage = new FacesMessage("Փոփոխությունը Հաջողությամբ պահպանվել է");
+                facesContext.addMessage(null, facesMessage);
+            }
+        }else {
+            if (getRoot().getHotelDao().insert(this.hotel)){
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+                FacesMessage facesMessage = new FacesMessage("Հաջողությամբ պահպանվել է");
+                for (Hotel hotel: root.getHotelDao().getAll()){
+                    if (hotel.getName().equals(this.hotel.getName())){
+                        this.setHotel(hotel);
+                        Util.getBean("hotel", Hotel.class).setId(hotel.getId());
+                    }
+                }
+                facesContext.addMessage(null, facesMessage);
+            }
+        }
+
+        this.hotelsWithType = null;
+    }
+
+    public void newHotel(){
         this.hotel = new Hotel();
     }
 
+    public void changeHotelType(){
+        this.hotelsWithType = getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind);
+//        this.hotelsWithType.clear();
+//        this.hotelsWithType.addAll(getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind));
+    }
 
-    public void buttonAction(ActionEvent actionEvent) {
-        System.out.println("Welcome to Primefaces!!");
+    public void editHotel(Integer id){
+        this.setHotel(getRoot().getHotelDao().getById(id));
+        Util.getBean("hotel", Hotel.class).setId(hotel.getId());
+    }
+
+    public void deleteHotel(Integer id){
+        System.out.println(id);
     }
 }
