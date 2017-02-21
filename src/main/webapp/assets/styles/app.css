@@ -5942,3 +5942,7 @@ textarea.md-input {
 .bootstrap-datetimepicker-widget table td span.active {
     background-color: #0cc2aa !important;
 }
+
+.top-z-index {
+  z-index: 1000000 !important;
+}

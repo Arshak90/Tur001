@@ -2,6 +2,11 @@ package portfolio;
 
 import Core.Interface.Dao;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +15,26 @@ import java.util.List;
 public class PortfolioDao implements Dao<Portfolio>{
     @Override
     public List<Portfolio> getAll() {
-        return null;
+        List<Portfolio> portfolios = new ArrayList<>();
+        String sql = "SELECT * FROM Portfolio";
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql);) {
+
+            while ( rs.next() ) {
+                Portfolio portfolio = new Portfolio();
+                portfolio.setId(rs.getInt("id"));
+                portfolio.setYear(rs.getInt("year"));
+                portfolio.setQuarter(rs.getInt("quarter"));
+                portfolios.add(portfolio);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+        return portfolios;
     }
 
     @Override

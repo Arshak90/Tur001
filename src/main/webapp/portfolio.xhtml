@@ -182,35 +182,35 @@
 
         <!-- content -->
         <div id="content" class="app-content box-shadow-z0" role="main">
-            <div class="app-header white box-shadow">
-                <div class="navbar">
-                    <!-- Open side - Naviation on mobile -->
-                    <a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up">
-                        <i class="material-icons">&#xe5d2;</i>
-                    </a>
-                    <!-- / -->
+            <!--<div class="app-header white box-shadow">-->
+                <!--<div class="navbar">-->
+                    <!--&lt;!&ndash; Open side - Naviation on mobile &ndash;&gt;-->
+                    <!--<a data-toggle="modal" data-target="#aside" class="navbar-item pull-left hidden-lg-up">-->
+                        <!--<i class="material-icons">&#xe5d2;</i>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash; / &ndash;&gt;-->
 
-                    <!-- Page title - Bind to $state's title -->
-                    <div class="navbar-item pull-left h5" ng-bind="$state.current.data.title" id="pageTitle"></div>
+                    <!--&lt;!&ndash; Page title - Bind to $state's title &ndash;&gt;-->
+                    <!--<div class="navbar-item pull-left h5" ng-bind="$state.current.data.title" id="pageTitle"></div>-->
 
-                    <!-- navbar collapse -->
-                    <div class="collapse navbar-toggleable-sm" id="collapse">
-                        <div ui-include="'../views/blocks/navbar.form.right.html'"></div>
-                        <!-- link and dropdown -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="" data-toggle="dropdown">
-                                    <i class="fa fa-fw fa-plus text-muted"></i>
-                                    <span>Ավելացնել նոր հյուրանոց</span>
-                                </a>
-                                <div ui-include="'../views/blocks/dropdown.new.html'"></div>
-                            </li>
-                        </ul>
-                        <!-- / -->
-                    </div>
-                    <!-- / navbar collapse -->
-                </div>
-            </div>
+                    <!--&lt;!&ndash; navbar collapse &ndash;&gt;-->
+                    <!--<div class="collapse navbar-toggleable-sm" id="collapse">-->
+                        <!--<div ui-include="'../views/blocks/navbar.form.right.html'"></div>-->
+                        <!--&lt;!&ndash; link and dropdown &ndash;&gt;-->
+                        <!--<ul class="nav navbar-nav">-->
+                            <!--<li class="nav-item dropdown">-->
+                                <!--<a class="nav-link" href="" data-toggle="dropdown">-->
+                                    <!--<i class="fa fa-fw fa-plus text-muted"></i>-->
+                                    <!--<span>Ավելացնել նոր հյուրանոց</span>-->
+                                <!--</a>-->
+                                <!--<div ui-include="'../views/blocks/dropdown.new.html'"></div>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                        <!--&lt;!&ndash; / &ndash;&gt;-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; / navbar collapse &ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="app-footer">
                 <div class="p-a text-xs">
                     <div class="pull-right text-muted">
@@ -222,7 +222,7 @@
                     </div>
                 </div>
             </div>
-            <h:form>
+            <h:form id="portfolioForm" prependId="false">
             <div ui-view="" class="app-body" id="view">
 
                     <!-- ############ PAGE START-->
@@ -234,20 +234,26 @@
                             <p:selectOneMenu id="console" value="#{portfolioForm.selectedYear}" style="width:125px">
                                 <f:selectItem itemLabel="Select One" itemValue="" />
                                 <f:selectItems value="#{portfolioForm.years}" />
-                                <p:ajax event="change" update="table" process="@this"></p:ajax>
+                                <p:ajax event="change" update="table" process="@this" listener="#{portfolioForm.changeYear}"></p:ajax>
                             </p:selectOneMenu>
                             <div class="table-responsive">
 
                                 <p:dataTable id="table" value="#{portfolioForm.portfolios}" var="portfolio" tableStyleClass="table table-striped b-t b-b">
-                                    <p:column headerText="Id">
-                                        <h:outputText value="#{portfolio.id}" />
+                                    <p:column style="width:32px;text-align: center">
+                                        <p:commandButton update=":portfolioForm:carDetail" oncomplete="PF('carDialog').show();" icon="ui-icon-search" title="View"/>
                                     </p:column>
-
                                     <p:column headerText="Quarter">
                                         <h:outputText value="#{portfolio.quarter}" />
                                     </p:column>
+                                    <p:column headerText="Year">
+                                        <h:outputText value="#{portfolio.year}" />
+                                    </p:column>
                                 </p:dataTable>
-
+                                <p:dialog header="Car Info" styleClass="top-z-index" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                    <p:outputPanel id="carDetail" style="text-align:center;">
+                                        <p:outputLabel >AAA</p:outputLabel>
+                                    </p:outputPanel>
+                                </p:dialog>
                             </div>
                         </div>
                     </div>
