@@ -5,9 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+
+
     <bean id="root" class="Core.Root" scope="singleton" />
 
-    <bean id="hotel" class="hotel.Hotel" scope="session"/>
+    <bean id="fileUpload" class="Core.FileUpload" scope="session"/>
 
     <bean id="projectEditForm" class="Beans.ProjectEditForm" scope="session"/>
 
@@ -17,9 +19,40 @@
         <property name="root" ref="root"/>
     </bean>
 
+    <!--HOTEL BEANS-->
+
+    <bean id="hotel" class="hotel.Hotel" scope="session"/>
+
     <bean id="hotelForm" class="hotel.HotelForm" scope="session" >
         <property name="root" ref="root"/>
         <property name="hotel" ref="hotel"/>
+    </bean>
+
+    <!--Restaurant BEANS-->
+
+    <bean id="restaurant" class="restaurant.Restaurant" scope="session"/>
+
+    <bean id="restaurantForm" class="restaurant.RestaurantForm" scope="session" >
+        <property name="root" ref="root"/>
+        <property name="restaurant" ref="restaurant"/>
+    </bean>
+
+    <!--tour operator BEANS-->
+
+    <bean id="tourOperator" class="tourOperator.TourOperator" scope="session"/>
+
+    <bean id="tourOperatorForm" class="tourOperator.TourOperatorForm" scope="session" >
+        <property name="root" ref="root"/>
+        <property name="tourOperator" ref="tourOperator"/>
+    </bean>
+
+    <!--tour sights BEANS-->
+
+    <bean id="touristSight" class="touristSights.TouristSight" scope="session"/>
+
+    <bean id="touristSightForm" class="touristSights.TouristSightForm" scope="session" >
+        <property name="root" ref="root"/>
+        <property name="touristSight" ref="touristSight"/>
     </bean>
 
 </beans>

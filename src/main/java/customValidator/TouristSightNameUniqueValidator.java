@@ -2,7 +2,7 @@ package customValidator;
 
 import Core.Root;
 import Core.Util;
-import hotel.Hotel;
+import touristSights.TouristSight;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -12,18 +12,16 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
- * Created by gev on 05.02.2017.
+ * Created by gev on 20.02.2017.
  */
-@FacesValidator("HotelNameUniqueValidator")
-public class HotelNameUniqueValidator implements Validator {
-
-
+@FacesValidator("TouristSightNameUniqueValidator")
+public class TouristSightNameUniqueValidator implements Validator{
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         Root root = Util.getBean("root", Root.class);
-        Hotel hotel = Util.getBean("hotel", Hotel.class);
-        for (Hotel hotelitem : root.getHotelDao().getAll()) {
-            if (hotelitem.getName().equals(o) && !hotel.getId().equals(hotelitem.getId())) {
+        TouristSight tourOperator = Util.getBean("touristSight", TouristSight.class);
+        for (TouristSight item : root.getTouristSightDao().getAll()) {
+            if (item.getName().equals(o) && !tourOperator.getId().equals(item.getId())) {
                 FacesMessage fmsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, "Անվանումը գոյություն ունի");
                 throw new ValidatorException(fmsg);
             }

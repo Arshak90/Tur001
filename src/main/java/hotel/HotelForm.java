@@ -1,23 +1,31 @@
 package hotel;
 
+import Core.FileUpload;
+import Core.Interface.Form;
 import Core.Root;
 import Core.Util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by arshak.askaryan on 1/25/2017.
  */
-public class HotelForm implements Serializable {
+public class HotelForm implements Form, Serializable {
     private Root root;
     private List<Hotel> hotels;
     private Hotel hotel;
     private List<HotelType> hotelTypes;
     private Integer hotelTypeIdForFind = 1;
     private List<Hotel> hotelsWithType;
+    private Part file;
 
     public Root getRoot() {
         return root;
@@ -28,14 +36,22 @@ public class HotelForm implements Serializable {
     }
 
     public List<Hotel> getHotels() {
-        if(this.hotels == null){
+        if (this.hotels == null) {
             this.hotels = getRoot().getHotelDao().getAll();
         }
-         return hotels;
+        return hotels;
     }
 
     public void setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
     }
 
     public Hotel getHotel() {
@@ -47,7 +63,7 @@ public class HotelForm implements Serializable {
     }
 
     public List<HotelType> getHotelTypes() {
-        if (this.hotelTypes == null){
+        if (this.hotelTypes == null) {
             this.hotelTypes = getRoot().getHotelDao().getHotelTypes();
         }
         return hotelTypes;
@@ -62,7 +78,7 @@ public class HotelForm implements Serializable {
     }
 
     public List<Hotel> getHotelsWithType() {
-        if (this.hotelsWithType == null){
+        if (this.hotelsWithType == null) {
             this.hotelsWithType = getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind);
         }
         return hotelsWithType;
@@ -76,19 +92,30 @@ public class HotelForm implements Serializable {
         this.hotelTypes = hotelTypes;
     }
 
-    public void saveHotel(){
-        if (this.hotel.getId()!= null){
-            if (getRoot().getHotelDao().update(this.hotel)){
+    public void save() {
+
+        if (this.hotel.getId() != null) {
+            if (file != null) {
+                String imageWay = "";
+                try {
+                    imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                this.hotel.setPhotoWay(imageWay);
+                deleteOldFile(this.hotel.getId());
+            }
+            if (getRoot().getHotelDao().update(this.hotel)) {
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 FacesMessage facesMessage = new FacesMessage("Փոփոխությունը Հաջողությամբ պահպանվել է");
                 facesContext.addMessage(null, facesMessage);
             }
-        }else {
-            if (getRoot().getHotelDao().insert(this.hotel)){
+        } else {
+            if (getRoot().getHotelDao().insert(this.hotel)) {
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 FacesMessage facesMessage = new FacesMessage("Հաջողությամբ պահպանվել է");
-                for (Hotel hotel: root.getHotelDao().getAll()){
-                    if (hotel.getName().equals(this.hotel.getName())){
+                for (Hotel hotel : root.getHotelDao().getAll()) {
+                    if (hotel.getName().equals(this.hotel.getName())) {
                         this.setHotel(hotel);
                         Util.getBean("hotel", Hotel.class).setId(hotel.getId());
                     }
@@ -100,22 +127,56 @@ public class HotelForm implements Serializable {
         this.hotelsWithType = null;
     }
 
-    public void newHotel(){
-        this.hotel = new Hotel();
+    public boolean deleteOldFile(Integer id) {
+        Properties prop = new Properties();
+        String url = "";
+        try {
+            InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+            prop.load(input);
+            url = prop.getProperty("fileUploadUrl");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Hotel oldHotel = getRoot().getHotelDao().getById(id);
+        if (oldHotel.getPhotoWay() == null) {
+            return true;
+        }
+        File file = new File(url + oldHotel.getPhotoWay());
+        if (file.delete()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void changeHotelType(){
+    public void addNew() {
+        this.hotel = new Hotel();
+        this.file = null;
+    }
+
+    public void changeHotelType() {
         this.hotelsWithType = getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind);
 //        this.hotelsWithType.clear();
 //        this.hotelsWithType.addAll(getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind));
     }
 
-    public void editHotel(Integer id){
+    public void edit(Integer id) {
         this.setHotel(getRoot().getHotelDao().getById(id));
         Util.getBean("hotel", Hotel.class).setId(hotel.getId());
     }
 
-    public void deleteHotel(Integer id){
-        System.out.println(id);
+    public void delete(Integer id) {
+        if (this.getHotel().getId().equals(id)) {
+            this.hotel = new Hotel();
+        }
+        this.hotelsWithType = null;
+        if (deleteOldFile(id)) {
+            if (this.getRoot().getHotelDao().delete(id)) {
+                FacesContext facesContext = FacesContext.getCurrentInstance();
+                FacesMessage facesMessage = new FacesMessage("Հաջողությամբ ջնջվել է");
+                facesContext.addMessage(null, facesMessage);
+            }
+        }
     }
+
 }

@@ -13,11 +13,13 @@
 <h:head>
     <link href="../images/favicon.png" rel="shortcut icon"
           type="image/x-icon" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Անալիտիկ</title>
     <meta name="description" content="Admin, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!--file upload imports-->
+    <link rel="stylesheet" href="assets/styles/fileUpload.css" type="text/css" />
 
     <!-- for ios 7 style, multi-resolution icon of 152x152 -->
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -41,9 +43,10 @@
     <link rel="stylesheet" href="assets/styles/font.css" type="text/css" />
 
 </h:head>
-<h:body>
+<body>
 
     <div class="app" id="app">
+
 
         <!-- ############ LAYOUT START-->
 
@@ -146,13 +149,23 @@
                                 </a>
                                 <ul class="nav-sub">
                                     <li>
-                                        <a href="hotels.xhtml" >
+                                        <a href="hotels.xhtml">
                                             <span class="nav-text">Հյուրանոցներ</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="motels.html" >
-                                            <span class="nav-text">Իջեւանատներ</span>
+                                        <a href="restaurant.xhtml">
+                                            <span class="nav-text">Ռեստորաններ</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="tourOperator.xhtml">
+                                            <span class="nav-text">Տուր օպերատորներ</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="touristSight.xhtml">
+                                            <span class="nav-text">Տեսարժան վայրեր</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -252,16 +265,23 @@
                                                 <h:form id="hotelsListForm">
                                                     <div class="list-item pointer">
                                                         <c:forEach var="hotel" items="#{hotelForm.hotelsWithType}">
-                                                            <p:commandLink actionListener="#{hotelForm.editHotel(hotel.id)}" immediate="true" update=":formId">
+                                                            <p:commandLink actionListener="#{hotelForm.edit(hotel.id)}" immediate="true" update=":formId">
                                                                     <div class="list-left" >
                                                                         <span class="w-40 avatar">
-                                                                          <img src="../assets/images/p0.svg" class="img-circle"></img>
+                                                                            <c:if test="#{not empty hotel.photoWay}">
+                                                                                <h:graphicImage url="upload/#{hotel.photoWay}"/>
+                                                                            </c:if>
+                                                                            <c:if test="#{empty hotel.photoWay}">
+                                                                                <img src="../assets/images/p0.svg" class="img-circle"></img>
+                                                                            </c:if>
                                                                         </span>
                                                                     </div>
                                                                     <div class="list-body">
                                                                         <h:outputText value="#{hotel.name}"/>
                                                                         <div style="float: right">
-                                                                            <p:commandLink styleClass="glyphicon glyphicon-trash" actionListener="#{hotelForm.deleteHotel(hotel.id)}" immediate="true" update="@this"></p:commandLink>
+                                                                            <h:commandLink styleClass="glyphicon glyphicon-trash" immediate="true" onclick="return confirm('Ջնջել');">
+                                                                                <f:ajax listener="#{hotelForm.delete(hotel.id)}" event="click" render="@this :hotelsListForm :formId"/>
+                                                                            </h:commandLink>
                                                                         </div>
                                                                         <small class="block"><i class="fa fa-phone m-r-sm text-muted"></i><h:outputText value="#{hotel.mobilePhoneNumber}"/> </small>
                                                                     </div>
@@ -275,7 +295,7 @@
                                 </div>
                                 <div class="p-a b-t text-center">
                                     <h:form>
-                                        <p:commandLink  value="Ավելացնել նորը" styleClass="fa fa-plus fa-fw m-r-xs" style="width: 130px" action="#{hotelForm.newHotel}" update=":formId"/>
+                                        <p:commandLink  value="Ավելացնել նորը" styleClass="fa fa-plus fa-fw m-r-xs" style="width: 130px" action="#{hotelForm.addNew}" update=":formId"/>
                                     </h:form>
                                 </div>
                             </div>
@@ -289,15 +309,25 @@
                                     <div class="row-body">
                                         <h:panelGroup id="contentId" styleClass="row-inner"  style="max-width: 700px; margin: 10% auto 0;" layout="block">
                                             <h:panelGroup class="padding">
-                                                <h:form id="formId">
+                                                <h:form id="formId" enctype="multipart/form-data" prependId="false">
                                                     <div class="row-col h-auto mrgb28">
                                                         <div class="form-horizontal">
                                                             <h:messages  infoStyle="color:darkgreen" errorStyle="color:red" globalOnly="true"/>
                                                             <div class="form-group row">
                                                                 <div class="col-sm-5">
                                                                     <div class="avatar w-80 inline">
-                                                                        <img src="../assets/images/p0.svg"></img>
-                                                                    </div>
+                                                                        <c:if test="#{not empty hotelForm.hotel.photoWay}">
+                                                                            <h:graphicImage url="upload/#{hotelForm.hotel.photoWay}"/>
+                                                                        </c:if>
+                                                                     </div>
+                                                                        <!--<div id="image-preview" style="display: block">-->
+                                                                            <label for="image-upload" id="image-label">Ընտրել Նկարը</label>
+                                                                            <h:inputFile name="image" value="#{hotelForm.file}" id="image-upload" mode="simple" skinSimple="false">
+                                                                                <f:validator validatorId="FileUploadValidator"/>
+                                                                            </h:inputFile><br/>
+
+                                                                        <h:message for="image-upload" id="messages" style="color: red;"/>
+
                                                                 </div>
                                                                 <div class="col-sm-2">
                                                                     <h:outputLabel class="form-control-label">1-5 աստղ</h:outputLabel>
@@ -307,7 +337,7 @@
                                                                     <h:message for="rateId" style="color: red;" showDetail="false" showSummary="true"/>
                                                                 </div>
                                                                 <div class="col-sm-5">
-                                                                    <h:outputLabel class="form-control-label">Տիպ</h:outputLabel>
+                                                                    <h:outputLabel class="form-control-label">Տիպ *</h:outputLabel>
                                                                     <h:selectOneMenu value="#{hotelForm.hotel.hotelType}" styleClass="form-control" id="hotelTypeId"
                                                                                      required="true" requiredMessage="Տիպը անպայման դաշտ է">
                                                                         <f:validateRequired />
@@ -320,7 +350,7 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-12">
-                                                                <h:outputLabel class="form-control-label">Անվանում</h:outputLabel>
+                                                                <h:outputLabel class="form-control-label">Անվանում *</h:outputLabel>
                                                                 <h:inputText styleClass="form-control" value="#{hotelForm.hotel.name}"
                                                                              required="true" requiredMessage="Անվանում անպայման դաշտ է" id="nameId" >
                                                                     <f:validateRequired />
@@ -413,9 +443,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <p:commandLink  value="Պահպանել" styleClass="btn btn-info btn-sm" action="#{hotelForm.saveHotel}" update="@form :hotelsListForm">
+                                                        <h:commandLink  value="Պահպանել" styleClass="btn btn-info btn-sm"  action="#{hotelForm.save}" update="@form :hotelsListForm">
 
-                                                        </p:commandLink>
+                                                        </h:commandLink>
                                                     </div>
                                                 </h:form>
                                             </h:panelGroup>
@@ -436,6 +466,8 @@
         <!-- / -->
 
     </div>
+
+
 
     <!-- build:js scripts/app.html.js -->
     <!-- jQuery -->
@@ -465,11 +497,22 @@
     <script src="scripts/ui-toggle-class.js"></script>
 
     <script src="scripts/app.js"></script>
+    <!--file upload JS-->
+    <script type="text/javascript" src="scripts/jquery.uploadPreview.js"></script>
+    <script type="text/javascript">
+//        $(document).ready(function() {
+//            $.uploadPreview({
+//                input_field: "#image-upload",
+//                preview_box: "#image-preview",
+//                label_field: "#image-label"
+//            });
+//        });
+    </script>
 
     <!-- ajax -->
     <!--<script src="../libs/jquery/jquery-pjax/jquery.pjax.js"></script>-->
     <!--<script src="scripts/ajax.js"></script>-->
     <!-- endbuild -->
 
-</h:body>
+</body>
 </html>
