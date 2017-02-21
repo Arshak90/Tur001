@@ -7,3 +7,4 @@ out
 WebContent/
 /src/main/resources/config.properties
 /src/main/resources/db.sqlite
+src/main/webapp/upload/
