@@ -14,7 +14,7 @@ public class Portfolio {
   private Integer socialpackagecount;
   private Integer transportid;
   private Integer column_12;
-  private Integer istouroperator;
+  private boolean istouroperator;
   private Integer age15;
   private Integer age30;
   private Integer age50;
@@ -125,11 +125,11 @@ public class Portfolio {
     this.column_12 = column_12;
   }
 
-  public Integer getIstouroperator() {
+  public boolean getIstouroperator() {
     return istouroperator;
   }
 
-  public void setIstouroperator(Integer istouroperator) {
+  public void setIstouroperator(boolean istouroperator) {
     this.istouroperator = istouroperator;
   }
 
@@ -171,5 +171,30 @@ public class Portfolio {
 
   public void setYear(Integer year) {
     this.year = year;
+  }
+
+  @Override
+  public String toString() {
+    return "Portfolio{" +
+            "id=" + id +
+            ", quarter=" + quarter +
+            ", totaltouristcount=" + totaltouristcount +
+            ", armtouristcount=" + armtouristcount +
+            ", othertouristcount=" + othertouristcount +
+            ", finances=" + finances +
+            ", ictouristcount=" + ictouristcount +
+            ", icmalecount=" + icmalecount +
+            ", icfemalecount=" + icfemalecount +
+            ", icvisitdecription='" + icvisitdecription + '\'' +
+            ", socialpackagecount=" + socialpackagecount +
+            ", transportid=" + transportid +
+            ", column_12=" + column_12 +
+            ", istouroperator=" + istouroperator +
+            ", age15=" + age15 +
+            ", age30=" + age30 +
+            ", age50=" + age50 +
+            ", age51=" + age51 +
+            ", year=" + year +
+            '}';
   }
 }

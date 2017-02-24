@@ -1,0 +1,58 @@
+package portfolio;
+
+public class Portfoliomonthly {
+  private Integer id;
+  private Integer totaltouristcount;
+  private Integer armtouristcount;
+  private Integer othertouristcount;
+  private Double finances;
+  private Integer portfolioid;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Integer getTotaltouristcount() {
+    return totaltouristcount;
+  }
+
+  public void setTotaltouristcount(Integer totaltouristcount) {
+    this.totaltouristcount = totaltouristcount;
+  }
+
+  public Integer getArmtouristcount() {
+    return armtouristcount;
+  }
+
+  public void setArmtouristcount(Integer armtouristcount) {
+    this.armtouristcount = armtouristcount;
+  }
+
+  public Integer getOthertouristcount() {
+    return othertouristcount;
+  }
+
+  public void setOthertouristcount(Integer othertouristcount) {
+    this.othertouristcount = othertouristcount;
+  }
+
+  public Double getFinances() {
+    return finances;
+  }
+
+  public void setFinances(Double finances) {
+    this.finances = finances;
+  }
+
+  public Integer getPortfolioid() {
+    return portfolioid;
+  }
+
+  public void setPortfolioid(Integer portfolioid) {
+    this.portfolioid = portfolioid;
+  }
+}

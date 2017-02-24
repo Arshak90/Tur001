@@ -232,28 +232,82 @@
                                 <h2>DataTables</h2>
                             </div>
                             <p:selectOneMenu id="console" value="#{portfolioForm.selectedYear}" style="width:125px">
-                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
                                 <f:selectItems value="#{portfolioForm.years}" />
                                 <p:ajax event="change" update="table" process="@this" listener="#{portfolioForm.changeYear}"></p:ajax>
                             </p:selectOneMenu>
                             <div class="table-responsive">
-
+                                <h:form id="carDetail" prependId="false">
                                 <p:dataTable id="table" value="#{portfolioForm.portfolios}" var="portfolio" tableStyleClass="table table-striped b-t b-b">
-                                    <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update=":portfolioForm:carDetail" oncomplete="PF('carDialog').show();" icon="ui-icon-search" title="View"/>
+                                    <p:column style="width:80px;text-align: center">
+                                        <p:commandButton actionListener="#{portfolioForm.editPortfolio(portfolio)}" update="panelGroupView" icon="fa fa-pencil-square-o" title="Խմբագրել"/>
                                     </p:column>
-                                    <p:column headerText="Quarter">
+                                    <p:column headerText="Եռամսյակ">
                                         <h:outputText value="#{portfolio.quarter}" />
                                     </p:column>
-                                    <p:column headerText="Year">
+                                    <p:column headerText="Տարի">
                                         <h:outputText value="#{portfolio.year}" />
                                     </p:column>
+                                    <p:column headerText="Ընդհանուր զբոսաշրջիկների թիվը">
+                                        <h:outputText value="#{portfolio.totaltouristcount}" />
+                                    </p:column>
                                 </p:dataTable>
-                                <p:dialog header="Car Info" styleClass="top-z-index" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                                    <p:outputPanel id="carDetail" style="text-align:center;">
-                                        <p:outputLabel >AAA</p:outputLabel>
-                                    </p:outputPanel>
-                                </p:dialog>
+                                <div class="clear"></div>
+                                <h:panelGroup id="panelGroupView" >
+                                    <h:panelGrid columns="2" cellpadding="5" rendered="#{portfolioForm.selectedPortfolio != null}">
+                                        <p:outputLabel for="totaltouristcountId" value="Ընդհանուր զբոսաշրջիկների թիվը: " />
+                                        <p:inputNumber id="totaltouristcountId" value="#{portfolioForm.selectedPortfolio.totaltouristcount}" decimalPlaces="0"/>
+                                        <p:outputLabel for="armtouristcountId" value="ՀՀ զբոսաշրջիկների թիվը: " />
+                                        <p:inputNumber id="armtouristcountId" value="#{portfolioForm.selectedPortfolio.armtouristcount}" decimalPlaces="0"/>
+                                        <p:outputLabel for="othertouristcountId" value="Արտերկրյա զբոսաշրջիկների թիվը: " />
+                                        <p:inputNumber id="othertouristcountId" value="#{portfolioForm.selectedPortfolio.othertouristcount}" decimalPlaces="0"/>
+                                        <p:outputLabel for="othertouristcountId" value="Տրանսպորտ: " />
+                                        <p:selectOneMenu id="transportId" value="#{portfolioForm.selectedPortfolio.transportid}" style="width:125px">
+                                            <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
+                                            <f:selectItems value="#{portfolioForm.transports}" var="transport" itemLabel="#{transport.name}" itemValue="#{transport.id}"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel for="financesId" value="Ֆինանսներ: " />
+                                        <p:inputNumber id="financesId" value="#{portfolioForm.selectedPortfolio.finances}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s"/>
+                                        <p:outputLabel for="ictouristcountId" value="ԻԿ Ընդհանուր զբոսաշրջիկների թիվը: " />
+                                        <p:inputNumber id="ictouristcountId" value="#{portfolioForm.selectedPortfolio.ictouristcount}" decimalPlaces="0"/>
+                                        <p:outputLabel for="icmalecountId" value="ԻԿ տղամարդկանց թիվը: " />
+                                        <p:inputNumber id="icmalecountId" value="#{portfolioForm.selectedPortfolio.icmalecount}" decimalPlaces="0"/>
+                                        <p:outputLabel for="icfemalecountId" value="ԻԿ կանանց թիվը: " />
+                                        <p:inputNumber id="icfemalecountId" value="#{portfolioForm.selectedPortfolio.icfemalecount}" decimalPlaces="0"/>
+                                        <p:outputLabel for="icvisitdecriptionId" value="ԻԿ նկարագրություն: " />
+                                        <p:inputTextarea id="icvisitdecriptionId" rows="10" cols="50" value="#{portfolioForm.selectedPortfolio.icvisitdecription}" queryDelay="750" minQueryLength="4" />
+                                        <p:outputLabel for="socialpackagecountId" value="Սոցիալական փաթեթի թիվը: " />
+                                        <p:inputNumber id="socialpackagecountId" value="#{portfolioForm.selectedPortfolio.socialpackagecount}" decimalPlaces="0"/>
+                                        <p:outputLabel for="istouroperatorId" value="Տուր օպերատոր: " />
+                                        <p:selectBooleanCheckbox id="istouroperatorId" value="#{portfolioForm.selectedPortfolio.istouroperator}" />
+                                        <p:outputLabel for="age15Id" value="Մինչև 15 տարեկան: " />
+                                        <p:inputNumber id="age15Id" value="#{portfolioForm.selectedPortfolio.age15}" decimalPlaces="0"/>
+                                        <p:outputLabel for="age30Id" value="16 - 30 տարեկան: " />
+                                        <p:inputNumber id="age30Id" value="#{portfolioForm.selectedPortfolio.age30}" decimalPlaces="0"/>
+                                        <p:outputLabel for="age50Id" value="31 - 50 տարեկան: " />
+                                        <p:inputNumber id="age50Id" value="#{portfolioForm.selectedPortfolio.age50}" decimalPlaces="0"/>
+                                        <p:outputLabel for="age51Id" value="51 և մեծ: " />
+                                        <p:inputNumber id="age51Id" value="#{portfolioForm.selectedPortfolio.age51}" decimalPlaces="0"/>
+                                    </h:panelGrid>
+                                    <p:dataTable rendered="#{portfolioForm.selectedPortfolio != null}" id="portfoliosightsesId" value="#{portfolioForm.portfoliosightsesByPortfolioId}" var="sight" tableStyleClass="table table-striped b-t b-b">
+                                        <p:column headerText="Տեսարժան վայրեր">
+                                            <h:outputText value="#{sight.sights.name}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                    <p:selectOneMenu id="stightId" value="#{portfolioForm.sightId}" style="width:125px" rendered="#{portfolioForm.selectedPortfolio != null}">
+                                        <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
+                                        <f:selectItems value="#{portfolioForm.sights}" var="t" itemLabel="#{t.name}" itemValue="#{t.id}"/>
+                                    </p:selectOneMenu>
+                                    <div class="clear"/>
+                                    <p:commandButton action="#{portfolioForm.addPortfolioSight}" process="@form" update="portfoliosightsesId" value="Ավելացնել տեսարժան վայրեր" rendered="#{portfolioForm.selectedPortfolio != null}"></p:commandButton>
+                                    <div class="clear"/>
+                                    <p:commandButton actionListener="#{portfolioForm.save}" process="@form" value="Պահպանել" rendered="#{portfolioForm.selectedPortfolio != null}"></p:commandButton>
+                                    </h:panelGroup>
+
+
+                                    </h:form>
+
+
                             </div>
                         </div>
                     </div>
@@ -274,6 +328,7 @@
     <script type="text/javascript" src="/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=6.0"></script>
     <script type="text/javascript" src="/javax.faces.resource/core.js.xhtml?ln=primefaces&amp;v=6.0"></script>
     <script type="text/javascript" src="/javax.faces.resource/components.js.xhtml?ln=primefaces&amp;v=6.0"></script>
+    <script type="text/javascript" src="/javax.faces.resource/inputnumber/inputnumber.js.xhtml?ln=primefaces&amp;v=6.0"></script>
     <!-- Bootstrap -->
     <script src="../libs/jquery/tether/dist/js/tether.min.js"></script>
     <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>

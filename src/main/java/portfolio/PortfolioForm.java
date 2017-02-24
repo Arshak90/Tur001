@@ -2,10 +2,16 @@ package portfolio;
 
 import Core.Models.Year;
 import Core.Root;
+import Models.Sights;
+import Models.Transport;
+import org.primefaces.context.RequestContext;
 
+import javax.faces.application.FacesMessage;
+import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -13,9 +19,18 @@ import java.util.stream.Collectors;
  */
 public class PortfolioForm {
 
+    public PortfolioForm() {
+    }
+
     private Root root;
     private List<Year> years;
     private String selectedYear;
+    private Portfolio selectedPortfolio;
+    private List<Portfolio> portfolios  = new ArrayList<>();
+    private List<Transport> transports;
+    private List<Sights> sights;
+    private List<Portfoliosights> portfoliosightses;
+    final static Logger logger = Logger.getLogger(String.valueOf(PortfolioForm.class));
 
     public Root getRoot() {
         return root;
@@ -36,9 +51,21 @@ public class PortfolioForm {
         this.years = years;
     }
 
+    public List<Transport> getTransports() {
+        if(transports == null){
+            return getRoot().getPortfolioDao().getTransport();
+        }
+        return transports;
+    }
+
+    public void setTransports(List<Transport> transports) {
+        this.transports = transports;
+    }
+
     public String getSelectedYear() {
         if(selectedYear == null || selectedYear == ""){
             selectedYear = String.valueOf(new Date().getYear() + 1900);
+            changeYear();
         }
         return selectedYear;
     }
@@ -61,27 +88,7 @@ public class PortfolioForm {
         this.console = console;
     }
 
-    private List<Portfolio> portfolios  = new ArrayList<>();
-
     public List<Portfolio> getPortfolios() {
-//        if(portfolios.size() == 0){
-//            Portfolio p1 = new Portfolio();
-//            p1.setId(1);
-//            p1.setQuarter(1);
-//            Portfolio p2 = new Portfolio();
-//            p2.setId(2);
-//            p2.setQuarter(2);
-//            Portfolio p3 = new Portfolio();
-//            p3.setId(3);
-//            p3.setQuarter(3);
-//            Portfolio p4 = new Portfolio();
-//            p4.setId(4);
-//            p4.setQuarter(4);
-//            portfolios.add(p1);
-//            portfolios.add(p2);
-//            portfolios.add(p3);
-//            portfolios.add(p4);
-//        }
         return portfolios;
     }
 
@@ -93,5 +100,76 @@ public class PortfolioForm {
         this.portfolios = getRoot().getPortfolioDao().getAll().stream().
                         filter(x -> selectedYear.equals(x.getYear().toString())).
                         collect(Collectors.toList());
+    }
+
+    public Portfolio getSelectedPortfolio() {
+        return selectedPortfolio;
+    }
+
+    public void setSelectedPortfolio(Portfolio selectedPortfolio) {
+        this.selectedPortfolio = selectedPortfolio;
+    }
+
+    public void editPortfolio(Portfolio portfolio) {
+        this.selectedPortfolio = portfolio;
+    }
+
+    public void save(){
+        if(selectedPortfolio.getArmtouristcount() + selectedPortfolio.getOthertouristcount() == selectedPortfolio.getTotaltouristcount()){
+            getRoot().getPortfolioDao().update(selectedPortfolio);
+            logger.info("Saved successfully " + selectedPortfolio.toString());
+            selectedPortfolio = null;
+            RequestContext.getCurrentInstance().update("panelGroupView");
+        }else{
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "What we do in life", "Echoes in eternity.");
+
+            RequestContext.getCurrentInstance().showMessageInDialog(message);
+        }
+    }
+
+    public List<Portfoliosights> getPortfoliosightses() {
+        if(portfoliosightses == null){
+            portfoliosightses = getRoot().getPortfolioDao().getPortfolioSights();
+        }
+        return portfoliosightses;
+    }
+
+    public void setPortfoliosightses(List<Portfoliosights> portfoliosightses) {
+        this.portfoliosightses = portfoliosightses;
+    }
+
+
+
+    public List<Sights> getSights() {
+        if(sights == null){
+            return getRoot().getPortfolioDao().getSightses();
+        }
+        return sights;
+    }
+
+    public void setSights(List<Sights> sights) {
+        this.sights = sights;
+    }
+
+    private Integer sightId;
+
+    public Integer getSightId() {
+        return sightId;
+    }
+
+    public void setSightId(Integer sightId) {
+        this.sightId = sightId;
+    }
+
+    public void addPortfolioSight(){
+        if(selectedPortfolio != null && sightId != null){
+            getRoot().getPortfolioDao().insertPortfoliosights(selectedPortfolio.getId(), sightId);
+            sightId = null;
+            portfoliosightses = null;
+        }
+    }
+
+    public List<Portfoliosights> getPortfoliosightsesByPortfolioId(){
+        return getPortfoliosightses().stream().filter(x -> selectedPortfolio.getId().equals(x.getPortfolioid())).collect(Collectors.toList());
     }
 }

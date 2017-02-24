@@ -41,11 +41,6 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
-    <!--<context-param>-->
-        <!--<param-name>primefaces.THEME</param-name>-->
-        <!--<param-value>none</param-value>-->
-    <!--</context-param>-->
-
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
