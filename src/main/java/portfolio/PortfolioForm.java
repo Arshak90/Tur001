@@ -1,16 +1,16 @@
 package portfolio;
 
+import Core.Models.Month;
 import Core.Models.Year;
 import Core.Root;
+import Core.Util;
 import Models.Sights;
 import Models.Transport;
 import org.primefaces.context.RequestContext;
 
 import javax.faces.application.FacesMessage;
 import java.lang.ref.ReferenceQueue;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -30,6 +30,7 @@ public class PortfolioForm {
     private List<Transport> transports;
     private List<Sights> sights;
     private List<Portfoliosights> portfoliosightses;
+    private Portfoliomonthly portfoliomonthly = new Portfoliomonthly();
     final static Logger logger = Logger.getLogger(String.valueOf(PortfolioForm.class));
 
     public Root getRoot() {
@@ -128,10 +129,7 @@ public class PortfolioForm {
     }
 
     public List<Portfoliosights> getPortfoliosightses() {
-        if(portfoliosightses == null){
-            portfoliosightses = getRoot().getPortfolioDao().getPortfolioSights();
-        }
-        return portfoliosightses;
+        return  portfoliosightses = getRoot().getPortfolioDao().getPortfolioSights();
     }
 
     public void setPortfoliosightses(List<Portfoliosights> portfoliosightses) {
@@ -141,10 +139,11 @@ public class PortfolioForm {
 
 
     public List<Sights> getSights() {
-        if(sights == null){
-            return getRoot().getPortfolioDao().getSightses();
-        }
-        return sights;
+        return getRoot().getPortfolioDao().getSightses().stream().filter(x-> !filterQuarterSights(x.getId())).collect(Collectors.toList());
+    }
+
+    public List<Sights> getSightsAll() {
+        return getRoot().getPortfolioDao().getSightses();
     }
 
     public void setSights(List<Sights> sights) {
@@ -172,4 +171,56 @@ public class PortfolioForm {
     public List<Portfoliosights> getPortfoliosightsesByPortfolioId(){
         return getPortfoliosightses().stream().filter(x -> selectedPortfolio.getId().equals(x.getPortfolioid())).collect(Collectors.toList());
     }
+
+    public List<Portfoliomonthly> getPortfoliomonthlyByPortfolioId(){
+        return getRoot().getPortfolioDao().getPortfolioMonthly().stream().filter(x -> selectedPortfolio.getId().equals(x.getPortfolioid())).collect(Collectors.toList());
+    }
+
+    public Portfoliomonthly getPortfoliomonthly() {
+        return portfoliomonthly;
+    }
+
+    public void setPortfoliomonthly(Portfoliomonthly portfoliomonthly) {
+        this.portfoliomonthly = portfoliomonthly;
+    }
+
+    public void addPortfoliomonthly(){
+        if(selectedPortfolio != null && portfoliomonthly.getMonthId() != null){
+            portfoliomonthly.setPortfolioid(selectedPortfolio.getId());
+            getRoot().getPortfolioDao().insertPortfoliomonthly(portfoliomonthly);
+            portfoliomonthly = new Portfoliomonthly();
+        }
+    }
+
+    private Map<String, List<String>> quarterMonth;
+
+    public List<Month> getQuarterMonth() {
+        return Util.getMonths().stream().filter(x -> selectedPortfolio.getQuarter().equals(x.getQuarter()) && !filterQuarterMonth(x.getId())).collect(Collectors.toList());
+    }
+
+    public void setQuarterMonth(Map<String, List<String>> quarterMonth) {
+        this.quarterMonth = quarterMonth;
+    }
+
+    public boolean filterQuarterMonth(Integer monthId){
+        return getPortfoliomonthlyByPortfolioId().stream().filter(x-> x.getMonthId().equals(monthId)).findAny().isPresent();
+    }
+
+    public boolean filterQuarterSights(Integer sightsId){
+        return getPortfoliosightsesByPortfolioId().stream().filter(x-> x.getSights().getId().equals(sightsId)).findAny().isPresent();
+    }
+
+    public String getMonthNameById(Integer id){
+        return Util.getMonths().get(id-1).getName();
+    }
+
+    public void deletePortfoliosightses(Portfoliosights portfoliosights){
+        getRoot().getPortfolioDao().deletePortfoliosightses(portfoliosights.getId());
+    }
+
+    public void deletePortfoliomonthly(Portfoliomonthly portfoliomonthly){
+        getRoot().getPortfolioDao().deletePortfoliomonthly(portfoliomonthly.getId());
+    }
+
+
 }

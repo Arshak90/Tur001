@@ -220,7 +220,8 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfoliomonthly.setTotaltouristcount(res.getInt("totalTouristCount"));
                 portfoliomonthly.setArmtouristcount(res.getInt("armTouristCount"));
                 portfoliomonthly.setOthertouristcount(res.getInt("otherTouristCount"));
-                portfoliomonthly.setFinances(res.getDouble("count"));
+                portfoliomonthly.setFinances(res.getDouble("finances"));
+                portfoliomonthly.setMonthId(res.getInt("monthId"));
                 portfoliomonthlies.add(portfoliomonthly);
             }
         }catch (SQLException e) {
@@ -369,5 +370,55 @@ public class PortfolioDao implements Dao<Portfolio>{
             }
         }
         return null;
+    }
+
+    public boolean insertPortfoliomonthly(Portfoliomonthly portfoliomonthly) {
+        String sql = "INSERT INTO PortfolioMonthly(portfolioId,totalTouristCount,finances, monthId) VALUES (?,?,?,?)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, portfoliomonthly.getPortfolioid());
+            pstmt.setInt(2, portfoliomonthly.getTotaltouristcount());
+            pstmt.setDouble(3, portfoliomonthly.getFinances());
+            pstmt.setInt(4,portfoliomonthly.getMonthId());
+
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean deletePortfoliosightses(Integer id){
+        String sql = "DELETE FROM PortfolioSights WHERE id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean deletePortfoliomonthly(Integer id){
+        String sql = "DELETE FROM PortfolioMonthly WHERE id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }

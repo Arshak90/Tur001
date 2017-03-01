@@ -7,6 +7,7 @@ public class Portfoliomonthly {
   private Integer othertouristcount;
   private Double finances;
   private Integer portfolioid;
+  private Integer monthId;
 
   public Integer getId() {
     return id;
@@ -54,5 +55,13 @@ public class Portfoliomonthly {
 
   public void setPortfolioid(Integer portfolioid) {
     this.portfolioid = portfolioid;
+  }
+
+  public Integer getMonthId() {
+    return monthId;
+  }
+
+  public void setMonthId(Integer monthId) {
+    this.monthId = monthId;
   }
 }
