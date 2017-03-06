@@ -344,7 +344,7 @@
                                                                         <f:selectItem itemValue="" itemLabel="Ընտրել տիպը" />
                                                                         <f:selectItems value="#{hotelForm.hotelTypes}" var="hType" itemLabel="#{hType.name}" itemValue="#{hType.id}"/>
                                                                     </h:selectOneMenu>
-                                                                    <h:message for="hotelTypeId" style="color: red;" />
+                                                                    <h:message for="hotelTypeId" id="typeMessage" style="color: red;" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -356,7 +356,7 @@
                                                                     <f:validateRequired />
                                                                     <f:validator validatorId="HotelNameUniqueValidator"/>
                                                                 </h:inputText>
-                                                                <h:message for="nameId" style="color: red;" />
+                                                                <h:message for="nameId" id="nameMessage" style="color: red;" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -443,8 +443,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <h:commandLink  value="Պահպանել" styleClass="btn btn-info btn-sm"  action="#{hotelForm.save}" update="@form :hotelsListForm">
-
+                                                        <h:commandLink  value="Պահպանել" styleClass="btn btn-info btn-sm"  action="#{hotelForm.save}" update="@form :hotelsListForm" >
                                                         </h:commandLink>
                                                     </div>
                                                 </h:form>

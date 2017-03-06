@@ -87,16 +87,18 @@ public class RestaurantForm implements Serializable, Form {
     }
 
     public void save() {
+        if (file != null) {
+            String imageWay = "";
+            try {
+                imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.restaurant.setPhotoWay(imageWay);
+        }
 
         if (this.restaurant.getId() != null) {
             if (file != null) {
-                String imageWay = "";
-                try {
-                    imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                this.restaurant.setPhotoWay(imageWay);
                 deleteOldFile(this.restaurant.getId());
             }
             if (getRoot().getRestaurantDao().update(this.restaurant)) {

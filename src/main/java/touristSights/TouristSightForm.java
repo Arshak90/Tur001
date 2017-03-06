@@ -62,15 +62,17 @@ public class TouristSightForm implements Serializable, Form {
 
     @Override
     public void save() {
+        if (file != null) {
+            String imageWay = "";
+            try {
+                imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.touristSight.setPhotoWay(imageWay);
+        }
         if (this.touristSight.getId() != null) {
             if (file != null) {
-                String imageWay = "";
-                try {
-                    imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                this.touristSight.setPhotoWay(imageWay);
                 deleteOldFile(this.touristSight.getId());
             }
             if (getRoot().getTouristSightDao().update(this.touristSight)) {

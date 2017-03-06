@@ -93,16 +93,18 @@ public class HotelForm implements Form, Serializable {
     }
 
     public void save() {
+        if (file != null) {
+            String imageWay = "";
+            try {
+                imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.hotel.setPhotoWay(imageWay);
+        }
 
         if (this.hotel.getId() != null) {
             if (file != null) {
-                String imageWay = "";
-                try {
-                    imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                this.hotel.setPhotoWay(imageWay);
                 deleteOldFile(this.hotel.getId());
             }
             if (getRoot().getHotelDao().update(this.hotel)) {

@@ -88,16 +88,18 @@ public class TourOperatorForm implements Serializable, Form {
     }
 
     public void save() {
+        if (file != null) {
+            String imageWay = "";
+            try {
+                imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.tourOperator.setPhotoWay(imageWay);
+        }
 
         if (this.tourOperator.getId() != null) {
             if (file != null) {
-                String imageWay = "";
-                try {
-                    imageWay = Util.getBean("fileUpload", FileUpload.class).upload(this.file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                this.tourOperator.setPhotoWay(imageWay);
                 deleteOldFile(this.tourOperator.getId());
             }
             if (getRoot().getTourOperatorDao().update(this.tourOperator)) {
