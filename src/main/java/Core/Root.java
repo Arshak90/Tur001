@@ -1,5 +1,6 @@
 package Core;
 
+import Core.Dao.CountryDao;
 import Core.Dao.YearDao;
 import hotel.HotelDao;
 import portfolio.PortfolioDao;
@@ -17,6 +18,7 @@ public class Root {
     private RestaurantDao restaurantDao;
     private TouristSightDao touristSightDao;
     private TourOperatorDao tourOperatorDao;
+    private CountryDao countryDao;
 
     public YearDao getYearDao() {
         if(this.yearDao == null){
@@ -82,5 +84,16 @@ public class Root {
 
     public void setTourOperatorDao(TourOperatorDao tourOperatorDao) {
         this.tourOperatorDao = tourOperatorDao;
+    }
+
+    public CountryDao getCountryDao() {
+        if(countryDao == null){
+            countryDao = new CountryDao();
+        }
+        return countryDao;
+    }
+
+    public void setCountryDao(CountryDao countryDao) {
+        this.countryDao = countryDao;
     }
 }

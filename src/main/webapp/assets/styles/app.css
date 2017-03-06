@@ -2508,16 +2508,16 @@ body {
   color: rgba(255, 255, 255, 0.87) !important;
   background-color: #424242 !important; }
 
-.ui-icon {
+.ui-icon2 {
   display: inline-block;
   text-align: center;
   height: 1em;
   background: transparent !important; }
-  .ui-icon:before {
+  .ui-icon2:before {
     position: relative;
     z-index: 1; }
-  .ui-icon:after {
-    content: "";
+  .ui-icon2:after {
+    /*content: "";*/
     border-width: 1px;
     border-style: solid;
     border-color: inherit;
@@ -2529,31 +2529,31 @@ body {
     position: relative;
     z-index: 0;
     background-clip: padding-box; }
-  .ui-icon.b-2x:after {
+  .ui-icon2.b-2x:after {
     border-width: 2px; }
-  .ui-icon.b-3x:after {
+  .ui-icon2.b-3x:after {
     border-width: 3px; }
-  .ui-icon.ui-icon-sm:after {
+  .ui-icon2.ui-icon-sm:after {
     width: 1.7em;
     height: 1.7em;
     top: -1.35em; }
-  .ui-icon.primary:after {
+  .ui-icon2.primary:after {
     background-color: #0cc2aa; }
-  .ui-icon.success:after {
+  .ui-icon2.success:after {
     background-color: #6cc788; }
-  .ui-icon.info:after {
+  .ui-icon2.info:after {
     background-color: #6887ff; }
-  .ui-icon.warning:after {
+  .ui-icon2.warning:after {
     background-color: #f77a99; }
-  .ui-icon.danger:after {
+  .ui-icon2.danger:after {
     background-color: #f44455; }
-  .ui-icon.accent:after {
+  .ui-icon2.accent:after {
     background-color: #a88add; }
-  .ui-icon.dark:after {
+  .ui-icon2.dark:after {
     background-color: #2e3e4e; }
-  .ui-icon.light:after {
+  .ui-icon2.light:after {
     background-color: #f8f8f8; }
-  .ui-icon.white:after {
+  .ui-icon2.white:after {
     background-color: #fff; }
 
 .item {

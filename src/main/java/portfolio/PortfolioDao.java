@@ -193,7 +193,7 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfoliocountry.setId(res.getInt("id"));
                 portfoliocountry.setCountryid(res.getInt("countryId"));
                 portfoliocountry.setPortfolioid(res.getInt("portfolioId"));
-                portfoliocountry.setCount(res.getInt("count"));
+                portfoliocountry.setCount(res.getInt("countNumber"));
                 portfoliocountries.add(portfoliocountry);
             }
         }catch (SQLException e) {
@@ -409,6 +409,112 @@ public class PortfolioDao implements Dao<Portfolio>{
 
     public boolean deletePortfoliomonthly(Integer id){
         String sql = "DELETE FROM PortfolioMonthly WHERE id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public List<Yearlyinforamtion> getYearlyinforamtions(){
+        List<Yearlyinforamtion> yearlyinforamtions = new ArrayList<>();
+        String sql = "SELECT * FROM YearlyInforamtion";
+
+        try(Connection conn = this.connect();
+            Statement stat = conn.createStatement();
+            ResultSet res = stat.executeQuery(sql)) {
+
+            while ( res.next() ){
+                Yearlyinforamtion yearlyinforamtion = new Yearlyinforamtion();
+                yearlyinforamtion.setId(res.getInt("id"));
+                yearlyinforamtion.setGdp(res.getDouble("GDP"));
+                yearlyinforamtion.setOvernightduration(res.getInt("overnightDuration"));
+                yearlyinforamtion.setAncaket1(res.getInt("ancaket1"));
+                yearlyinforamtion.setAncaket2(res.getInt("ancaket2"));
+                yearlyinforamtion.setAncaket3(res.getInt("ancaket3"));
+                yearlyinforamtion.setAmcaket4(res.getInt("amcaket4"));
+                yearlyinforamtion.setAncaket5(res.getInt("ancaket5"));
+                yearlyinforamtion.setYearId(res.getInt("yearId"));
+                yearlyinforamtions.add(yearlyinforamtion);
+            }
+        }catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return yearlyinforamtions;
+    }
+
+    public boolean updateYearlyinforamtion(Yearlyinforamtion yearlyinforamtion) {
+        String sql = "UPDATE YearlyInforamtion SET GDP = ?, overnightDuration = ?, ancaket1 =? ,ancaket2 =?, ancaket3 =?, amcaket4 =? , ancaket5 = ?, yearId =? WHERE id = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDouble(1, yearlyinforamtion.getGdp());
+            pstmt.setInt(2, yearlyinforamtion.getOvernightduration());
+            pstmt.setInt(3, yearlyinforamtion.getAncaket1());
+            pstmt.setInt(4, yearlyinforamtion.getAncaket2());
+            pstmt.setInt(5, yearlyinforamtion.getAncaket3());
+            pstmt.setInt(6, yearlyinforamtion.getAmcaket4());
+            pstmt.setInt(7, yearlyinforamtion.getAncaket5());
+            pstmt.setInt(8,yearlyinforamtion.getYearId());
+            pstmt.setInt(9, yearlyinforamtion.getId());
+
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean updatePortfoliocountry(Portfoliocountry portfoliocountry) {
+        String sql = "UPDATE PortfolioCountry SET countryId = ?, portfolioId = ?, countNumber =? WHERE id = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, portfoliocountry.getCountryid());
+            pstmt.setInt(2, portfoliocountry.getPortfolioid());
+            pstmt.setInt(3, portfoliocountry.getCount());
+            pstmt.setInt(4, portfoliocountry.getId());
+
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean insertPortfoliocountry(Portfoliocountry portfoliocountry) {
+        String sql = "INSERT INTO PortfolioCountry(countryId,portfolioId,countNumber) VALUES (?,?,?)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, portfoliocountry.getCountryid());
+            pstmt.setInt(2, portfoliocountry.getPortfolioid());
+            pstmt.setInt(3, portfoliocountry.getCount());
+
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean deletePortfoliocountry(Integer id){
+        String sql = "DELETE FROM PortfolioCountry WHERE id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

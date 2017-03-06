@@ -1,5 +1,6 @@
 package portfolio;
 
+import Core.Models.Country;
 import Core.Models.Month;
 import Core.Models.Year;
 import Core.Root;
@@ -7,6 +8,7 @@ import Core.Util;
 import Models.Sights;
 import Models.Transport;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.RowEditEvent;
 
 import javax.faces.application.FacesMessage;
 import java.lang.ref.ReferenceQueue;
@@ -31,7 +33,10 @@ public class PortfolioForm {
     private List<Sights> sights;
     private List<Portfoliosights> portfoliosightses;
     private Portfoliomonthly portfoliomonthly = new Portfoliomonthly();
+    private Portfoliocountry portfoliocountry = new Portfoliocountry();
+    private List<Portfoliocountry> portfoliocountries;
     final static Logger logger = Logger.getLogger(String.valueOf(PortfolioForm.class));
+    private Yearlyinforamtion yearlyinforamtion;
 
     public Root getRoot() {
         return root;
@@ -73,6 +78,7 @@ public class PortfolioForm {
 
     public void setSelectedYear(String selectedYear) {
         this.selectedYear = selectedYear;
+        this.yearlyinforamtion = null;
     }
 
     public void reset(){
@@ -222,5 +228,71 @@ public class PortfolioForm {
         getRoot().getPortfolioDao().deletePortfoliomonthly(portfoliomonthly.getId());
     }
 
+    public List<Yearlyinforamtion> getYearlyinforamtions(){
+        return getRoot().getPortfolioDao().getYearlyinforamtions();
+    }
 
+    public void updatetYearlyinforamtion(){
+        getRoot().getPortfolioDao().updateYearlyinforamtion(yearlyinforamtion);
+    }
+
+    public Yearlyinforamtion getYearlyinforamtion() {
+        if(yearlyinforamtion == null){
+            yearlyinforamtion = getYearlyinforamtions().stream().filter(x -> selectedYear.equals(x.getYearId().toString())).findFirst().get();
+        }
+        return yearlyinforamtion;
+    }
+
+    public void setYearlyinforamtion(Yearlyinforamtion yearlyinforamtion) {
+        this.yearlyinforamtion = yearlyinforamtion;
+    }
+
+    public List<Portfoliocountry> getPortfoliocountries(){
+        if(portfoliocountries == null){
+            portfoliocountries = getRoot().getPortfolioDao().getPortfolioCountry().stream().filter(x-> selectedPortfolio.getId().equals(x.getPortfolioid())).collect(Collectors.toList());
+        }
+        return portfoliocountries;
+    }
+
+    public List<Country> getCountries(){
+        return getRoot().getCountryDao().getAll().stream().filter(x-> !filterPortfoliocountry(x.getId())).collect(Collectors.toList());
+    }
+
+    public Country getCountryById(Integer id){
+        return getAllCountry().stream().filter(x-> id.equals(x.getId())).findFirst().get();
+    }
+
+    public Portfoliocountry getPortfoliocountry() {
+        return portfoliocountry;
+    }
+
+    public void setPortfoliocountry(Portfoliocountry portfoliocountry) {
+        this.portfoliocountry = portfoliocountry;
+    }
+
+    public void addPortfoliocountry(){
+        if(selectedPortfolio != null && portfoliocountry.getCountryid() != null){
+            portfoliocountry.setPortfolioid(selectedPortfolio.getId());
+            getRoot().getPortfolioDao().insertPortfoliocountry(portfoliocountry);
+            portfoliocountry = new Portfoliocountry();
+            portfoliocountries = null;
+        }
+    }
+
+    public void deletePortfoliocountry(Portfoliocountry portfoliocountry){
+        getRoot().getPortfolioDao().deletePortfoliocountry(portfoliocountry.getId());
+        portfoliocountries = null;
+    }
+
+    public boolean filterPortfoliocountry(Integer countryId){
+        return getRoot().getPortfolioDao().getPortfolioCountry().stream().filter(x-> x.getPortfolioid().equals(selectedPortfolio.getId()) && countryId.equals(x.getCountryid())).findAny().isPresent();
+    }
+
+    public List<Country> getAllCountry(){
+        return getRoot().getCountryDao().getAll();
+    }
+
+    public void updatePortfoliocountries(RowEditEvent event){
+        getRoot().getPortfolioDao().updatePortfoliocountry((Portfoliocountry) event.getObject());
+    }
 }
