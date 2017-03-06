@@ -1,6 +1,16 @@
 package portfolio;
 
 public class Portfoliocountry {
+  public Portfoliocountry() {
+  }
+
+  public Portfoliocountry(Integer id, Integer portfolioid, Integer countryid, Integer count) {
+    this.id = id;
+    this.portfolioid = portfolioid;
+    this.countryid = countryid;
+    this.count = count;
+  }
+
   private Integer id;
   private Integer portfolioid;
   private Integer countryid;

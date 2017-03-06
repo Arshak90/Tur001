@@ -503,64 +503,22 @@
                         <div class="padding">
                             <div class="box" style="padding-bottom: 45px;">
                                 <div class="box-header b-b">
-                                    <h3 class="text-u-c text-muted">Թոփ 5 տարածաշրջաներ</h3>
+                                    <h3 class="text-u-c text-muted">Թոփ #{dashboardForm.topTenPortfolioCountriesCalculated.keySet().size()} տարածաշրջաներ</h3>
                                 </div>
                                 <ul class="list inset">
-                                    <li class="list-item">
-                                        <a herf="" class="list-left">
-              <span class="w-40 circle primary">
-                <strong class="text-lg">1</strong>
-              </span>
-                                        </a>
-                                        <div class="list-body">
-                                            <div><a href="" class="_600">ԱՄՆ</a></div>
-                                            <small class="text-muted">12.000.350 Դրամ</small>
-                                        </div>
-                                    </li>
-                                    <li class="list-item">
-                                        <a herf="" class="list-left">
-              <span class="w-40 circle light lt">
-                <strong class="text-lg text-muted">2</strong>
-              </span>
-                                        </a>
-                                        <div class="list-body">
-                                            <div><a href="" class="_600">Ռուսաստան</a></div>
-                                            <small class="text-muted">9.700.00 Դրամ</small>
-                                        </div>
-                                    </li>
-                                    <li class="list-item">
-                                        <a herf="" class="list-left">
-              <span class="w-40 circle light lt">
-                <strong class="text-lg text-muted">3</strong>
-              </span>
-                                        </a>
-                                        <div class="list-body">
-                                            <div><a href="" class="_600">Գերմանական</a></div>
-                                            <small class="text-muted">5.700.00 Դրամ</small>
-                                        </div>
-                                    </li>
-                                    <li class="list-item">
-                                        <a herf="" class="list-left">
-              <span class="w-40 circle light lt">
-                <strong class="text-lg text-muted">4</strong>
-              </span>
-                                        </a>
-                                        <div class="list-body">
-                                            <div><a href="" class="_600">Անգլիա</a></div>
-                                            <small class="text-muted">1.650.00 Դրամ</small>
-                                        </div>
-                                    </li>
-                                    <li class="list-item">
-                                        <a herf="" class="list-left">
-              <span class="w-40 circle light lt">
-                <strong class="text-lg text-muted">5</strong>
-              </span>
-                                        </a>
-                                        <div class="list-body">
-                                            <div><a href="" class="_600">Կանադա</a></div>
-                                            <small class="text-muted">870.00 Դրամ</small>
-                                        </div>
-                                    </li>
+                                    <ui:repeat value="#{dashboardForm.topTenPortfolioCountriesCalculated.keySet().toArray()}" var="topTenPortfolioCountry" varStatus="status">
+                                        <li class="list-item">
+                                            <div class="list-left">
+                                          <span class="w-40 circle primary">
+                                            <strong class="text-lg">#{status.index+1}</strong>
+                                          </span>
+                                            </div>
+                                            <div class="list-body">
+                                                <div><span class="_600">#{dashboardForm.getCountryById(topTenPortfolioCountry).name}</span></div>
+                                                <small class="text-muted">#{dashboardForm.topTenPortfolioCountriesCalculated[topTenPortfolioCountry]}</small>
+                                            </div>
+                                        </li>
+                                    </ui:repeat>
                                 </ul>
                             </div>
                         </div>
@@ -569,29 +527,9 @@
                         <div class="padding">
                             <div class="text-center m-b">
                                 <h6 class="text-u-c">Ֆինանսների հոսք</h6>
-                                <p class="text-muted">2016 թվականի ֆինանսների հոսքը ըստ ամիսների</p>
+                                <p class="text-muted">${dashboardForm.currentDate.year} թվականի ֆինանսների հոսքը ըստ ամիսների</p>
                             </div>
-                            <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="
-        [
-          {
-            data: [[1, 10], [2, 8], [3, 27], [4, 25], [5, 50], [6, 30], [7, 25]],
-            points: { show: true, radius: 5},
-            splines: { show: true, tension: 0.45, lineWidth: 4, fill: 0.1}
-          },
-          { data: [[1, 10], [2, 8], [3, 27], [4, 25], [5, 50], [6, 30], [7, 25]],
-            bars: { show: true, barWidth: 0.05, align: 'center', lineWidth: 0, fillColor: { colors: [{ opacity: 0.1 }, { opacity: 0.1}] } }
-          }
-        ],
-        {
-          colors: ['#0cc2aa','#0cc2aa'],
-          series: { shadowSize: 3 },
-          xaxis: { show: true, font: { color: '#0cc2aa' }, position: 'bottom' },
-          yaxis:{ show: false, font: { color: '#ccc' }},
-          grid: { hoverable: true, clickable: true, borderWidth: 0, color: 'transparent' },
-          tooltip: true,
-          tooltipOpts: { content: '%x.0 is %y.4',  defaultTheme: false, shifts: { x: 0, y: -40 } }
-        }
-      " style="height:360px" >
+                            <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="${dashboardForm.finaniceChartData}" style="height:360px" >
                             </div>
                             <div class="text-muted text-xs m-t"><span class="pull-right">2015</span>Դրամ</div>
                         </div>
@@ -713,7 +651,6 @@
             </div>
         </div>
         <!-- / -->
-
 
         <!-- ############ LAYOUT END-->
 

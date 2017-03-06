@@ -13,7 +13,9 @@
 
     <bean id="projectEditForm" class="Beans.ProjectEditForm" scope="session"/>
 
-    <bean id="dashboardForm" class="dashboard.DashboardForm" scope="session" />
+    <bean id="dashboardForm" class="dashboard.DashboardForm" scope="session" >
+        <property name="root" ref="root"/>
+    </bean>
 
     <bean id="portfolioForm" class="portfolio.PortfolioForm" scope="session" >
         <property name="root" ref="root"/>

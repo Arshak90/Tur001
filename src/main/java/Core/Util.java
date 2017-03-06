@@ -5,7 +5,9 @@ import Core.Models.Month;
 import javax.el.ELContext;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by arshak.askaryan on 1/26/2017.
@@ -33,5 +35,22 @@ public class Util {
         months.add(new Month(12,"Դեկտեմբեր",4));
         return months;
 
+    }
+
+    public static Map<Integer, Double> initMap(){
+        Map<Integer, Double> doubleMap = new HashMap<>();
+        doubleMap.put(1,0.0);
+        doubleMap.put(2,0.0);
+        doubleMap.put(3,0.0);
+        doubleMap.put(4,0.0);
+        doubleMap.put(5,0.0);
+        doubleMap.put(6,0.0);
+        doubleMap.put(7,0.0);
+        doubleMap.put(8,0.0);
+        doubleMap.put(9,0.0);
+        doubleMap.put(10,0.0);
+        doubleMap.put(11,0.0);
+        doubleMap.put(12,0.0);
+        return doubleMap;
     }
 }
