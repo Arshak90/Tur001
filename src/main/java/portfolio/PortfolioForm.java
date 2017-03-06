@@ -122,10 +122,9 @@ public class PortfolioForm {
     }
 
     public void save(){
-        if(selectedPortfolio.getArmtouristcount() + selectedPortfolio.getOthertouristcount() == selectedPortfolio.getTotaltouristcount()){
+        if(selectedPortfolio.getArmtouristcount() + selectedPortfolio.getOthertouristcount() <= selectedPortfolio.getTotaltouristcount()){
             getRoot().getPortfolioDao().update(selectedPortfolio);
             logger.info("Saved successfully " + selectedPortfolio.toString());
-            selectedPortfolio = null;
             RequestContext.getCurrentInstance().update("panelGroupView");
         }else{
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "What we do in life", "Echoes in eternity.");
@@ -294,5 +293,9 @@ public class PortfolioForm {
 
     public void updatePortfoliocountries(RowEditEvent event){
         getRoot().getPortfolioDao().updatePortfoliocountry((Portfoliocountry) event.getObject());
+    }
+
+    public void cancel(){
+        this.selectedPortfolio = null;
     }
 }

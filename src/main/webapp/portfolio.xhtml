@@ -234,7 +234,7 @@
                             <p:selectOneMenu id="portfolioYear" value="#{portfolioForm.selectedYear}" style="width:125px">
                                 <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
                                 <f:selectItems value="#{portfolioForm.years}" />
-                                <p:ajax event="change" update="table yearlyinforamtionId" process="@this" listener="#{portfolioForm.changeYear}"></p:ajax>
+                                <p:ajax event="change" update="yearlyinforamtionId table2" process="@this" listener="#{portfolioForm.changeYear}"></p:ajax>
                             </p:selectOneMenu>
                             <h:panelGroup  id="yearlyinforamtionId">
                                     <h:panelGrid columns="2" cellpadding="5" rendered="#{portfolioForm.selectedYear != null}">
@@ -259,20 +259,32 @@
 
                             <div class="table-responsive">
                                 <h:form id="carDetail" prependId="false">
-                                    <p:dataTable id="table" value="#{portfolioForm.portfolios}" var="portfolio" tableStyleClass="table table-striped b-t b-b">
-                                        <p:column style="width:80px;text-align: center">
-                                            <p:commandButton actionListener="#{portfolioForm.editPortfolio(portfolio)}" update="panelGroupView" icon="fa fa-pencil-square-o" title="Խմբագրել"/>
-                                        </p:column>
-                                        <p:column headerText="Եռամսյակ">
-                                            <h:outputText value="#{portfolio.quarter}" />
-                                        </p:column>
-                                        <p:column headerText="Տարի">
-                                            <h:outputText value="#{portfolio.year}" />
-                                        </p:column>
-                                        <p:column headerText="Ընդհանուր զբոսաշրջիկների թիվը">
-                                            <h:outputText value="#{portfolio.totaltouristcount}" />
-                                        </p:column>
-                                    </p:dataTable>
+
+
+                                <h:panelGroup layout="blcok" class="table-responsive" id="table2" rendered="#{portfolioForm.selectedPortfolio == null}">
+                                    <table class="table table-striped b-t" >
+                                        <thead>
+                                        <tr>
+                                            <th>Եռամսյակ</th>
+                                            <th>Տարի</th>
+                                            <th>Ընդհանուր զբոսաշրջիկների թիվը</th>
+                                            <th style="width:50px;"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <ui:repeat value="#{portfolioForm.portfolios}" var="portfolio">
+                                            <tr>
+                                                <td>#{portfolio.quarter}</td>
+                                                <td>#{portfolio.year}</td>
+                                                <td>#{portfolio.totaltouristcount}</td>
+                                                <td style="width:80px;text-align: center">
+                                                    <p:commandLink  styleClass="fa fa-pencil-square-o" actionListener="#{portfolioForm.editPortfolio(portfolio)}" update="panelGroupView" icon="" title="Խմբագրել"/>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                        </tbody>
+                                    </table>
+                                </h:panelGroup>
                                     <div class="clear"></div>
                                     <h:panelGroup id="panelGroupView" >
                                         <h:panelGrid columns="2" cellpadding="5" rendered="#{portfolioForm.selectedPortfolio != null}">
@@ -391,7 +403,8 @@
                                                 <div class="clear"/>
                                             </h:panelGrid>
                                         </h:panelGroup>
-                                        <p:commandLink style="margin-bottom: 30px;" styleClass="btn btn-fw primary" actionListener="#{portfolioForm.save}" process="@form" value="Պահպանել" rendered="#{portfolioForm.selectedPortfolio != null}"></p:commandLink>
+                                        <p:commandLink style="margin-bottom: 30px;" styleClass="btn btn-fw primary" actionListener="#{portfolioForm.save}" update="table2" value="Պահպանել" rendered="#{portfolioForm.selectedPortfolio != null}"></p:commandLink>
+                                        <p:commandLink style="margin-bottom: 30px;" styleClass="btn btn-fw primary" actionListener="#{portfolioForm.cancel}" process="panelGroupView" update="panelGroupView table2" value="Փակել" rendered="#{portfolioForm.selectedPortfolio != null}"></p:commandLink>
                                     </h:panelGroup>
                                 </h:form>
                             </div>
