@@ -239,20 +239,19 @@
                             <h:panelGroup  id="yearlyinforamtionId">
                                     <h:panelGrid columns="2" cellpadding="5" rendered="#{portfolioForm.selectedYear != null}">
                                         <p:outputLabel for="yearlyinforamtionGdpId" value="ՀՆԱ: " />
-                                        <p:inputNumber id="yearlyinforamtionGdpId" value="#{portfolioForm.yearlyinforamtion.gdp}"></p:inputNumber>
+                                        <p:inputNumber id="yearlyinforamtionGdpId" value="#{portfolioForm.yearlyinforamtion.gdp}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s"></p:inputNumber>
                                         <p:outputLabel for="yearlyinforamtionOvernightdurationId" value="Գիշերակաց: " />
                                         <p:inputNumber id="yearlyinforamtionOvernightdurationId" value="#{portfolioForm.yearlyinforamtion.overnightduration}" decimalPlaces="0" ></p:inputNumber>
-                                        <p:outputLabel for="yearlyinforamtionAncaket1Id" value="Անցակեր 1: " />
+                                        <p:outputLabel for="yearlyinforamtionAncaket1Id" value="Զվարթնոց: " />
                                         <p:inputNumber id="yearlyinforamtionAncaket1Id" value="#{portfolioForm.yearlyinforamtion.ancaket1}" decimalPlaces="0" ></p:inputNumber>
-                                        <p:outputLabel for="yearlyinforamtionAncaket2Id" value="Անցակեր 2: " />
+                                        <p:outputLabel for="yearlyinforamtionAncaket2Id" value="Բագրատաշեն: " />
                                         <p:inputNumber id="yearlyinforamtionAncaket2Id" value="#{portfolioForm.yearlyinforamtion.ancaket2}" decimalPlaces="0" ></p:inputNumber>
-                                        <p:outputLabel for="yearlyinforamtionAncaket3Id" value="Անցակեր 3: " />
+                                        <p:outputLabel for="yearlyinforamtionAncaket3Id" value="Գյումրի: " />
                                         <p:inputNumber id="yearlyinforamtionAncaket3Id" value="#{portfolioForm.yearlyinforamtion.ancaket3}" decimalPlaces="0" ></p:inputNumber>
-                                        <p:outputLabel for="yearlyinforamtionAncaket5Id" value="Անցակեր 5: " />
-                                        <p:inputNumber id="yearlyinforamtionAncaket5Id" value="#{portfolioForm.yearlyinforamtion.ancaket5}" decimalPlaces="0" ></p:inputNumber>
-                                        <p:outputLabel for="yearlyinforamtionAncaket4Id" value="Անցակեր 4: " />
+                                        <p:outputLabel for="yearlyinforamtionAncaket4Id" value="Բավրա: " />
                                         <p:inputNumber id="yearlyinforamtionAncaket4Id" value="#{portfolioForm.yearlyinforamtion.amcaket4}" decimalPlaces="0" ></p:inputNumber>
-
+                                        <p:outputLabel for="yearlyinforamtionAncaket5Id" value="Մեղրի: " />
+                                        <p:inputNumber id="yearlyinforamtionAncaket5Id" value="#{portfolioForm.yearlyinforamtion.ancaket5}" decimalPlaces="0" ></p:inputNumber>
                                         <p:commandButton style="margin-bottom: 30px;" actionListener="#{portfolioForm.updatetYearlyinforamtion}" value="Պահպանել"></p:commandButton>
                                     </h:panelGrid>
                             </h:panelGroup>
