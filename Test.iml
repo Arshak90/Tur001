@@ -12,37 +12,17 @@
         </webroots>
       </configuration>
     </facet>
-    <facet type="Spring" name="Spring">
-      <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring-beans.xml</file>
-        </fileset>
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src/main/dashboard" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/Beans" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/Core" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/Interface" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/Convertors" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/portfolio" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/Test" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/initialize" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/Servlets" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/hotel" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/Authentication" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.primefaces.extensions:primefaces-extensions:6.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.primefaces.extensions:resources-ckeditor:6.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.sun.faces:jsf-api:2.2.10" level="project" />
     <orderEntry type="library" name="Maven: com.sun.faces:jsf-impl:2.2.10" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.0.1" level="project" />
