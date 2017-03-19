@@ -1,7 +1,7 @@
-package Core.Dao;
+package home;
+
 
 import Core.Interface.Dao;
-import Core.Models.Country;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,34 +11,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by arshak.askaryan on 1/25/2017.
+ * Created by gev on 15.03.2017.
  */
 public class CountryDao implements Dao<Country> {
 
-    @Override
     public List<Country> getAll() {
-        List<Country> countries = new ArrayList<>();
+        List<Country> Countrys = new ArrayList<>();
         String sql = "SELECT * FROM Country";
 
-        try(Connection conn = this.connect();
-            Statement stat = conn.createStatement();
-            ResultSet res = stat.executeQuery(sql)) {
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql);) {
 
-            while ( res.next() ){
+            while ( rs.next() ) {
                 Country country = new Country();
-                country.setId(res.getInt("id"));
-                country.setName(res.getString("name"));
-                country.setLat(res.getString("lat"));
-                country.setLng(res.getString("lng"));
-                country.setName_ENG(res.getString("name_ENG"));
-                countries.add(country);
+                country.setId(rs.getInt("id"));
+                country.setName(rs.getString("name"));
+                country.setName_ENG(rs.getString("name_ENG"));
+
+                Countrys.add(country);
             }
-        }catch (SQLException e) {
+
+        } catch (SQLException e) {
 
             System.out.println(e.getMessage());
         }
-
-        return countries;
+        return Countrys;
     }
 
     @Override

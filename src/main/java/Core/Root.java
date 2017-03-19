@@ -19,6 +19,7 @@ public class Root {
     private TouristSightDao touristSightDao;
     private TourOperatorDao tourOperatorDao;
     private CountryDao countryDao;
+    private home.CountryDao countryDaoForHome;
 
     public YearDao getYearDao() {
         if(this.yearDao == null){
@@ -95,5 +96,16 @@ public class Root {
 
     public void setCountryDao(CountryDao countryDao) {
         this.countryDao = countryDao;
+    }
+
+    public home.CountryDao getCountryDaoForHome() {
+        if(countryDaoForHome == null){
+            countryDaoForHome = new home.CountryDao();
+        }
+        return countryDaoForHome;
+    }
+
+    public void setCountryDaoForHome(home.CountryDao countryDaoForHome) {
+        this.countryDaoForHome = countryDaoForHome;
     }
 }

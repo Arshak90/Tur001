@@ -11,7 +11,13 @@
 
     <bean id="fileUpload" class="Core.FileUpload" scope="session"/>
 
-    <bean id="projectEditForm" class="Beans.ProjectEditForm" scope="session"/>
+    <bean id="projectEditForm" class="Beans.ProjectEditForm" scope="session">
+        <property name="root" ref="root"/>
+    </bean>
+
+    <bean id="HomeForm" class="home.HomeForm" scope="session">
+        <property name="root" ref="root"/>
+    </bean>
 
     <bean id="dashboardForm" class="dashboard.DashboardForm" scope="session" >
         <property name="root" ref="root"/>

@@ -7,12 +7,15 @@ import Core.Root;
 import Core.Util;
 import Models.Sights;
 import Models.Transport;
+import home.HomeForm;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 
 import javax.faces.application.FacesMessage;
-import java.lang.ref.ReferenceQueue;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -126,6 +129,7 @@ public class PortfolioForm {
             getRoot().getPortfolioDao().update(selectedPortfolio);
             logger.info("Saved successfully " + selectedPortfolio.toString());
             RequestContext.getCurrentInstance().update("panelGroupView");
+            Util.getBean("HomeForm", HomeForm.class).setJson(null);
         }else{
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "What we do in life", "Echoes in eternity.");
 

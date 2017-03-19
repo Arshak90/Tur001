@@ -270,4 +270,18 @@ public class HotelDao implements Dao<Hotel> {
         }
         return false;
     }
+
+//    public void insertCountry(String name,String name_ENG) {
+//            String sql = "INSERT INTO Country(name,name_ENG) VALUES (?,?)";
+//
+//            try (Connection conn = this.connect();
+//                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//                pstmt.setString(1, name);
+//                pstmt.setString(2, name_ENG);
+//                pstmt.executeUpdate();
+//
+//            } catch (SQLException e) {
+//                System.out.println(e.getMessage());
+//            }
+//    }
 }

@@ -5,6 +5,7 @@ public class Country {
   private String name;
   private String lat;
   private String lng;
+  private String name_ENG;
 
   public Integer getId() {
     return id;
@@ -36,5 +37,13 @@ public class Country {
 
   public void setLng(String lng) {
     this.lng = lng;
+  }
+
+  public String getName_ENG() {
+    return name_ENG;
+  }
+
+  public void setName_ENG(String name_ENG) {
+    this.name_ENG = name_ENG;
   }
 }

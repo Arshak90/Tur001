@@ -1,12 +1,21 @@
 package Beans;
 
-import Core.Dao.YearDao;
-import Core.Models.Year;
+import Core.Root;
 
 /**
  * Created by arshak.askaryan on 2/5/2016.
  */
 public class ProjectEditForm {
+
+    private Root root;
+
+    private Root getRoot() {
+        return root;
+    }
+
+    public void setRoot(Root root) {
+        this.root = root;
+    }
 
     public ProjectEditForm() {
 
