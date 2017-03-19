@@ -54,7 +54,10 @@ public class DashboardForm {
     }
 
     public List<Portfolio> getPortfolios() {
-        return getRoot().getPortfolioDao().getAll().stream().filter(x-> x.getYear().equals(currentDate.getYear())).collect(Collectors.toList());
+        if(this.portfolios == null){
+            this.portfolios = getRoot().getPortfolioDao().getAll().stream().filter(x-> x.getYear().equals(currentDate.getYear())).collect(Collectors.toList());
+        }
+        return this.portfolios;
     }
 
     public void setPortfolios(List<Portfolio> portfolios) {
@@ -73,10 +76,10 @@ public class DashboardForm {
     public Map<Integer , Integer> getTopTenPortfolioCountriesCalculated(){
         return  getTopTenPortfolioCountries().
                 stream().
-                limit(10).
                 collect(Collectors.groupingBy(Portfoliocountry::getCountryid, Collectors.summingInt(Portfoliocountry::getCount))).
                 entrySet().
                 stream().
+                limit(10).
                 sorted((p1, p2) -> p2.getValue().compareTo(p1.getValue())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,(e1, e2) -> e1, LinkedHashMap::new));
     }
 
@@ -125,5 +128,56 @@ public class DashboardForm {
                 "          tooltipOpts: { content: '%x.0 is %y.2',  defaultTheme: false, shifts: { x: 0, y: -40 } }\n" +
                 "        }\n" +
                 "      ";
+    }
+
+    public String getPeopleByGender(){
+        return "{\n" +
+                "  tooltip : {\n" +
+                "      trigger: 'axis'\n" +
+                "  },\n" +
+                "  legend: {\n" +
+                "      data:['Տղամարդ','Կին']\n" +
+                "  },\n" +
+                "  calculable : false,\n" +
+                "  xAxis : [\n" +
+                "      {\n" +
+                "          type : 'category',\n" +
+                "          data : ['Քառորդ 1','Քառորդ 2','Քառորդ 3','Քառորդ 4']\n" +
+                "      }\n" +
+                "  ],\n" +
+                "  yAxis : [\n" +
+                "      {\n" +
+                "          type : 'value'\n" +
+                "      }\n" +
+                "  ],\n" +
+                "  series : [\n" +
+                "      {\n" +
+                "          name:'Տղամարդ',\n" +
+                "          type:'bar',\n" +
+                "          data:"+ getPeopleByGenderMale()+"\n" +
+                "      },\n" +
+                "      {\n" +
+                "          name:'Կին',\n" +
+                "          type:'bar',\n" +
+                "          data:"+ getPeopleByGenderFmale()+"\n" +
+                "      }\n" +
+                "  ]\n" +
+                "}";
+    }
+
+    public String getPeopleByGenderFmale(){
+        String s = "[";
+        for(Portfolio portfolio : getPortfolios()){
+            s = s + portfolio.getIcfemalecount().toString() +  ",";
+        }
+        return s + "],";
+    }
+
+    public String getPeopleByGenderMale(){
+        String s = "[";
+        for(Portfolio portfolio : getPortfolios()){
+            s = s + portfolio.getIcmalecount().toString() +  ",";
+        }
+        return s + "],";
     }
 }

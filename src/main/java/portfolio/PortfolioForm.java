@@ -40,6 +40,7 @@ public class PortfolioForm {
     private List<Portfoliocountry> portfoliocountries;
     final static Logger logger = Logger.getLogger(String.valueOf(PortfolioForm.class));
     private Yearlyinforamtion yearlyinforamtion;
+    private List<Country> countries;
 
     public Root getRoot() {
         return root;
@@ -50,7 +51,6 @@ public class PortfolioForm {
     }
 
     public void init(){
-
     }
 
     public List<Year> getYears() {
@@ -126,6 +126,8 @@ public class PortfolioForm {
 
     public void editPortfolio(Portfolio portfolio) {
         this.selectedPortfolio = portfolio;
+        this.countries = null;
+        this.portfoliocountries = null;
     }
 
     public void save(){
@@ -262,7 +264,15 @@ public class PortfolioForm {
     }
 
     public List<Country> getCountries(){
-        return getRoot().getCountryDao().getAll().stream().filter(x-> !filterPortfoliocountry(x.getId())).collect(Collectors.toList());
+        if(this.countries == null){
+            this.countries =  getRoot().getCountryDao().getAll().stream().filter(x-> !filterPortfoliocountry(x.getId())).sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).collect(Collectors.toList());
+        }
+
+        return this.countries;
+    }
+
+    public void setCountries(List<Country> countries) {
+        this.countries = countries;
     }
 
     public Country getCountryById(Integer id){
@@ -283,12 +293,14 @@ public class PortfolioForm {
             getRoot().getPortfolioDao().insertPortfoliocountry(portfoliocountry);
             portfoliocountry = new Portfoliocountry();
             portfoliocountries = null;
+            countries = null;
         }
     }
 
     public void deletePortfoliocountry(Portfoliocountry portfoliocountry){
         getRoot().getPortfolioDao().deletePortfoliocountry(portfoliocountry.getId());
         portfoliocountries = null;
+        countries = null;
     }
 
     public boolean filterPortfoliocountry(Integer countryId){
@@ -305,5 +317,6 @@ public class PortfolioForm {
 
     public void cancel(){
         this.selectedPortfolio = null;
+        this.countries = null;
     }
 }

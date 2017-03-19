@@ -294,7 +294,7 @@
                                 <div class="box-header b-b">
                                     <h3 class="text-u-c text-muted">Թոփ #{dashboardForm.topTenPortfolioCountriesCalculated.keySet().size()} տարածաշրջաներ</h3>
                                 </div>
-                                <ul class="list inset">
+                                <ul class="list inset" style="height: 360px; overflow-y: auto">
                                     <ui:repeat value="#{dashboardForm.topTenPortfolioCountriesCalculated.keySet().toArray()}" var="topTenPortfolioCountry" varStatus="status">
                                         <li class="list-item">
                                             <div class="list-left">
@@ -372,60 +372,7 @@
                                     <small class="block text-muted">Մարդկաց քանակը ըստ սեռի</small>
                                 </div>
                                 <div class="box-body">
-                                    <div ui-jp="chart" ui-options=" {
-              tooltip : {
-                  trigger: 'axis'
-              },
-              legend: {
-                  data:['Տղամարդ','Կին']
-              },
-              calculable : false,
-              xAxis : [
-                  {
-                      type : 'category',
-                      data : ['Հուն','Փետ','Մար ','Ապ','Մայ','Հուն','Հուլ','Օգ','Սեպ','Հոկ','Նոյ','Դեկ']
-                  }
-              ],
-              yAxis : [
-                  {
-                      type : 'value'
-                  }
-              ],
-              series : [
-                  {
-                      name:'Տղամարդ',
-                      type:'bar',
-                      data:[15, 50, 60, 100, 70, 140, 78, 42, 172, 12, 72, 180],
-                      markPoint : {
-                          data : [
-                              {type : 'max', name: 'Max'},
-                              {type : 'min', name: 'Min'}
-                          ]
-                      },
-                      markLine : {
-                          data : [
-                              {type : 'average', name: 'Average'}
-                          ]
-                      }
-                  },
-                  {
-                      name:'Կին',
-                      type:'bar',
-                      data:[45, 54, 56, 105, 45, 170, 190, 25, 47, 18, 78, 140],
-                      markPoint : {
-                          data : [
-                              {name : 'Max', value : 190, xAxis: 6, yAxis: 183, symbolSize: 17},
-                              {name : 'Min', value : 12, xAxis: 11, yAxis: 3}
-                          ]
-                      },
-                      markLine : {
-                          data : [
-                              {type : 'average', name : 'Average'}
-                          ]
-                      }
-                  }
-              ]
-            }" style="height:300px" >
+                                    <div ui-jp="chart" ui-options="${dashboardForm.peopleByGender}" style="height:300px" >
                                     </div>
                                 </div>
                             </div>

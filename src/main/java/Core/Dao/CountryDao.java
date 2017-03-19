@@ -37,7 +37,6 @@ public class CountryDao implements Dao<Country> {
 
             System.out.println(e.getMessage());
         }
-
         return countries;
     }
 

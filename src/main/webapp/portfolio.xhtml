@@ -225,11 +225,11 @@
                 <div ui-view="" class="app-body" id="view">
 
                     <!-- ############ PAGE START-->
-                    <div class="app-header white box-shadow">
+                    <h:panelGroup id="savePanelId" layout="block" class="app-header white box-shadow">
                         <div class="float-right">
-                            <p:commandButton actionListener="#{portfolioForm.updatetYearlyinforamtion}" value="Պահպանել"></p:commandButton>
+                            <p:commandButton actionListener="#{portfolioForm.updatetYearlyinforamtion}" value="Պահպանել" rendered="#{portfolioForm.selectedPortfolio == null}"></p:commandButton>
                         </div>
-                    </div>
+                    </h:panelGroup>
                     <div class="app-body">
                         <div class="padding">
                             <div class="box form-border">
@@ -237,75 +237,78 @@
                                     <div class="col-xs-12">
                                         <h2 class="de-title">Բաժնի անուն</h2>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                                        <p:selectOneMenu id="portfolioYear" value="#{portfolioForm.selectedYear}" style="width:125px" styleClass="form-control input-c">
-                                            <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
-                                            <f:selectItems value="#{portfolioForm.years}" />
-                                            <p:ajax event="change" update="yearlyinforamtionId table2" listener="#{portfolioForm.changeYear}"></p:ajax>
-                                        </p:selectOneMenu>
-                                    </div>
-                                    <div class="clear"></div>
-                                    <h:panelGroup  layout="block" id="yearlyinforamtionId">
-                                        <h:panelGroup layout="block" rendered="#{portfolioForm.selectedYear != null}">
-                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                                                <p:outputLabel for="yearlyinforamtionGdpId" value="ՀՆԱ" styleClass="form-control-label"/>
-                                                <p:inputNumber id="yearlyinforamtionGdpId" styleClass="" value="#{portfolioForm.yearlyinforamtion.gdp}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s"></p:inputNumber>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                                                <p:outputLabel for="yearlyinforamtionOvernightdurationId" value="Գիշերակաց"  styleClass="form-control-label"/>
-                                                <p:inputNumber id="yearlyinforamtionOvernightdurationId" styleClass=""  value="#{portfolioForm.yearlyinforamtion.overnightduration}" decimalPlaces="0" ></p:inputNumber>
-                                            </div>
-                                            <div class="clear"></div>
-                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                                                <p:outputLabel for="yearlyinforamtionAncaket1Id" value="Զվարթնոց"  styleClass="form-control-label"/>
-                                                <p:inputNumber id="yearlyinforamtionAncaket1Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket1}" decimalPlaces="0" ></p:inputNumber>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                                                <p:outputLabel for="yearlyinforamtionAncaket2Id" value="Բագրատաշեն"  styleClass="form-control-label"/>
-                                                <p:inputNumber id="yearlyinforamtionAncaket2Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket2}" decimalPlaces="0" ></p:inputNumber>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                                                <p:outputLabel for="yearlyinforamtionAncaket3Id" value="Գյումրի" styleClass="form-control-label"/>
-                                                <p:inputNumber id="yearlyinforamtionAncaket3Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket3}" decimalPlaces="0" ></p:inputNumber>
-                                            </div>
-                                            <div class="clear"></div>
-                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                                                <p:outputLabel for="yearlyinforamtionAncaket4Id" value="Բավրա"  styleClass="form-control-label"/>
-                                                <p:inputNumber id="yearlyinforamtionAncaket4Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.amcaket4}" decimalPlaces="0" ></p:inputNumber>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
-                                                <p:outputLabel for="yearlyinforamtionAncaket5Id" value="Մեղրի: "  styleClass="form-control-label"/>
-                                                <p:inputNumber id="yearlyinforamtionAncaket5Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket5}" decimalPlaces="0" ></p:inputNumber>
-                                            </div>
+                                    <h:panelGroup id="yearlyPanelId" rendered="#{portfolioForm.selectedPortfolio == null}">
+                                        <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                            <p:selectOneMenu id="portfolioYear" value="#{portfolioForm.selectedYear}" style="width:125px" styleClass="form-control input-c">
+                                                <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
+                                                <f:selectItems value="#{portfolioForm.years}" />
+                                                <p:ajax event="change" update="yearlyinforamtionId table2" listener="#{portfolioForm.changeYear}"></p:ajax>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <h:panelGroup  layout="block" id="yearlyinforamtionId">
+                                            <h:panelGroup layout="block" rendered="#{portfolioForm.selectedYear != null}">
+                                                <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                    <p:outputLabel for="yearlyinforamtionGdpId" value="ՀՆԱ" styleClass="form-control-label"/>
+                                                    <p:inputNumber id="yearlyinforamtionGdpId" styleClass="" value="#{portfolioForm.yearlyinforamtion.gdp}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s"></p:inputNumber>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                    <p:outputLabel for="yearlyinforamtionOvernightdurationId" value="Գիշերակաց"  styleClass="form-control-label"/>
+                                                    <p:inputNumber id="yearlyinforamtionOvernightdurationId" styleClass=""  value="#{portfolioForm.yearlyinforamtion.overnightduration}" decimalPlaces="0" ></p:inputNumber>
+                                                </div>
+                                                <div class="clear"></div>
+                                                <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                    <p:outputLabel for="yearlyinforamtionAncaket1Id" value="Զվարթնոց"  styleClass="form-control-label"/>
+                                                    <p:inputNumber id="yearlyinforamtionAncaket1Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket1}" decimalPlaces="0" ></p:inputNumber>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                    <p:outputLabel for="yearlyinforamtionAncaket2Id" value="Բագրատաշեն"  styleClass="form-control-label"/>
+                                                    <p:inputNumber id="yearlyinforamtionAncaket2Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket2}" decimalPlaces="0" ></p:inputNumber>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                    <p:outputLabel for="yearlyinforamtionAncaket3Id" value="Գյումրի" styleClass="form-control-label"/>
+                                                    <p:inputNumber id="yearlyinforamtionAncaket3Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket3}" decimalPlaces="0" ></p:inputNumber>
+                                                </div>
+                                                <div class="clear"></div>
+                                                <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                    <p:outputLabel for="yearlyinforamtionAncaket4Id" value="Բավրա"  styleClass="form-control-label"/>
+                                                    <p:inputNumber id="yearlyinforamtionAncaket4Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.amcaket4}" decimalPlaces="0" ></p:inputNumber>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                    <p:outputLabel for="yearlyinforamtionAncaket5Id" value="Մեղրի: "  styleClass="form-control-label"/>
+                                                    <p:inputNumber id="yearlyinforamtionAncaket5Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket5}" decimalPlaces="0" ></p:inputNumber>
+                                                </div>
+                                            </h:panelGroup>
                                         </h:panelGroup>
-                                    </h:panelGroup>
-                                    <div class="clear"></div>
-                                    <h:form id="carDetail" prependId="false">
+                                        <div class="clear"></div>
                                         <h:panelGroup layout="block" class="de-table-block" id="table2" rendered="#{portfolioForm.selectedPortfolio == null}">
                                             <h2 class="de-title">Բաժնի անուն</h2>
                                             <table class="table table-hover b-t de-table" >
                                                 <thead>
-                                                    <tr class="de-table-head">
-                                                        <th>Եռամսյակ</th>
-                                                        <th>Տարի</th>
-                                                        <th>Ընդհանուր զբոսաշրջիկների թիվը</th>
-                                                        <th style="width:50px;"></th>
-                                                    </tr>
+                                                <tr class="de-table-head">
+                                                    <th>Եռամսյակ</th>
+                                                    <th>Տարի</th>
+                                                    <th>Ընդհանուր զբոսաշրջիկների թիվը</th>
+                                                    <th style="width:50px;"></th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <ui:repeat value="#{portfolioForm.portfolios}" var="portfolio">
-                                                        <tr>
-                                                            <td>#{portfolio.quarter}</td>
-                                                            <td>#{portfolio.year}</td>
-                                                            <td>#{portfolio.totaltouristcount}</td>
-                                                            <td style="width:80px;text-align: center">
-                                                                <p:commandLink  styleClass="fa fa-pencil-square-o" actionListener="#{portfolioForm.editPortfolio(portfolio)}" update="panelGroupView" icon="" title="Խմբագրել"/>
-                                                            </td>
-                                                        </tr>
-                                                    </ui:repeat>
+                                                <ui:repeat value="#{portfolioForm.portfolios}" var="portfolio">
+                                                    <tr>
+                                                        <td>#{portfolio.quarter}</td>
+                                                        <td>#{portfolio.year}</td>
+                                                        <td>#{portfolio.totaltouristcount}</td>
+                                                        <td style="width:80px;text-align: center">
+                                                            <p:commandLink  styleClass="fa fa-pencil-square-o" actionListener="#{portfolioForm.editPortfolio(portfolio)}" update="@form" icon="" title="Խմբագրել"/>
+                                                        </td>
+                                                    </tr>
+                                                </ui:repeat>
                                                 </tbody>
                                             </table>
                                         </h:panelGroup>
+                                    </h:panelGroup>
+
+
 
                                         <div class="clear"></div>
                                             <h:panelGroup id="panelGroupView" >
@@ -512,11 +515,10 @@
                                                                    actionListener="#{portfolioForm.save}" update="table2" value="Պահպանել"
                                                                    rendered="#{portfolioForm.selectedPortfolio != null}"></p:commandLink>
                                                     <p:commandLink styleClass="btn btn-fw dark" actionListener="#{portfolioForm.cancel}"
-                                                                   process="panelGroupView" update="panelGroupView table2" value="Փակել"
+                                                                   process="panelGroupView" update="@form" value="Փակել"
                                                                    rendered="#{portfolioForm.selectedPortfolio != null}"></p:commandLink>
                                                 </div>
                                             </h:panelGroup>
-                                        </h:form>
                 </div>
                             </div>
                         </div>
