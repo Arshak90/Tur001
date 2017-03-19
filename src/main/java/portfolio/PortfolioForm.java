@@ -49,6 +49,10 @@ public class PortfolioForm {
         this.root = root;
     }
 
+    public void init(){
+
+    }
+
     public List<Year> getYears() {
         if(this.years == null){
             this.years = getRoot().getYearDao().getAll();

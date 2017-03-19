@@ -241,7 +241,7 @@
                                         <p:selectOneMenu id="portfolioYear" value="#{portfolioForm.selectedYear}" style="width:125px" styleClass="form-control input-c">
                                             <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
                                             <f:selectItems value="#{portfolioForm.years}" />
-                                            <p:ajax event="change" update="yearlyinforamtionId table2" process="@this" listener="#{portfolioForm.changeYear}"></p:ajax>
+                                            <p:ajax event="change" update="yearlyinforamtionId table2" listener="#{portfolioForm.changeYear}"></p:ajax>
                                         </p:selectOneMenu>
                                     </div>
                                     <div class="clear"></div>

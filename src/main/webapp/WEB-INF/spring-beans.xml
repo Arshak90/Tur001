@@ -23,7 +23,7 @@
         <property name="root" ref="root"/>
     </bean>
 
-    <bean id="portfolioForm" class="portfolio.PortfolioForm" scope="session" >
+    <bean id="portfolioForm" class="portfolio.PortfolioForm" scope="session" init-method="init">
         <property name="root" ref="root"/>
     </bean>
 
