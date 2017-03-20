@@ -180,4 +180,9 @@ public class DashboardForm {
         }
         return s + "],";
     }
+
+    public void resetData(){
+        this.portfolios = null;
+        this.topTenPortfolioCountries = null;
+    }
 }

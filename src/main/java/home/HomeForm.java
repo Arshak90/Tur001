@@ -168,5 +168,14 @@ public class HomeForm {
                 "                  }\n" +
                 "              ]\n" +
                 "            }";
+
+
+    }
+
+    public void resetData(){
+        this.portfolios = null;
+        this.countresWithCount = null;
+        this.portfoliocountries = null;
+        this.json = null;
     }
 }
