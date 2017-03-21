@@ -211,16 +211,16 @@
                     <div class="collapse navbar-toggleable-sm" id="collapse">
                         <div ui-include="'../views/blocks/navbar.form.right.html'"></div>
                         <!-- link and dropdown -->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="" data-toggle="dropdown">
-                                    <i class="fa fa-fw fa-plus text-muted"></i>
-                                    
-                                    <span>Ավելացնել նոր հյուրանոց</span>
-                                </a>
-                                <div ui-include="'../views/blocks/dropdown.new.html'"></div>
-                            </li>
-                        </ul>
+                        <!--<ul class="nav navbar-nav">-->
+                            <!--<li class="nav-item dropdown">-->
+                                <!--<a class="nav-link" href="" data-toggle="dropdown">-->
+                                    <!--<i class="fa fa-fw fa-plus text-muted"></i>-->
+                                    <!---->
+                                    <!--<span>Ավելացնել նոր հյուրանոց</span>-->
+                                <!--</a>-->
+                                <!--<div ui-include="'../views/blocks/dropdown.new.html'"></div>-->
+                            <!--</li>-->
+                        <!--</ul>-->
                         <!-- / -->
                     </div>
                     <!-- / navbar collapse -->
@@ -307,22 +307,22 @@
                             <div class="row-col">
                                 <div class="row-row">
                                     <div class="row-body">
-                                        <h:panelGroup id="contentId" styleClass="row-inner"  style="max-width: 700px; margin: 10% auto 0;" layout="block">
-                                            <h:panelGroup class="padding">
+                                        <h:panelGroup id="contentId" styleClass="row-inner" layout="block">
+                                            <h:panelGroup layout="block" class="padding" style="max-width: 800px; margin: 0 auto;">
                                                 <h:form id="formId" enctype="multipart/form-data" prependId="false">
-                                                    <div class="row-col h-auto mrgb28">
+                                                    <div class="row-col h-auto">
                                                         <div class="form-horizontal">
                                                             <h:messages  infoStyle="color:darkgreen" errorStyle="color:red" globalOnly="true"/>
                                                             <div class="form-group row">
                                                                 <div class="col-sm-5">
-                                                                    <div class="avatar w-80 inline">
-                                                                        <c:if test="#{not empty hotelForm.hotel.photoWay}">
-                                                                            <h:graphicImage url="upload/#{hotelForm.hotel.photoWay}"/>
-                                                                        </c:if>
-                                                                     </div>
+                                                                    <!--<div class="avatar w-80 inline">-->
+                                                                        <!--<c:if test="#{not empty hotelForm.hotel.photoWay}">-->
+                                                                            <!--<h:graphicImage url="upload/#{hotelForm.hotel.photoWay}"/>-->
+                                                                        <!--</c:if>-->
+                                                                    <!--</div>-->
                                                                         <!--<div id="image-preview" style="display: block">-->
-                                                                            <label for="image-upload" id="image-label">Ընտրել Նկարը</label>
-                                                                            <h:inputFile name="image" value="#{hotelForm.file}" id="image-upload" mode="simple" skinSimple="false">
+                                                                            <label for="image-upload" id="image-label" style="margin-bottom: 20px">Ընտրել Նկարը</label>
+                                                                            <h:inputFile name="image" value="#{hotelForm.file}" id="image-upload" mode="simple" skinSimple="false" >
                                                                                 <f:validator validatorId="FileUploadValidator"/>
                                                                             </h:inputFile><br/>
 
@@ -442,8 +442,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <h:commandLink  value="Պահպանել" styleClass="btn btn-info btn-sm"  action="#{hotelForm.save}" update="@form :hotelsListForm" >
+
+                                                    <div class="de-btn-top">
+                                                        <h:commandLink  value="Պահպանել" styleClass="btn btn-fw primary"  action="#{hotelForm.save}" update="@form :hotelsListForm" >
                                                         </h:commandLink>
                                                     </div>
                                                 </h:form>

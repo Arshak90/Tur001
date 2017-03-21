@@ -438,7 +438,7 @@ sup {
   font-family: Arial, sans-serif;
 }
 
-.form-control-textarea {
+.form-control-textarea , textarea{
    height: 130px; 
 }
 
@@ -1734,7 +1734,8 @@ body {
     padding-top: 3rem; }
 
 .app-header.white.box-shadow {
-  padding: 13px 24px;
+  padding: 0;
+  height: 56px;
 }
 
 .app-body-inner {
@@ -3066,7 +3067,7 @@ body {
     background-color: #424242; }
 
 .primary {
-  color: rgba(255, 255, 255, 0.87);
+  color: #fff;
   background-color: #0cc2aa; }
   .primary .lt {
     background-color: #0dceb5; }
@@ -6161,7 +6162,7 @@ textarea.md-input {
 
 .de-btn-top {
   position: fixed;
-  top: 13px;
+  top: 9px;
   right: 26px;
   z-index: 9999;
 }
