@@ -25,7 +25,6 @@ public class PortfolioDao implements Dao<Portfolio>{
                 Portfolio portfolio = new Portfolio();
                 portfolio.setId(rs.getInt("id"));
                 portfolio.setQuarter(rs.getInt("quarter"));
-                portfolio.setTransportid(rs.getInt("transportId"));
                 portfolio.setTotaltouristcount(rs.getInt("totalTouristCount"));
                 portfolio.setArmtouristcount(rs.getInt("armTouristCount"));
                 portfolio.setOthertouristcount(rs.getInt("otherTouristCount"));
@@ -36,7 +35,7 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfolio.setIcvisitdecription(rs.getString("icVisitDecription"));
                 portfolio.setSocialpackagecount(rs.getInt("socialPackageCount"));
                 portfolio.setColumn_12(rs.getInt("column_12"));
-                portfolio.setIstouroperator(rs.getBoolean("isTourOperator"));
+                portfolio.setIstouroperator(rs.getInt("isTourOperator"));
                 portfolio.setAge15(rs.getInt("age15"));
                 portfolio.setAge30(rs.getInt("age30"));
                 portfolio.setAge50(rs.getInt("age50"));
@@ -68,7 +67,6 @@ public class PortfolioDao implements Dao<Portfolio>{
                 Portfolio portfolio = new Portfolio();
                 portfolio.setId(rs.getInt("id"));
                 portfolio.setQuarter(rs.getInt("quarter"));
-                portfolio.setTransportid(rs.getInt("transportId"));
                 portfolio.setTotaltouristcount(rs.getInt("totalTouristCount"));
                 portfolio.setArmtouristcount(rs.getInt("armTouristCount"));
                 portfolio.setOthertouristcount(rs.getInt("otherTouristCount"));
@@ -79,7 +77,7 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfolio.setIcvisitdecription(rs.getString("icVisitDecription"));
                 portfolio.setSocialpackagecount(rs.getInt("socialPackageCount"));
                 portfolio.setColumn_12(rs.getInt("column_12"));
-                portfolio.setIstouroperator(rs.getBoolean("isTourOperator"));
+                portfolio.setIstouroperator(rs.getInt("isTourOperator"));
                 portfolio.setAge15(rs.getInt("age15"));
                 portfolio.setAge30(rs.getInt("age30"));
                 portfolio.setAge50(rs.getInt("age50"));
@@ -104,7 +102,7 @@ public class PortfolioDao implements Dao<Portfolio>{
     @Override
     public boolean insert(Portfolio item) {
         String sql = "INSERT INTO Portfolio(quarter,totaltouristcount,armtouristcount,othertouristcount,finances,ictouristcount,icmalecount," +
-                "icfemalecount,icvisitdecription,socialpackagecount,transportid,column_12,istouroperator,age15,age30,age50,age51,year) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "icfemalecount,icvisitdecription,socialpackagecount,column_12,istouroperator,age15,age30,age50,age51,year) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -119,14 +117,13 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setInt(8, item.getIcfemalecount());
             pstmt.setString(9, item.getIcvisitdecription());
             pstmt.setInt(10, item.getSocialpackagecount());
-            pstmt.setInt(11, item.getTransportid());
-            pstmt.setInt(12, item.getColumn_12());
-            pstmt.setBoolean(13, item.getIstouroperator());
-            pstmt.setInt(14, item.getAge15());
-            pstmt.setInt(15, item.getAge30());
-            pstmt.setInt(16, item.getAge50());
-            pstmt.setInt(17, item.getAge51());
-            pstmt.setInt(18, item.getYear());
+            pstmt.setInt(11, item.getColumn_12());
+            pstmt.setInt(12, item.getIstouroperator());
+            pstmt.setInt(13, item.getAge15());
+            pstmt.setInt(14, item.getAge30());
+            pstmt.setInt(15, item.getAge50());
+            pstmt.setInt(16, item.getAge51());
+            pstmt.setInt(17, item.getYear());
 
             pstmt.executeUpdate();
             return true;
@@ -140,7 +137,7 @@ public class PortfolioDao implements Dao<Portfolio>{
     @Override
     public boolean update(Portfolio item) {
         String sql = "UPDATE Portfolio SET quarter = ?, totaltouristcount = ?, armtouristcount = ?, othertouristcount = ?, finances = ?," +
-                " ictouristcount = ?, icmalecount = ?, icfemalecount = ?, icvisitdecription = ?, socialpackagecount = ?, transportid = ?, column_12 = ?," +
+                " ictouristcount = ?, icmalecount = ?, icfemalecount = ?, icvisitdecription = ?, socialpackagecount = ?, column_12 = ?," +
                 " istouroperator = ?, age15=?,age30=?,age50=?,age51=?,year=? WHERE id = ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -155,15 +152,14 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setInt(8, item.getIcfemalecount());
             pstmt.setString(9, item.getIcvisitdecription());
             pstmt.setInt(10, item.getSocialpackagecount());
-            pstmt.setInt(11, item.getTransportid());
-            pstmt.setInt(12, item.getColumn_12());
-            pstmt.setBoolean(13, item.getIstouroperator());
-            pstmt.setInt(14, item.getAge15());
-            pstmt.setInt(15, item.getAge30());
-            pstmt.setInt(16, item.getAge50());
-            pstmt.setInt(17, item.getAge51());
-            pstmt.setInt(18, item.getYear());
-            pstmt.setInt(19, item.getId());
+            pstmt.setInt(11, item.getColumn_12());
+            pstmt.setInt(12, item.getIstouroperator());
+            pstmt.setInt(13, item.getAge15());
+            pstmt.setInt(14, item.getAge30());
+            pstmt.setInt(15, item.getAge50());
+            pstmt.setInt(16, item.getAge51());
+            pstmt.setInt(17, item.getYear());
+            pstmt.setInt(18, item.getId());
 
             pstmt.executeUpdate();
             return true;
@@ -246,6 +242,7 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfoliosights.setId(res.getInt("id"));
                 portfoliosights.setPortfolioid(res.getInt("portfolioId"));
                 portfoliosights.setStightsid(res.getInt("sightsId"));
+                portfoliosights.setCount(res.getInt("countNumber"));
                 portfoliosightses.add(portfoliosights);
             }
         }catch (SQLException e) {
@@ -302,14 +299,15 @@ public class PortfolioDao implements Dao<Portfolio>{
         return sightses;
     }
 
-    public boolean insertPortfoliosights(Integer portfolioId, Integer sightsId) {
-        String sql = "INSERT INTO PortfolioSights(portfolioId,sightsId) VALUES (?,?)";
+    public boolean insertPortfoliosights(Integer portfolioId, Integer sightsId, Integer count) {
+        String sql = "INSERT INTO PortfolioSights(portfolioId,sightsId, countNumber) VALUES (?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, portfolioId);
             pstmt.setInt(2, sightsId);
+            pstmt.setInt(3, count);
 
             pstmt.executeUpdate();
             return true;
@@ -321,13 +319,14 @@ public class PortfolioDao implements Dao<Portfolio>{
     }
 
     public boolean updatePortfoliosights(Portfoliosights item) {
-        String sql = "UPDATE PortfolioSights SET portfolioId = ?, sightsId = ? WHERE id = ?";
+        String sql = "UPDATE PortfolioSights SET portfolioId = ?, sightsId = ?, countNumber = ? WHERE id = ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, item.getPortfolioid());
             pstmt.setInt(2, item.getStightsid());
-            pstmt.setInt(3, item.getId());
+            pstmt.setInt(3, item.getCount());
+            pstmt.setInt(4, item.getId());
 
             pstmt.executeUpdate();
             return true;
@@ -356,6 +355,7 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfoliosights.setId(rs.getInt("id"));
                 portfoliosights.setPortfolioid(rs.getInt("portfolioId"));
                 portfoliosights.setStightsid(rs.getInt("sightsId"));
+                portfoliosights.setCount(rs.getInt("countNumber"));
                 portfoliosightses.add(portfoliosights);
             }
             return portfoliosightses;
@@ -523,6 +523,146 @@ public class PortfolioDao implements Dao<Portfolio>{
             return true;
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public List<Transportsyear> getTransportsyearByYear(Integer year){
+
+        String sql = "SELECT * FROM TransportsYear WHERE yearId = ?";
+        ResultSet rs = null;
+        List<Transportsyear> transportsyears = new ArrayList<>();
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setInt(1, year);
+
+            // update
+            rs  = pstmt.executeQuery();
+            while ( rs.next() ) {
+                Transportsyear transportsyear = new Transportsyear();
+                transportsyear.setId(rs.getInt("id"));
+                transportsyear.setYearId(rs.getInt("yearId"));
+                transportsyear.setTransportid(rs.getInt("transportId"));
+                transportsyear.setCountnumber(rs.getInt("countNumber"));
+                transportsyears.add(transportsyear);
+            }
+            return transportsyears;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteTransportsyear(Integer id){
+        String sql = "DELETE FROM TransportsYear WHERE id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean insertTransportsyear(Transportsyear transportsyear) {
+        String sql = "INSERT INTO TransportsYear(yearId,transportId,countNumber) VALUES (?,?,?)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, transportsyear.getYearId());
+            pstmt.setInt(2, transportsyear.getTransportid());
+            pstmt.setInt(3, transportsyear.getCountnumber());
+
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public List<Portfoliohotels> getPortfoliohotelsByPortfolioId(Integer id){
+
+        String sql = "SELECT * FROM PortfolioHotels WHERE portfolioId = ?";
+        ResultSet rs = null;
+        List<Portfoliohotels> portfoliohotelses = new ArrayList<>();
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setInt(1, id);
+
+            // update
+            rs  = pstmt.executeQuery();
+            while ( rs.next() ) {
+                Portfoliohotels portfoliohotels = new Portfoliohotels();
+                portfoliohotels.setId(rs.getInt("id"));
+                portfoliohotels.setPortfolioid(rs.getInt("portfolioId"));
+                portfoliohotels.setHotelid(rs.getInt("hotelId"));
+                portfoliohotels.setFinance(rs.getDouble("finance"));
+                portfoliohotels.setTotaltouristcount(rs.getInt("totalTouristCount"));
+                portfoliohotelses.add(portfoliohotels);
+            }
+            return portfoliohotelses;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public boolean deletePortfoliohotels(Integer id){
+        String sql = "DELETE FROM PortfolioHotels WHERE id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean insertPortfoliohotels(Portfoliohotels portfoliohotels) {
+        String sql = "INSERT INTO PortfolioHotels(portfolioId,totalTouristCount,finance, hotelId) VALUES (?,?,?,?)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, portfoliohotels.getPortfolioid());
+            pstmt.setInt(2, portfoliohotels.getTotaltouristcount());
+            pstmt.setDouble(3, portfoliohotels.getFinance());
+            pstmt.setInt(4, portfoliohotels.getHotelid());
+
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+
             System.out.println(e.getMessage());
         }
         return false;

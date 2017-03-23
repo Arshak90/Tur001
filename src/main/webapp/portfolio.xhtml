@@ -290,6 +290,49 @@
                                                     <p:inputNumber id="yearlyinforamtionAncaket5Id" styleClass=""  value="#{portfolioForm.yearlyinforamtion.ancaket5}" decimalPlaces="0" ></p:inputNumber>
                                                 </div>
                                             </h:panelGroup>
+                                            <div class="clear"></div>
+                                                <h:panelGroup id="transportsyearPanel">
+                                                <div class="col-xs-12 form-group">
+                                                    <p:dataTable
+                                                                 id="transportsYearsId" value="#{portfolioForm.transportsyears}"
+                                                                 var="transportsyears"  tableStyleClass="table table-hover b-t de-table table-top"
+                                                                 emptyMessage="Չկա ավելացված գրառում">
+                                                        <p:column headerText="Տրանսպորտ" styleClass="left">
+                                                            <h:outputText value="#{portfolioForm.getTransportNameById(transportsyears.transportid)}" />
+                                                        </p:column>
+                                                        <p:column headerText="Զբոսաշրջիկների թիվը" styleClass="left">
+                                                            <h:outputText value="#{transportsyears.countnumber}" />
+                                                        </p:column>
+                                                        <p:column style="width:80px;text-align: center">
+                                                            <div class="icon">
+                                                                <p:commandButton actionListener="#{portfolioForm.deleteTransportsyear(transportsyears)}" update="transportsyearPanel" icon="fa fa-trash-o" title="Հեռացնել"/>
+                                                            </div>
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </div>
+                                                <h:panelGroup rendered="#{portfolioForm.transports.size() gt 0}">
+                                                    <div class="col-xs-12 col-sm-6 col-md-4 form-group">
+                                                        <p:outputLabel for="othertouristcountId" value="Տրանսպորտ"  styleClass="form-control-label"/>
+                                                        <p:selectOneMenu id="transportId" value="#{portfolioForm.transportsyear.transportid}">
+                                                            <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
+                                                            <f:selectItems value="#{portfolioForm.transports}" var="transport" itemLabel="#{transport.name}" itemValue="#{transport.id}"/>
+                                                        </p:selectOneMenu>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                        <p:outputLabel for="countaddId" value="Զբոսաշրջիկների թիվը" styleClass="form-control-label"/>
+                                                        <p:inputNumber id="transportsYearsCountaddId" value="#{portfolioForm.transportsyear.countnumber}" decimalPlaces="0"></p:inputNumber>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-4 form-group">
+                                                        <p:commandButton action="#{portfolioForm.addTransportsyear}"
+                                                                         process="transportsyearPanel" update="transportsyearPanel"
+                                                                         value="Ավելացնել տրանսպորտ"
+                                                                         styleClass="mrgt37"
+                                                                         rendered="#{portfolioForm.transports.size() gt 0}">
+                                                        </p:commandButton>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+
                                         </h:panelGroup>
                                         <div class="clear"></div>
                                         <h:panelGroup layout="block" class="de-table-block" id="table2" rendered="#{portfolioForm.selectedPortfolio == null}">
@@ -338,13 +381,6 @@
                                                     </div>
                                                     <div class="clear"></div>
                                                     <div class="col-xs-12 col-sm-6 col-md-4 form-group">
-                                                        <p:outputLabel for="othertouristcountId" value="Տրանսպորտ"  styleClass="form-control-label"/>
-                                                        <p:selectOneMenu id="transportId" value="#{portfolioForm.selectedPortfolio.transportid}">
-                                                            <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
-                                                            <f:selectItems value="#{portfolioForm.transports}" var="transport" itemLabel="#{transport.name}" itemValue="#{transport.id}"/>
-                                                        </p:selectOneMenu>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-6 col-md-4 form-group">
                                                         <p:outputLabel for="financesId" value="Ֆինանսներ"  styleClass="form-control-label"/>
                                                         <p:inputNumber id="financesId" value="#{portfolioForm.selectedPortfolio.finances}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s"/>
                                                     </div>
@@ -374,7 +410,7 @@
                                                     </div>
                                                     <div class="col-xs-12 col-sm-6 col-md-3 form-group">
                                                         <p:outputLabel for="istouroperatorId" value="Տուր օպերատոր" styleClass="form-control-label"/>
-                                                        <p:selectBooleanCheckbox id="istouroperatorId" value="#{portfolioForm.selectedPortfolio.istouroperator}"/>
+                                                        <p:inputNumber id="istouroperatorId" value="#{portfolioForm.selectedPortfolio.istouroperator}" decimalPlaces="0"/>
                                                     </div>
                                                     <div class="clear"></div>
                                                     <div class="col-xs-12 col-sm-6 col-md-3 form-group">
@@ -405,6 +441,9 @@
                                                             <p:column headerText="Տեսարժան վայրեր" styleClass="left">
                                                                 <h:outputText value="#{sight.sights.name}" />
                                                             </p:column>
+                                                            <p:column headerText="Զբոսաշրջիկների թիվը" styleClass="left">
+                                                                <h:outputText value="#{sight.count}" />
+                                                            </p:column>
                                                             <p:column style="width:80px;text-align: center">
                                                                 <div class="icon">
                                                                     <p:commandButton actionListener="#{portfolioForm.deletePortfoliosightses(sight)}" update="portfoliosightsesPanel" icon="fa fa-trash-o" title="Հեռացնել"/>
@@ -412,21 +451,28 @@
                                                             </p:column>
                                                         </p:dataTable>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-6 col-md-4 form-group">
-                                                        <p:outputLabel for="stightId" value="Տեսարժան վայրեր" styleClass="form-control-label"/>
-                                                        <p:selectOneMenu id="stightId" value="#{portfolioForm.sightId}" style="width:125px" rendered="#{portfolioForm.selectedPortfolio != null and portfolioForm.sights.size() gt 0}">
-                                                            <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
-                                                            <f:selectItems value="#{portfolioForm.sights}" var="t" itemLabel="#{t.name}" itemValue="#{t.id}"/>
-                                                        </p:selectOneMenu>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-6 col-md-4 form-group">
-                                                        <p:commandButton action="#{portfolioForm.addPortfolioSight}"
-                                                                         process="portfoliosightsesPanel" update="portfoliosightsesPanel"
-                                                                         value="Ավելացնել տեսարժան վայրեր"
-                                                                         styleClass="mrgt37"
-                                                                         rendered="#{portfolioForm.selectedPortfolio != null and portfolioForm.sights.size() gt 0}">
-                                                        </p:commandButton>
-                                                    </div>
+                                                    <h:panelGroup rendered="#{portfolioForm.selectedPortfolio != null and portfolioForm.sights.size() gt 0}">
+                                                        <div class="col-xs-12 col-sm-6 col-md-4 form-group">
+                                                            <p:outputLabel for="stightId" value="Տեսարժան վայրեր" styleClass="form-control-label"/>
+                                                            <p:selectOneMenu id="stightId" value="#{portfolioForm.portfoliosights.stightsid}" style="width:125px" rendered="#{portfolioForm.selectedPortfolio != null and portfolioForm.sights.size() gt 0}">
+                                                                <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
+                                                                <f:selectItems value="#{portfolioForm.sights}" var="t" itemLabel="#{t.name}" itemValue="#{t.id}"/>
+                                                            </p:selectOneMenu>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                            <p:outputLabel for="countaddId" value="Զբոսաշրջիկների թիվը" styleClass="form-control-label" />
+                                                            <p:inputNumber id="portfoliosightsaddId" value="#{portfolioForm.portfoliosights.count}" decimalPlaces="0"></p:inputNumber>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6 col-md-4 form-group">
+                                                            <p:commandButton action="#{portfolioForm.addPortfolioSight}"
+                                                                             process="portfoliosightsesPanel" update="portfoliosightsesPanel"
+                                                                             value="Ավելացնել տեսարժան վայրեր"
+                                                                             styleClass="mrgt37"
+                                                                             rendered="#{portfolioForm.selectedPortfolio != null and portfolioForm.sights.size() gt 0}">
+                                                            </p:commandButton>
+                                                        </div>
+                                                    </h:panelGroup>
+
                                                 </h:panelGroup>
 
                                                 <div class="clear"/>
@@ -517,6 +563,51 @@
                                                         <div class="col-xs-12 col-sm-6 col-md-3 form-group">
                                                             <p:commandButton action="#{portfolioForm.addPortfoliocountry}" process="portfoliocountriesPanel"
                                                                              styleClass="mrgt37" update="portfoliocountriesPanel portfoliocountriesTableId" value="Ավելացնել"></p:commandButton>
+                                                        </div>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+                                                <div class="clear"/>
+                                                <h:panelGroup layout="block" id="portfoliohotelsPanel">
+                                                    <div class="col-xs-12 form-group">
+                                                        <p:dataTable rendered="#{portfolioForm.selectedPortfolio != null}"
+                                                                     id="portfoliohotelsId" value="#{portfolioForm.portfoliohotelses}"
+                                                                     var="portfoliohotels" tableStyleClass="table table-hover b-t de-table table-top"
+                                                                     emptyMessage="Չկա ավելացված գրառում">
+                                                            <p:column headerText="Հյուրանոց" styleClass="left">
+                                                                <h:outputText value="#{portfolioForm.getHotelNameById(portfoliohotels.hotelid)}" />
+                                                            </p:column>
+                                                            <p:column headerText="Ընդհանուր զբոսաշրջիկների թիվը" styleClass="left">
+                                                                <h:outputText value="#{portfoliohotels.totaltouristcount}" />
+                                                            </p:column>
+                                                            <p:column headerText="Ֆինանսներ" styleClass="left">
+                                                                <h:outputText value="#{portfoliohotels.finance}" />
+                                                            </p:column>
+                                                            <p:column style="width:80px;text-align: center">
+                                                                <div class="icon">
+                                                                    <p:commandButton actionListener="#{portfolioForm.deletePortfoliohotel(portfoliohotels)}" update="portfoliohotelsPanel" icon="fa fa-trash-o" title="Հեռացնել"/>
+                                                                </div>
+                                                            </p:column>
+                                                        </p:dataTable>
+                                                    </div>
+                                                    <h:panelGroup rendered="#{portfolioForm.selectedPortfolio != null and portfolioForm.hotels.size() gt 0}">
+                                                        <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                            <p:outputLabel for="monthId" value="Հյուրանոց" styleClass="form-control-label"/>
+                                                            <p:selectOneMenu id="hotelId" value="#{portfolioForm.portfoliohotels.hotelid}">
+                                                                <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
+                                                                <f:selectItems value="#{portfolioForm.hotels}" var="t" itemValue="#{t.id}" itemLabel="#{t.name}"/>
+                                                            </p:selectOneMenu>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                            <p:outputLabel for="totaltouristcountaddId" value="Ընդհանուր զբոսաշրջիկների թիվը" styleClass="form-control-label"/>
+                                                            <p:inputNumber id="totaltouristcountHoteladdId" value="#{portfolioForm.portfoliohotels.totaltouristcount}" decimalPlaces="0"></p:inputNumber>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                            <p:outputLabel for="financesaddId" value="Ֆինանսներ" styleClass="form-control-label"/>
+                                                            <p:inputNumber id="financesHoteladdId" value="#{portfolioForm.portfoliohotels.finance}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s"></p:inputNumber>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                            <p:commandButton action="#{portfolioForm.addPortfoliohotel}" process="portfoliohotelsPanel"
+                                                                             styleClass="mrgt37" update="portfoliohotelsPanel" value="Ավելացնել"></p:commandButton>
                                                         </div>
                                                     </h:panelGroup>
                                                 </h:panelGroup>

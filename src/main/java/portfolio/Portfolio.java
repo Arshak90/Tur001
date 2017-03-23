@@ -14,7 +14,7 @@ public class Portfolio {
   private Integer socialpackagecount;
   private Integer transportid;
   private Integer column_12;
-  private boolean istouroperator;
+  private Integer istouroperator;
   private Integer age15;
   private Integer age30;
   private Integer age50;
@@ -125,11 +125,11 @@ public class Portfolio {
     this.column_12 = column_12;
   }
 
-  public boolean getIstouroperator() {
+  public Integer getIstouroperator() {
     return istouroperator;
   }
 
-  public void setIstouroperator(boolean istouroperator) {
+  public void setIstouroperator(Integer istouroperator) {
     this.istouroperator = istouroperator;
   }
 

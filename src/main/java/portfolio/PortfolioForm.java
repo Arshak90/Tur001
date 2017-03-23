@@ -8,6 +8,7 @@ import Core.Util;
 import Models.Sights;
 import Models.Transport;
 import home.HomeForm;
+import hotel.Hotel;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 
@@ -37,10 +38,16 @@ public class PortfolioForm {
     private List<Portfoliosights> portfoliosightses;
     private Portfoliomonthly portfoliomonthly = new Portfoliomonthly();
     private Portfoliocountry portfoliocountry = new Portfoliocountry();
+    private Portfoliosights portfoliosights = new Portfoliosights();
     private List<Portfoliocountry> portfoliocountries;
     final static Logger logger = Logger.getLogger(String.valueOf(PortfolioForm.class));
     private Yearlyinforamtion yearlyinforamtion;
     private List<Country> countries;
+    private List<Transportsyear> transportsyears;
+    private Transportsyear transportsyear = new Transportsyear();
+    private List<Portfoliohotels> portfoliohotelses;
+    private Portfoliohotels portfoliohotels = new Portfoliohotels();
+    private List<Hotel> hotels;
 
     public Root getRoot() {
         return root;
@@ -66,7 +73,7 @@ public class PortfolioForm {
 
     public List<Transport> getTransports() {
         if(transports == null){
-            return getRoot().getPortfolioDao().getTransport();
+            return getRoot().getPortfolioDao().getTransport().stream().filter(x-> !filterTransportsyears(x.getId())).sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).collect(Collectors.toList());
         }
         return transports;
     }
@@ -176,8 +183,8 @@ public class PortfolioForm {
     }
 
     public void addPortfolioSight(){
-        if(selectedPortfolio != null && sightId != null){
-            getRoot().getPortfolioDao().insertPortfoliosights(selectedPortfolio.getId(), sightId);
+        if(selectedPortfolio != null && getPortfoliosights().getStightsid() != null){
+            getRoot().getPortfolioDao().insertPortfoliosights(selectedPortfolio.getId(), getPortfoliosights().getStightsid(),getPortfoliosights().getCount());
             sightId = null;
             portfoliosightses = null;
         }
@@ -318,5 +325,93 @@ public class PortfolioForm {
     public void cancel(){
         this.selectedPortfolio = null;
         this.countries = null;
+    }
+
+    public Portfoliosights getPortfoliosights() {
+        return portfoliosights;
+    }
+
+    public void setPortfoliosights(Portfoliosights portfoliosights) {
+        this.portfoliosights = portfoliosights;
+    }
+
+    public Transportsyear getTransportsyear() {
+        return transportsyear;
+    }
+
+    public void setTransportsyear(Transportsyear transportsyear) {
+        this.transportsyear = transportsyear;
+    }
+
+    public List<Transportsyear> getTransportsyears() {
+        return this.getRoot().getPortfolioDao().getTransportsyearByYear(Integer.parseInt(this.selectedYear));
+    }
+
+    public void setTransportsyears(List<Transportsyear> transportsyears) {
+        this.transportsyears = transportsyears;
+    }
+
+    public void deleteTransportsyear(Transportsyear transportsyear){
+        getRoot().getPortfolioDao().deleteTransportsyear(transportsyear.getId());
+    }
+
+    public void addTransportsyear(){
+        if(getTransportsyear().getTransportid() != null && getTransportsyear().getCountnumber() != null){
+            getTransportsyear().setYearId(Integer.parseInt(getSelectedYear()));
+            getRoot().getPortfolioDao().insertTransportsyear(getTransportsyear());
+            this.transportsyear = new Transportsyear();
+        }
+    }
+
+    public boolean filterTransportsyears(Integer transportId){
+        return getTransportsyears().stream().filter(x-> x.getTransportid().equals(transportId)).findAny().isPresent();
+    }
+
+    public String getTransportNameById(Integer id){
+        return getRoot().getPortfolioDao().getTransport().stream().filter(x-> x.getId().equals(id)).findFirst().get().getName();
+    }
+
+    public List<Portfoliohotels> getPortfoliohotelses() {
+        return getRoot().getPortfolioDao().getPortfoliohotelsByPortfolioId(selectedPortfolio.getId());
+    }
+
+    public void setPortfoliohotelses(List<Portfoliohotels> portfoliohotelses) {
+        this.portfoliohotelses = portfoliohotelses;
+    }
+
+    public Portfoliohotels getPortfoliohotels() {
+        return portfoliohotels;
+    }
+
+    public void setPortfoliohotels(Portfoliohotels portfoliohotels) {
+        this.portfoliohotels = portfoliohotels;
+    }
+
+    public void deletePortfoliohotel(Portfoliohotels portfoliohotels){
+        getRoot().getPortfolioDao().deletePortfoliohotels(portfoliohotels.getId());
+    }
+
+    public void addPortfoliohotel(){
+        if(getPortfoliohotels().getHotelid() != null && getPortfoliohotels().getTotaltouristcount() != null && getPortfoliohotels().getFinance() != null){
+            getPortfoliohotels().setPortfolioid(selectedPortfolio.getId());
+            getRoot().getPortfolioDao().insertPortfoliohotels(getPortfoliohotels());
+            this.portfoliohotels = new Portfoliohotels();
+        }
+    }
+
+    public String getHotelNameById(Integer id){
+        return getRoot().getHotelDao().getById(id).getName();
+    }
+
+    public List<Hotel> getHotels() {
+        return getRoot().getHotelDao().getAll().stream().filter(x-> !filterHotels(x.getId())).sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).collect(Collectors.toList());
+    }
+
+    public void setHotels(List<Hotel> hotels) {
+        this.hotels = hotels;
+    }
+
+    public boolean filterHotels(Integer hotelId){
+        return getPortfoliohotelses().stream().filter(x-> x.getHotelid().equals(hotelId)).findAny().isPresent();
     }
 }

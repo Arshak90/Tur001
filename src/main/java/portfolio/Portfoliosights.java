@@ -11,6 +11,7 @@ public class Portfoliosights {
   private Integer portfolioid;
   private Integer stightsid;
   private Sights sights;
+  private Integer count;
   private Root root;
 
   public Integer getId() {
@@ -43,6 +44,14 @@ public class Portfoliosights {
 
   public void setSights(Sights sights) {
     this.sights = sights;
+  }
+
+  public Integer getCount() {
+    return count;
+  }
+
+  public void setCount(Integer count) {
+    this.count = count;
   }
 
   public Root getRoot() {
