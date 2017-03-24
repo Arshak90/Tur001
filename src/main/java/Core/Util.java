@@ -53,4 +53,21 @@ public class Util {
         doubleMap.put(12,0.0);
         return doubleMap;
     }
+
+    public static Map<Integer, Integer> initMapForTurCount(){
+        Map<Integer, Integer> doubleMap = new HashMap<>();
+        doubleMap.put(1,0);
+        doubleMap.put(2,0);
+        doubleMap.put(3,0);
+        doubleMap.put(4,0);
+        doubleMap.put(5,0);
+        doubleMap.put(6,0);
+        doubleMap.put(7,0);
+        doubleMap.put(8,0);
+        doubleMap.put(9,0);
+        doubleMap.put(10,0);
+        doubleMap.put(11,0);
+        doubleMap.put(12,0);
+        return doubleMap;
+    }
 }
