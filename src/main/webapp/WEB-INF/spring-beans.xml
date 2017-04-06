@@ -45,6 +45,15 @@
         <property name="restaurant" ref="restaurant"/>
     </bean>
 
+    <!--Museum BEANS-->
+
+    <bean id="museum" class="museum.Museum" scope="session"/>
+
+    <bean id="museumForm" class="museum.MuseumForm" scope="session" >
+        <property name="root" ref="root"/>
+        <property name="museum" ref="museum"/>
+    </bean>
+
     <!--tour operator BEANS-->
 
     <bean id="tourOperator" class="tourOperator.TourOperator" scope="session"/>

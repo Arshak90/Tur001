@@ -3,6 +3,7 @@ package Core;
 import Core.Dao.CountryDao;
 import Core.Dao.YearDao;
 import hotel.HotelDao;
+import museum.MuseumDao;
 import portfolio.PortfolioDao;
 import restaurant.RestaurantDao;
 import tourOperator.TourOperatorDao;
@@ -16,6 +17,7 @@ public class Root {
     private HotelDao hotelDao;
     private PortfolioDao portfolioDao;
     private RestaurantDao restaurantDao;
+    private MuseumDao museumDao;
     private TouristSightDao touristSightDao;
     private TourOperatorDao tourOperatorDao;
     private CountryDao countryDao;
@@ -63,6 +65,17 @@ public class Root {
 
     public void setRestaurantDao(RestaurantDao restaurantDao) {
         this.restaurantDao = restaurantDao;
+    }
+
+    public MuseumDao getMuseumDao() {
+        if(this.museumDao == null){
+            museumDao = new MuseumDao();
+        }
+        return museumDao;
+    }
+
+    public void setMuseumDao(MuseumDao museumDao) {
+        this.museumDao = museumDao;
     }
 
     public TouristSightDao getTouristSightDao() {

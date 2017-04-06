@@ -154,7 +154,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="restaurant.xhtml">
+                                    <a href="museum.xhtml">
                                         <span class="nav-text">Ռեստորաններ</span>
                                     </a>
                                 </li>
@@ -214,19 +214,19 @@
 
                 <!-- navbar collapse -->
                 <!--<div class="collapse navbar-toggleable-sm" id="collapse">-->
-                    <!--<div ui-include="'../views/blocks/navbar.form.right.html'"></div>-->
-                    <!--&lt;!&ndash; link and dropdown &ndash;&gt;-->
-                    <!--<ul class="nav navbar-nav">-->
-                        <!--<li class="nav-item dropdown">-->
-                            <!--<a class="nav-link" href="" data-toggle="dropdown">-->
-                                <!--<i class="fa fa-fw fa-plus text-muted"></i>-->
+                <!--<div ui-include="'../views/blocks/navbar.form.right.html'"></div>-->
+                <!--&lt;!&ndash; link and dropdown &ndash;&gt;-->
+                <!--<ul class="nav navbar-nav">-->
+                <!--<li class="nav-item dropdown">-->
+                <!--<a class="nav-link" href="" data-toggle="dropdown">-->
+                <!--<i class="fa fa-fw fa-plus text-muted"></i>-->
 
-                                <!--<span>Ավելացնել նոր ռեստորան</span>-->
-                            <!--</a>-->
-                            <!--<div ui-include="'../views/blocks/dropdown.new.html'"></div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                    <!--&lt;!&ndash; / &ndash;&gt;-->
+                <!--<span>Ավելացնել նոր ռեստորան</span>-->
+                <!--</a>-->
+                <!--<div ui-include="'../views/blocks/dropdown.new.html'"></div>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--&lt;!&ndash; / &ndash;&gt;-->
                 <!--</div>-->
                 <!-- / navbar collapse -->
             </div>
@@ -268,39 +268,39 @@
                                 <div class="row-body scrollable hover">
                                     <div class="row-inner">
                                         <div class="list inset">
-                                            <h:form id="restaurantsListForm">
+                                            <h:form id="museumsListForm">
                                                 <div class="list-item pointer">
-                                                    <c:forEach var="restaurant" items="#{restaurantForm.restaurants}">
+                                                    <c:forEach var="museum" items="#{museumForm.museums}">
                                                         <p:commandLink
-                                                                actionListener="#{restaurantForm.edit(restaurant.id)}"
+                                                                actionListener="#{museumForm.edit(museum.id)}"
                                                                 immediate="true" update=":formId">
                                                             <div class="list-left">
                                                                         <span class="w-40 avatar">
-                                                                          <c:if test="#{not empty restaurant.photoWay}">
+                                                                          <c:if test="#{not empty museum.photoWay}">
                                                                                 <h:graphicImage
-                                                                                        url="upload/#{restaurant.photoWay}"/>
+                                                                                        url="upload/#{museum.photoWay}"/>
                                                                             </c:if>
-                                                                            <c:if test="#{empty restaurant.photoWay}">
+                                                                            <c:if test="#{empty museum.photoWay}">
                                                                                 <img src="../assets/images/p0.svg"
                                                                                      class="img-circle"></img>
                                                                             </c:if>
                                                                         </span>
                                                             </div>
                                                             <div class="list-body">
-                                                                <h:outputText value="#{restaurant.name}"/>
+                                                                <h:outputText value="#{museum.name}"/>
                                                                 <div style="float: right">
                                                                     <h:commandLink
                                                                             styleClass="glyphicon glyphicon-trash"
                                                                             immediate="true"
                                                                             onclick="return confirm('Ջնջել');">
-                                                                        <f:ajax listener="#{restaurantForm.delete(restaurant.id)}"
+                                                                        <f:ajax listener="#{museumForm.delete(museum.id)}"
                                                                                 event="click"
-                                                                                render="@this :restaurantsListForm :formId"/>
+                                                                                render="@this :museumsListForm :formId"/>
                                                                     </h:commandLink>
                                                                 </div>
                                                                 <small class="block"><i
                                                                         class="fa fa-phone m-r-sm text-muted"></i><h:outputText
-                                                                        value="#{restaurant.mobilePhoneNumber}"/>
+                                                                        value="#{museum.phoneNumber}"/>
                                                                 </small>
                                                             </div>
                                                         </p:commandLink>
@@ -314,7 +314,7 @@
                             <div class="p-a b-t text-center">
                                 <h:form>
                                     <p:commandLink value="Ավելացնել նորը" styleClass="fa fa-plus fa-fw m-r-xs"
-                                                   style="width: 130px" action="#{restaurantForm.addNew}"
+                                                   style="width: 130px" action="#{museumForm.addNew}"
                                                    update=":formId"/>
                                 </h:form>
                             </div>
@@ -337,18 +337,18 @@
                                                         <div class="form-group row">
                                                             <div class="col-sm-5">
                                                                 <!--<div class="avatar w-80 inline">-->
-                                                                    <!--<c:if test="#{not empty restaurantForm.restaurant.photoWay}">-->
-                                                                        <!--<h:graphicImage-->
-                                                                                <!--url="upload/#{restaurantForm.restaurant.photoWay}"/>-->
-                                                                    <!--</c:if>-->
+                                                                <!--<c:if test="#{not empty museumForm.museum.photoWay}">-->
+                                                                <!--<h:graphicImage-->
+                                                                <!--url="upload/#{museumForm.museum.photoWay}"/>-->
+                                                                <!--</c:if>-->
                                                                 <!--</div>-->
                                                                 <!--<div id="image-preview" style="display: block">-->
                                                                 <label for="image-upload"
                                                                        id="image-label">Ընտրել Նկարը</label>
                                                                 <h:inputFile name="image"
-                                                                              value="#{restaurantForm.file}"
-                                                                              id="image-upload" mode="simple"
-                                                                              skinSimple="false">
+                                                                             value="#{museumForm.file}"
+                                                                             id="image-upload" mode="simple"
+                                                                             skinSimple="false">
                                                                     <f:validator validatorId="FileUploadValidator"/>
                                                                 </h:inputFile><br/>
 
@@ -367,21 +367,21 @@
                                                             <h:outputLabel
                                                                     class="form-control-label">Անվանում *</h:outputLabel>
                                                             <h:inputText styleClass="form-control"
-                                                                         value="#{restaurantForm.restaurant.name}"
+                                                                         value="#{museumForm.museum.name}"
                                                                          required="true"
                                                                          requiredMessage="Անվանում անպայման դաշտ է"
                                                                          id="nameId">
                                                                 <f:validateRequired/>
-                                                                <f:validator validatorId="RestaurantNameUniqueValidator"/>
+                                                                <f:validator validatorId="MuseumNameUniqueValidator"/>
                                                             </h:inputText>
                                                             <h:message for="nameId" style="color: red;"/>
                                                         </div>
 
                                                         <div class="col-sm-6">
                                                             <h:outputLabel
-                                                                    class="form-control-label">Փաստացի անվանում</h:outputLabel>
+                                                                    class="form-control-label">Հասցե</h:outputLabel>
                                                             <h:inputText styleClass="form-control"
-                                                                         value="#{restaurantForm.restaurant.legalName}"/>
+                                                                         value="#{museumForm.museum.address}"/>
                                                         </div>
                                                     </div>
 
@@ -390,22 +390,13 @@
                                                             <h:outputLabel
                                                                     class="form-control-label">Էելետրոնային փոստ</h:outputLabel>
                                                             <h:inputText styleClass="form-control"
-                                                                         value="#{restaurantForm.restaurant.email}"/>
+                                                                         value="#{museumForm.museum.email}"/>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <h:outputLabel
                                                                     class="form-control-label">Կայք</h:outputLabel>
                                                             <h:inputText styleClass="form-control"
-                                                                         value="#{restaurantForm.restaurant.site}"/>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <h:outputLabel
-                                                                    class="form-control-label">Հասցե</h:outputLabel>
-                                                            <h:inputText styleClass="form-control"
-                                                                         value="#{restaurantForm.restaurant.address}"/>
+                                                                         value="#{museumForm.museum.site}"/>
                                                         </div>
                                                     </div>
 
@@ -413,20 +404,27 @@
                                                         <div class="col-sm-6">
                                                             <h:outputLabel
                                                                     class="form-control-label">Հեռախոս</h:outputLabel>
-                                                            <p:inputMask styleClass="form-control"  maxlength="10" mask="(999)99-99-99" value="#{restaurantForm.restaurant.phoneNumber}"/>
+                                                            <p:inputMask styleClass="form-control"  maxlength="10" mask="(999)99-99-99" value="#{museumForm.museum.phoneNumber}"/>
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-2">
                                                             <h:outputLabel
-                                                                    class="form-control-label">Բջջային հեռախոս</h:outputLabel>
-                                                            <p:inputMask styleClass="form-control"  maxlength="10" mask="(999)99-99-99" value="#{restaurantForm.restaurant.mobilePhoneNumber}"/>
+                                                                    class="form-control-label">Վճարովի</h:outputLabel><br></br>
+                                                            <p:selectBooleanCheckbox value="#{museumForm.museum.isPay}" id="isPay" converter="javax.faces.Boolean" >
+                                                            <f:ajax render="pay" />
+                                                            </p:selectBooleanCheckbox>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <h:outputLabel
+                                                                    class="form-control-label">Գինը</h:outputLabel>
+                                                            <p:inputNumber id="pay" value="#{museumForm.museum.pay}" disabled="#{not(museumForm.museum.isPay)}" decimalPlaces="0" symbol=" դրամ" symbolPosition="s"/>
                                                         </div>
                                                     </div>
 
                                                 </div>
                                                 <div class="de-btn-top">
                                                     <h:commandLink value="Պահպանել" styleClass="btn btn-fw primary"
-                                                                   action="#{restaurantForm.save}"
-                                                                   update="@form :restaurantsListForm">
+                                                                   action="#{museumForm.save}"
+                                                                   update="@form :museumsListForm">
 
                                                     </h:commandLink>
                                                 </div>
@@ -454,10 +452,10 @@
 <!-- build:js scripts/app.html.js -->
 <!-- jQuery -->
 <script type="text/javascript" src="/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=6.0"></script>
-<script type="text/javascript"
-        src="/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=6.0"></script>
+<script type="text/javascript" src="/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=6.0"></script>
 <script type="text/javascript" src="/javax.faces.resource/core.js.xhtml?ln=primefaces&amp;v=6.0"></script>
 <script type="text/javascript" src="/javax.faces.resource/components.js.xhtml?ln=primefaces&amp;v=6.0"></script>
+<script type="text/javascript" src="/javax.faces.resource/inputnumber/inputnumber.js.xhtml?ln=primefaces&amp;v=6.0"></script>
 <!-- Bootstrap -->
 <script src="../libs/jquery/tether/dist/js/tether.min.js"></script>
 <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>

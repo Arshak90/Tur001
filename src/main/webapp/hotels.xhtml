@@ -159,6 +159,11 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="museum.xhtml">
+                                            <span class="nav-text">Թանգարան</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="tourOperator.xhtml">
                                             <span class="nav-text">Տուր օպերատորներ</span>
                                         </a>
@@ -395,11 +400,12 @@
                                                         <div class="form-group row">
                                                             <div class="col-sm-6">
                                                                 <h:outputLabel class="form-control-label">Հեռախոս</h:outputLabel>
-                                                                <h:inputText styleClass="form-control" value="#{hotelForm.hotel.phoneNumber}"/>
+                                                                <p:inputMask styleClass="form-control" maxlength="10" mask="(999)99-99-99" value="#{hotelForm.hotel.phoneNumber}"/>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <h:outputLabel class="form-control-label">Բջջային հեռախոս</h:outputLabel>
-                                                                <h:inputText styleClass="form-control" value="#{hotelForm.hotel.mobilePhoneNumber}"/>
+                                                                <p:inputMask styleClass="form-control"  maxlength="10" mask="(999)99-99-99" value="#{hotelForm.hotel.mobilePhoneNumber}"/>
+
                                                             </div>
                                                         </div>
 

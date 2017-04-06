@@ -159,6 +159,11 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="museum.xhtml">
+                                        <span class="nav-text">Թանգարան</span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="tourOperator.xhtml">
                                         <span class="nav-text">Տուր օպերատորներ</span>
                                     </a>
@@ -408,14 +413,12 @@
                                                         <div class="col-sm-6">
                                                             <h:outputLabel
                                                                     class="form-control-label">Հեռախոս</h:outputLabel>
-                                                            <h:inputText styleClass="form-control"
-                                                                         value="#{tourOperatorForm.tourOperator.phoneNumber}"/>
+                                                            <p:inputMask styleClass="form-control"  maxlength="10" mask="(999)99-99-99" value="#{tourOperatorForm.tourOperator.phoneNumber}"/>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <h:outputLabel
                                                                     class="form-control-label">Բջջային հեռախոս</h:outputLabel>
-                                                            <h:inputText styleClass="form-control"
-                                                                         value="#{tourOperatorForm.tourOperator.mobilePhoneNumber}"/>
+                                                            <p:inputMask styleClass="form-control"  maxlength="10" mask="(999)99-99-99" value="#{tourOperatorForm.tourOperator.mobilePhoneNumber}"/>
                                                         </div>
                                                     </div>
 
