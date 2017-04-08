@@ -72,4 +72,10 @@
         <property name="touristSight" ref="touristSight"/>
     </bean>
 
+    <!--Map form-->
+    <bean id="mapForm" class="analytics.MapForm" scope="session" >
+        <property name="root" ref="root"/>
+    </bean>
+
+
 </beans>
