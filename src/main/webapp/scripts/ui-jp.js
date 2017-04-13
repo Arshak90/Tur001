@@ -1,6 +1,5 @@
 (function ($, MODULE_CONFIG) {
   	"use strict";
-  
 	$.fn.uiJp = function(){
 
 		var lists  = this;

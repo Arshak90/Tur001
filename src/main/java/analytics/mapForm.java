@@ -3,6 +3,7 @@ package analytics;
 import Core.Models.Year;
 import Core.Root;
 import home.Country;
+import org.primefaces.context.RequestContext;
 import portfolio.Portfolio;
 import portfolio.Portfoliocountry;
 
@@ -182,5 +183,7 @@ public class MapForm {
 
 
         }
+        RequestContext.getCurrentInstance().update("table2");
+        RequestContext.getCurrentInstance().execute("reload_js('scripts/app.js')");
     }
 }

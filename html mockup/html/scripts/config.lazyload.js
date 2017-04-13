@@ -21,7 +21,7 @@ var MODULE_CONFIG = {
                       '../libs/jquery/footable/css/footable.core.css'
                     ],
     screenfull:     [
-                      '../libs/jquery/screenfull/dist/screenfull.min.js'
+                      'libs/jquery/screenfull/dist/screenfull.min.js'
                     ],
     sortable:       [
                       '../libs/jquery/html.sortable/dist/html.sortable.min.js'

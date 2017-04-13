@@ -13,10 +13,10 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 
 import javax.faces.application.FacesMessage;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -48,6 +48,8 @@ public class PortfolioForm {
     private List<Portfoliohotels> portfoliohotelses;
     private Portfoliohotels portfoliohotels = new Portfoliohotels();
     private List<Hotel> hotels;
+    private BigDecimal totalSpent;
+    private BigDecimal totalBalance;
 
     public Root getRoot() {
         return root;
@@ -138,13 +140,13 @@ public class PortfolioForm {
     }
 
     public void save(){
-        if(selectedPortfolio.getArmtouristcount() + selectedPortfolio.getOthertouristcount() <= selectedPortfolio.getTotaltouristcount()){
+        if(selectedPortfolio.getArmtouristcount() + selectedPortfolio.getOthertouristcount() == selectedPortfolio.getTotaltouristcount()){
             getRoot().getPortfolioDao().update(selectedPortfolio);
             logger.info("Saved successfully " + selectedPortfolio.toString());
             RequestContext.getCurrentInstance().update("panelGroupView");
             Util.getBean("HomeForm", HomeForm.class).setJson(null);
         }else{
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "What we do in life", "Echoes in eternity.");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Սխալ", "ՀՀ զբոսաշրջիկների թիվի և Արտերկրյա զբոսաշրջիկների թիվի գումարը պիտի հավասար լինի Ընդհանուր զբոսաշրջիկների թիվին");
 
             RequestContext.getCurrentInstance().showMessageInDialog(message);
         }
@@ -413,5 +415,49 @@ public class PortfolioForm {
 
     public boolean filterHotels(Integer hotelId){
         return getPortfoliohotelses().stream().filter(x-> x.getHotelid().equals(hotelId)).findAny().isPresent();
+    }
+
+    public BigDecimal getProgramsTotalByProgramNumber(Integer number){
+        switch (number){
+            case 1:
+                return getPortfolios().stream().map(Portfolio::getProgram1).reduce(BigDecimal::add).get();
+            case 2:
+                return getPortfolios().stream().map(Portfolio::getProgram2).reduce(BigDecimal::add).get();
+            case 3:
+                return getPortfolios().stream().map(Portfolio::getProgram3).reduce(BigDecimal::add).get();
+            case 4:
+                return getPortfolios().stream().map(Portfolio::getProgram4).reduce(BigDecimal::add).get();
+            case 5:
+                return getPortfolios().stream().map(Portfolio::getProgram5).reduce(BigDecimal::add).get();
+            case 6:
+                return getPortfolios().stream().map(Portfolio::getProgram6).reduce(BigDecimal::add).get();
+        }
+        return BigDecimal.ZERO;
+    }
+
+    public String getTotalSpent() {
+        totalSpent = BigDecimal.ZERO;
+        for(int i=1;i<7;i++){
+            totalSpent = totalSpent.add(getProgramsTotalByProgramNumber(i));
+        }
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat df = (DecimalFormat) nf;
+        df.applyPattern("#,##0.00");
+        return  df.format(totalSpent);
+    }
+
+    public void setTotalSpent(BigDecimal totalSpent) {
+        this.totalSpent = totalSpent;
+    }
+
+    public String getTotalBalance() {
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat df = (DecimalFormat) nf;
+        df.applyPattern("#,##0.00");
+        return  df.format(getYearlyinforamtion().getTotalBigDecimal().subtract(totalSpent));
+    }
+
+    public void setTotalBalance(BigDecimal totalBalance) {
+        this.totalBalance = totalBalance;
     }
 }

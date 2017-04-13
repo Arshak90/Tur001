@@ -41,6 +41,13 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfolio.setAge50(rs.getInt("age50"));
                 portfolio.setAge51(rs.getInt("age51"));
                 portfolio.setYear(rs.getInt("year"));
+                portfolio.setProgram1(rs.getBigDecimal("program1"));
+                portfolio.setProgram2(rs.getBigDecimal("program2"));
+                portfolio.setProgram3(rs.getBigDecimal("program3"));
+                portfolio.setProgram4(rs.getBigDecimal("program4"));
+                portfolio.setProgram5(rs.getBigDecimal("program5"));
+                portfolio.setProgram6(rs.getBigDecimal("program6"));
+
                 portfolios.add(portfolio);
             }
 
@@ -83,6 +90,12 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfolio.setAge50(rs.getInt("age50"));
                 portfolio.setAge51(rs.getInt("age51"));
                 portfolio.setYear(rs.getInt("year"));
+                portfolio.setProgram1(rs.getBigDecimal("program1"));
+                portfolio.setProgram2(rs.getBigDecimal("program2"));
+                portfolio.setProgram3(rs.getBigDecimal("program3"));
+                portfolio.setProgram4(rs.getBigDecimal("program4"));
+                portfolio.setProgram5(rs.getBigDecimal("program5"));
+                portfolio.setProgram6(rs.getBigDecimal("program6"));
 
                 return portfolio;
             }
@@ -102,7 +115,7 @@ public class PortfolioDao implements Dao<Portfolio>{
     @Override
     public boolean insert(Portfolio item) {
         String sql = "INSERT INTO Portfolio(quarter,totaltouristcount,armtouristcount,othertouristcount,finances,ictouristcount,icmalecount," +
-                "icfemalecount,icvisitdecription,socialpackagecount,column_12,istouroperator,age15,age30,age50,age51,year) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "icfemalecount,icvisitdecription,socialpackagecount,column_12,istouroperator,age15,age30,age50,age51,year,program1,program2,program3,program4,program5,program6) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -124,6 +137,13 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setInt(15, item.getAge50());
             pstmt.setInt(16, item.getAge51());
             pstmt.setInt(17, item.getYear());
+            pstmt.setBigDecimal(18, item.getProgram1());
+            pstmt.setBigDecimal(19, item.getProgram2());
+            pstmt.setBigDecimal(20, item.getProgram3());
+            pstmt.setBigDecimal(21, item.getProgram4());
+            pstmt.setBigDecimal(22, item.getProgram5());
+            pstmt.setBigDecimal(23, item.getProgram6());
+
 
             pstmt.executeUpdate();
             return true;
@@ -138,7 +158,7 @@ public class PortfolioDao implements Dao<Portfolio>{
     public boolean update(Portfolio item) {
         String sql = "UPDATE Portfolio SET quarter = ?, totaltouristcount = ?, armtouristcount = ?, othertouristcount = ?, finances = ?," +
                 " ictouristcount = ?, icmalecount = ?, icfemalecount = ?, icvisitdecription = ?, socialpackagecount = ?, column_12 = ?," +
-                " istouroperator = ?, age15=?,age30=?,age50=?,age51=?,year=? WHERE id = ?";
+                " istouroperator = ?, age15=?,age30=?,age50=?,age51=?,year=?, program1=?, program2 =?, program3 =?, program4 =? , program5 =?, program6 =? WHERE id = ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -159,7 +179,13 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setInt(15, item.getAge50());
             pstmt.setInt(16, item.getAge51());
             pstmt.setInt(17, item.getYear());
-            pstmt.setInt(18, item.getId());
+            pstmt.setBigDecimal(18, item.getProgram1());
+            pstmt.setBigDecimal(19, item.getProgram2());
+            pstmt.setBigDecimal(20, item.getProgram3());
+            pstmt.setBigDecimal(21, item.getProgram4());
+            pstmt.setBigDecimal(22, item.getProgram5());
+            pstmt.setBigDecimal(23, item.getProgram6());
+            pstmt.setInt(24, item.getId());
 
             pstmt.executeUpdate();
             return true;
@@ -441,6 +467,12 @@ public class PortfolioDao implements Dao<Portfolio>{
                 yearlyinforamtion.setAmcaket4(res.getInt("amcaket4"));
                 yearlyinforamtion.setAncaket5(res.getInt("ancaket5"));
                 yearlyinforamtion.setYearId(res.getInt("yearId"));
+                yearlyinforamtion.setProgram1(res.getBigDecimal("program1"));
+                yearlyinforamtion.setProgram2(res.getBigDecimal("program2"));
+                yearlyinforamtion.setProgram3(res.getBigDecimal("program3"));
+                yearlyinforamtion.setProgram4(res.getBigDecimal("program4"));
+                yearlyinforamtion.setProgram5(res.getBigDecimal("program5"));
+                yearlyinforamtion.setProgram6(res.getBigDecimal("program6"));
                 yearlyinforamtions.add(yearlyinforamtion);
             }
         }catch (SQLException e) {
@@ -452,7 +484,7 @@ public class PortfolioDao implements Dao<Portfolio>{
     }
 
     public boolean updateYearlyinforamtion(Yearlyinforamtion yearlyinforamtion) {
-        String sql = "UPDATE YearlyInforamtion SET GDP = ?, overnightDuration = ?, ancaket1 =? ,ancaket2 =?, ancaket3 =?, amcaket4 =? , ancaket5 = ?, yearId =? WHERE id = ?";
+        String sql = "UPDATE YearlyInforamtion SET GDP = ?, overnightDuration = ?, ancaket1 =? ,ancaket2 =?, ancaket3 =?, amcaket4 =? , ancaket5 = ?, yearId =?, program1 =?, program2 =?, program3 =?, program4 =?, program5 =?, program6 =? WHERE id = ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -464,7 +496,13 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setInt(6, yearlyinforamtion.getAmcaket4());
             pstmt.setInt(7, yearlyinforamtion.getAncaket5());
             pstmt.setInt(8,yearlyinforamtion.getYearId());
-            pstmt.setInt(9, yearlyinforamtion.getId());
+            pstmt.setBigDecimal(9, yearlyinforamtion.getProgram1());
+            pstmt.setBigDecimal(10, yearlyinforamtion.getProgram2());
+            pstmt.setBigDecimal(11, yearlyinforamtion.getProgram3());
+            pstmt.setBigDecimal(12, yearlyinforamtion.getProgram4());
+            pstmt.setBigDecimal(13, yearlyinforamtion.getProgram5());
+            pstmt.setBigDecimal(14, yearlyinforamtion.getProgram6());
+            pstmt.setInt(15, yearlyinforamtion.getId());
 
             pstmt.executeUpdate();
             return true;

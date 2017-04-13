@@ -4,7 +4,6 @@
 (function ($) {
     $.extend({
         uploadPreview : function (options) {
-            debugger;
             // Options + Defaults
             var settings = $.extend({
                 input_field: ".image-input",
@@ -18,7 +17,6 @@
 
             // Check if FileReader is available
             if (window.File && window.FileList && window.FileReader) {
-               debugger;
                 if (typeof($(settings.input_field)) !== 'undefined' && $(settings.input_field) !== null) {
                     $(settings.input_field).change(function() {
                         var files = this.files;

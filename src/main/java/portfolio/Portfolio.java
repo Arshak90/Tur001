@@ -1,5 +1,10 @@
 package portfolio;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Portfolio {
   private Integer id;
   private Integer quarter;
@@ -20,6 +25,14 @@ public class Portfolio {
   private Integer age50;
   private Integer age51;
   private Integer year;
+  private BigDecimal program1;
+  private BigDecimal program2;
+  private BigDecimal program3;
+  private BigDecimal program4;
+  private BigDecimal program5;
+  private BigDecimal program6;
+  private BigDecimal total;
+
 
   public Integer getId() {
     return id;
@@ -173,6 +186,65 @@ public class Portfolio {
     this.year = year;
   }
 
+  public BigDecimal getProgram1() {
+    return program1;
+  }
+
+  public void setProgram1(BigDecimal program1) {
+    this.program1 = program1;
+  }
+
+  public BigDecimal getProgram2() {
+    return program2;
+  }
+
+  public void setProgram2(BigDecimal program2) {
+    this.program2 = program2;
+  }
+
+  public BigDecimal getProgram3() {
+    return program3;
+  }
+
+  public void setProgram3(BigDecimal program3) {
+    this.program3 = program3;
+  }
+
+  public BigDecimal getProgram4() {
+    return program4;
+  }
+
+  public void setProgram4(BigDecimal program4) {
+    this.program4 = program4;
+  }
+
+  public BigDecimal getProgram5() {
+    return program5;
+  }
+
+  public void setProgram5(BigDecimal program5) {
+    this.program5 = program5;
+  }
+
+  public BigDecimal getProgram6() {
+    return program6;
+  }
+
+  public void setProgram6(BigDecimal program6) {
+    this.program6 = program6;
+  }
+
+  public void setTotal(BigDecimal total) {
+    this.total = total;
+  }
+
+  public String getTotal() {
+    NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+    DecimalFormat df = (DecimalFormat) nf;
+    df.applyPattern("#,##0.00");
+    return df.format(program1.add(program2).add(program3).add(program4).add(program5).add(program6));
+  }
+
   @Override
   public String toString() {
     return "Portfolio{" +
@@ -195,6 +267,12 @@ public class Portfolio {
             ", age50=" + age50 +
             ", age51=" + age51 +
             ", year=" + year +
+            ", program1=" + program1 +
+            ", program2=" + program2 +
+            ", program3=" + program3 +
+            ", program4=" + program4 +
+            ", program5=" + program5 +
+            ", program6=" + program6 +
             '}';
   }
 }
