@@ -234,23 +234,23 @@
                     <div class="padding">
                         <div class="row-col">
                             <div class="col-xs-4 v-m">
-                                <h1 class="_800 l-s-n-4x inline m-r-sm">15,400</h1>
+                                <h1 class="_800 l-s-n-4x inline m-r-sm">${dashboardForm.countTouristByYear}</h1>
             <span class="inline l-h-1x">
               Մարդ <br/>
-              <small class="text-muted">51 երկրից</small>
+              <small class="text-muted">${dashboardForm.countriesCount} երկրից</small>
             </span>
                             </div>
                             <div class="col-xs-4 v-m">
-                                <h1 class="_800 l-s-n-4x inline m-r-sm text-primary">18,000,000</h1>
+                                <h1 class="_800 l-s-n-4x inline m-r-sm text-primary">${dashboardForm.financeByYear}</h1>
             <span class="inline l-h-1x">
               Դրամ  <br/>
-              <small class="text-muted">From 16 countries</small>
+              <small class="text-muted">${dashboardForm.countriesCount} երկրից</small>
             </span>
                             </div>
                             <div class="col-xs-4 v-m">
-                                <h1 class="_800 l-s-n-4x text-white text-shadow inline m-r-sm">4,300</h1>
+                                <h1 class="_800 l-s-n-4x inline m-r-sm text-primary">${dashboardForm.gdpByYear}</h1>
             <span class="inline l-h-1x">
-             ԼՂՀ ՀՆԱ    <br/>
+             Դրամ    <br/>
               <small class="text-muted"> Զբոսաշրջության ներդրումը ԼՂՀ ՀՆԱ-ի մեջ  #{HomeForm.selectedYear}</small>
             </span>
                             </div>
@@ -318,7 +318,7 @@
                     </div>
                 </div>
                 <div class="row-col" style="background-color:#F0F0F0;">
-                    <div class="col-md-7 col-lg-8 v-b">
+                    <div class="col-md-12 col-lg-12 v-b" >
                         <div class="padding">
                             <div class="text-center m-b">
                                 <h6 class="text-u-c">Ընդհանուր զբոսաշրջիկների թիվը</h6>
@@ -329,20 +329,20 @@
                             <div class="text-muted text-xs m-t"><span class="pull-right">${dashboardForm.currentDate.year}</span>Զբոսաշրջիկների քանակ</div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="padding">
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3>Սեռ</h3>
-                                    <small class="block text-muted">Մարդկաց քանակը ըստ սեռի</small>
-                                </div>
-                                <div class="box-body">
-                                    <div ui-jp="chart" ui-options="${dashboardForm.peopleByGender}" style="height:300px" >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="col-sm-6">-->
+                        <!--<div class="padding">-->
+                            <!--<div class="box">-->
+                                <!--<div class="box-header">-->
+                                    <!--<h3>Սեռ</h3>-->
+                                    <!--<small class="block text-muted">Մարդկաց քանակը ըստ սեռի</small>-->
+                                <!--</div>-->
+                                <!--<div class="box-body">-->
+                                    <!--<div ui-jp="chart" ui-options="${dashboardForm.peopleByGender}" style="height:300px" >-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
 
 

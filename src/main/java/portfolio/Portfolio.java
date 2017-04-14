@@ -11,7 +11,7 @@ public class Portfolio {
   private Integer totaltouristcount;
   private Integer armtouristcount;
   private Integer othertouristcount;
-  private Double finances;
+  private BigDecimal finances;
   private Integer ictouristcount;
   private Integer icmalecount;
   private Integer icfemalecount;
@@ -74,11 +74,11 @@ public class Portfolio {
     this.othertouristcount = othertouristcount;
   }
 
-  public Double getFinances() {
+  public BigDecimal getFinances() {
     return finances;
   }
 
-  public void setFinances(Double finances) {
+  public void setFinances(BigDecimal finances) {
     this.finances = finances;
   }
 

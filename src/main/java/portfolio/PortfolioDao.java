@@ -28,7 +28,7 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfolio.setTotaltouristcount(rs.getInt("totalTouristCount"));
                 portfolio.setArmtouristcount(rs.getInt("armTouristCount"));
                 portfolio.setOthertouristcount(rs.getInt("otherTouristCount"));
-                portfolio.setFinances(rs.getDouble("finances"));
+                portfolio.setFinances(rs.getBigDecimal("finances"));
                 portfolio.setIctouristcount(rs.getInt("icTouristCount"));
                 portfolio.setIcmalecount(rs.getInt("icMaleCount"));
                 portfolio.setIcfemalecount(rs.getInt("icFemaleCount"));
@@ -77,7 +77,7 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfolio.setTotaltouristcount(rs.getInt("totalTouristCount"));
                 portfolio.setArmtouristcount(rs.getInt("armTouristCount"));
                 portfolio.setOthertouristcount(rs.getInt("otherTouristCount"));
-                portfolio.setFinances(rs.getDouble("finances"));
+                portfolio.setFinances(rs.getBigDecimal("finances"));
                 portfolio.setIctouristcount(rs.getInt("icTouristCount"));
                 portfolio.setIcmalecount(rs.getInt("icMaleCount"));
                 portfolio.setIcfemalecount(rs.getInt("icFemaleCount"));
@@ -124,7 +124,7 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setInt(2, item.getTotaltouristcount());
             pstmt.setInt(3, item.getArmtouristcount());
             pstmt.setInt(4, item.getOthertouristcount());
-            pstmt.setDouble(5, item.getFinances());
+            pstmt.setBigDecimal(5, item.getFinances());
             pstmt.setInt(6, item.getIctouristcount());
             pstmt.setInt(7, item.getIcmalecount());
             pstmt.setInt(8, item.getIcfemalecount());
@@ -166,7 +166,7 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setInt(2, item.getTotaltouristcount());
             pstmt.setInt(3, item.getArmtouristcount());
             pstmt.setInt(4, item.getOthertouristcount());
-            pstmt.setDouble(5, item.getFinances());
+            pstmt.setBigDecimal(5, item.getFinances());
             pstmt.setInt(6, item.getIctouristcount());
             pstmt.setInt(7, item.getIcmalecount());
             pstmt.setInt(8, item.getIcfemalecount());
@@ -242,7 +242,7 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfoliomonthly.setTotaltouristcount(res.getInt("totalTouristCount"));
                 portfoliomonthly.setArmtouristcount(res.getInt("armTouristCount"));
                 portfoliomonthly.setOthertouristcount(res.getInt("otherTouristCount"));
-                portfoliomonthly.setFinances(res.getDouble("finances"));
+                portfoliomonthly.setFinances(res.getBigDecimal("finances"));
                 portfoliomonthly.setMonthId(res.getInt("monthId"));
                 portfoliomonthlies.add(portfoliomonthly);
             }
@@ -406,7 +406,7 @@ public class PortfolioDao implements Dao<Portfolio>{
 
             pstmt.setInt(1, portfoliomonthly.getPortfolioid());
             pstmt.setInt(2, portfoliomonthly.getTotaltouristcount());
-            pstmt.setDouble(3, portfoliomonthly.getFinances());
+            pstmt.setBigDecimal(3, portfoliomonthly.getFinances());
             pstmt.setInt(4,portfoliomonthly.getMonthId());
 
             pstmt.executeUpdate();
@@ -459,7 +459,7 @@ public class PortfolioDao implements Dao<Portfolio>{
             while ( res.next() ){
                 Yearlyinforamtion yearlyinforamtion = new Yearlyinforamtion();
                 yearlyinforamtion.setId(res.getInt("id"));
-                yearlyinforamtion.setGdp(res.getDouble("GDP"));
+                yearlyinforamtion.setGdp(res.getBigDecimal("GDP"));
                 yearlyinforamtion.setOvernightduration(res.getInt("overnightDuration"));
                 yearlyinforamtion.setAncaket1(res.getInt("ancaket1"));
                 yearlyinforamtion.setAncaket2(res.getInt("ancaket2"));
@@ -488,7 +488,7 @@ public class PortfolioDao implements Dao<Portfolio>{
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setDouble(1, yearlyinforamtion.getGdp());
+            pstmt.setBigDecimal(1, yearlyinforamtion.getGdp());
             pstmt.setInt(2, yearlyinforamtion.getOvernightduration());
             pstmt.setInt(3, yearlyinforamtion.getAncaket1());
             pstmt.setInt(4, yearlyinforamtion.getAncaket2());

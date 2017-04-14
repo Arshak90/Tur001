@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class Yearlyinforamtion {
   private Integer id;
-  private Double gdp;
+  private BigDecimal gdp;
   private Integer overnightduration;
   private Integer ancaket1;
   private Integer ancaket2;
@@ -31,11 +31,11 @@ public class Yearlyinforamtion {
     this.id = id;
   }
 
-  public Double getGdp() {
+  public BigDecimal getGdp() {
     return gdp;
   }
 
-  public void setGdp(Double gdp) {
+  public void setGdp(BigDecimal gdp) {
     this.gdp = gdp;
   }
 

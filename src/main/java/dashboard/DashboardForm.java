@@ -6,6 +6,7 @@ import Core.Util;
 import portfolio.Portfolio;
 import portfolio.Portfoliocountry;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -83,6 +84,12 @@ public class DashboardForm {
                 stream().
                 limit(10).
                 sorted((p1, p2) -> p2.getValue().compareTo(p1.getValue())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+    public Integer getCountriesCount() {
+        return getTopTenPortfolioCountries().
+                stream().
+                collect(Collectors.groupingBy(Portfoliocountry::getCountryid, Collectors.summingInt(Portfoliocountry::getCount))).
+                size();
     }
 
     public void setTopTenPortfolioCountriesCalculated(Map<Integer, Integer> topTenPortfolioCountriesCalculated) {
@@ -225,5 +232,25 @@ public class DashboardForm {
                 "          tooltipOpts: { content: '%x.0 is %y.2',  defaultTheme: false, shifts: { x: 0, y: -40 } }\n" +
                 "        }\n" +
                 "      ";
+    }
+
+    public BigDecimal getGdpByYear(){
+        return getRoot().getPortfolioDao().getYearlyinforamtions().stream().filter(x-> x.getYearId() == getCurrentDate().getYear()).findFirst().get().getGdp();
+    }
+
+    public BigDecimal getFinanceByYear(){
+        BigDecimal result = BigDecimal.ZERO;
+        for(Portfolio portfolio: getPortfolios()){
+            result = result.add(portfolio.getFinances() == null ? BigDecimal.ZERO : portfolio.getFinances());
+        }
+        return result;
+    }
+
+    public Integer getCountTouristByYear(){
+        Integer result = 0;
+        for(Portfolio portfolio: getPortfolios()){
+            result += portfolio.getTotaltouristcount();
+        }
+        return result;
     }
 }
