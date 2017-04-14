@@ -104,7 +104,8 @@ public class DashboardForm {
         for (Integer doubleMap : getCurrentYearPortfoliomonthlies().keySet()) {
             s = s + "[" + doubleMap + ", " + getCurrentYearPortfoliomonthlies().get(doubleMap) + "],";
         }
-        return s + "],";
+        s = s + "],";
+        return s;
     }
 
 

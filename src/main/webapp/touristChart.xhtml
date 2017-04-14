@@ -235,22 +235,14 @@
                                 <div class="row-col">
                                     <div class="col-xs-3 v-m">
                                         <h:form id="mapForm" prependId="false">
-                                            <h4 >Մարդկանց թիվը ըստ երկրների</h4>
                                             <div class="col-xs-12 col-sm-6 col-md-2 form-group">
-                                                <p:selectOneMenu id="filterFirstYear" value="#{mapForm.firstYear}" style="width:125px" styleClass="form-control input-c" required="true" >
+                                                <p:selectOneMenu id="filterFirstYear" value="#{mapForm.filterYearForTurist}" style="width:125px" styleClass="form-control input-c" required="true" >
                                                     <f:selectItem itemLabel="Ընտրիր մեկը"  />
                                                     <f:selectItems value="#{mapForm.years}" />
                                                     <f:validateRequired />
                                                 </p:selectOneMenu>
 
-
-                                                <p:selectOneMenu id="filterLastYear" value="#{mapForm.lastYear}" style="width:125px" styleClass="form-control input-c" required="true" >
-                                                    <f:selectItem itemLabel="Ընտրիր մեկը"  />
-                                                    <f:selectItems value="#{mapForm.years}" />
-                                                    <f:validateRequired />
-                                                </p:selectOneMenu>
-
-                                                <p:commandButton action="#{mapForm.getFilter}" update="@form :table2"
+                                                <p:commandButton action="#{mapForm.getTotalTuristChartData}" update="@form :table2"
                                                                  styleClass="mrgt37"  value="Ֆիլտրել"></p:commandButton>
                                             </div>
                                         </h:form>
@@ -263,14 +255,16 @@
 
 
                             <!-- ############ Map START-->
-                            <h:panelGroup layout="block" id="table2" class="col-sm-12" >
-                                <div style="background-color:#E9E9E9;">
-                                    <form id="map">
-                                        <div class="box-body" >
-                                            <div  ui-jp="chart" ui-options="#{mapForm.json}"   style="height:600px" >
-                                            </div>
-                                        </div>
-                                    </form>
+
+                            <h:panelGroup layout="block" id="table2" class="col-sm-12" style="margin-bottom: 20px;">
+                                <div class="padding">
+                                    <div class="text-center m-b">
+                                        <h6 class="text-u-c">Ընդհանուր զբոսաշրջիկների թիվը</h6>
+                                        <p class="text-muted">${mapForm.filterYearForTurist} թվականի Ընդհանուր զբոսաշրջիկների թիվը ըստ ամիսների</p>
+                                    </div>
+                                    <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="${mapForm.jsonForTourist}" style="height:360px" >
+                                    </div>
+                                    <div class="text-muted text-xs m-t"><span class="pull-right">${mapForm.filterYearForTurist}</span>Զբոսաշրջիկների քանակ</div>
                                 </div>
                             </h:panelGroup>
 
@@ -282,15 +276,15 @@
 
 
 
-                        <!-- ############ PAGE END-->
+                            <!-- ############ PAGE END-->
 
+                        </div>
                     </div>
-                </div>
-                <!-- / -->
+                    <!-- / -->
 
-                <!-- ############ LAYOUT END-->
+                    <!-- ############ LAYOUT END-->
 
-            </div></div>
+                </div></div>
         </div>
     </div>
 
