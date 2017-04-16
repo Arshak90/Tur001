@@ -6,11 +6,17 @@ import Core.Util;
 import portfolio.Portfolio;
 import portfolio.Portfoliocountry;
 
+import javax.mail.internet.InternetAddress;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**
@@ -112,6 +118,11 @@ public class DashboardForm {
             s = s + "[" + doubleMap + ", " + getCurrentYearPortfoliomonthlies().get(doubleMap) + "],";
         }
         s = s + "],";
+        try {
+            InetAddress thisIp = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         return s;
     }
 
@@ -252,5 +263,25 @@ public class DashboardForm {
             result += portfolio.getTotaltouristcount();
         }
         return result;
+    }
+
+    public boolean isAdmin() {
+        InetAddress thisIp = null;
+        try {
+            thisIp = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+        Properties prop = new Properties();
+        String url = "";
+        InputStream input = getClass().getClassLoader().getResourceAsStream("access.properties");
+        try {
+            prop.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return prop.getProperty(String.valueOf(thisIp.getHostAddress())) != null ? true : false;
     }
 }
