@@ -127,7 +127,6 @@ public class HotelForm implements Form, Serializable {
         }
 
         this.hotelsWithType = null;
-        externalContext.redirect("foo.xhtml");
     }
 
     public boolean deleteOldFile(Integer id) {
