@@ -200,15 +200,12 @@
                         <div ui-include="'views/blocks/navbar.form.right.html'"></div>
                         <!-- link and dropdown -->
                         <h:form>
-                            <ul class="nav navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="" data-toggle="dropdown">
-                                        <!--<i class="fa fa-fw fa-plus text-muted"></i>-->
-                                        <հ:commandLink actionListener="#{dashboardForm.resetData}" action="#{HomeForm.resetData}">Թարմացնել տվյալները</հ:commandLink>
-                                    </a>
+                            <div class="de-btn-top">
+                                <button class="md-btn md-flat text-primary">
+                                    <հ:commandLink actionListener="#{dashboardForm.resetData}" action="#{HomeForm.resetData}">Թարմացնել տվյալները</հ:commandLink>
                                     <div ui-include="'views/blocks/dropdown.new.html'"></div>
-                                </li>
-                            </ul>
+                                </button>
+                            </div>
                         </h:form>
 
                         <!-- / -->
@@ -230,61 +227,48 @@
             <div ui-view="" class="app-body" id="view">
 
                 <!-- ############ PAGE START-->
-                <div class="dker">
+                <div class="">
                     <div class="tab-content tab-alt">
                         <div class="tab-pane fade in active" id="world">
                             <div class="padding">
-                                <div class="row-col">
-                                    <div class="col-xs-3 v-m">
-                                        <h:form id="mapForm" prependId="false">
-                                            <div class="col-xs-12 col-sm-6 col-md-2 form-group">
-                                                <p:selectOneMenu id="filterFirstYear" value="#{mapForm.filterYearForFinancial}" style="width:125px" styleClass="form-control input-c" required="true" >
-                                                    <f:selectItem itemLabel="Ընտրիր մեկը"  />
-                                                    <f:selectItems value="#{mapForm.years}" />
-                                                    <f:validateRequired />
-                                                </p:selectOneMenu>
-
-                                                <p:commandButton action="#{mapForm.getTotalFinancialChartData}" update="@form :table2"
-                                                                 styleClass="mrgt37"  value="Ֆիլտրել"></p:commandButton>
+                                <div class="box form-border">
+                                    <div class="box-body">
+                                        <div class="row-col">
+                                            <h:form id="mapForm" prependId="false">
+                                                <div class="col-xs-12">
+                                                    <h2 class="de-title">ՖԻՆԱՆՍՆԵՐԻ ՀՈՍՔ</h2>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-2 form-group">
+                                                    <p:selectOneMenu id="filterFirstYear" value="#{mapForm.filterYearForFinancial}" style="width:125px" styleClass="form-control input-c" required="true" >
+                                                        <f:selectItem itemLabel="Ընտրիր մեկը"  />
+                                                        <f:selectItems value="#{mapForm.years}" />
+                                                        <f:validateRequired />
+                                                    </p:selectOneMenu>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-2 form-group">
+                                                    <p:commandButton action="#{mapForm.getTotalFinancialChartData}" update="@form :table2" value="Ֆիլտրել"></p:commandButton>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                        <!-- ############ Map START-->
+                                        <h:panelGroup layout="block" id="table2" class="col-sm-12" style="margin-bottom: 20px;">
+                                            <div class="padding">
+                                                <div class="text-center m-b">
+                                                    <p class="text-muted">${mapForm.filterYearForFinancial} թվականի ֆինանսների հոսքը ըստ ամիսների</p>
+                                                </div>
+                                                <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="${mapForm.jsonForFinancial}" style="height:360px" ></div>
+                                                <div class="text-muted text-xs m-t"><span class="pull-right">${mapForm.filterYearForFinancial}</span>Դրամ</div>
                                             </div>
-                                        </h:form>
+                                        </h:panelGroup>
+                                        <div class="clear"></div>
+                                        <!-- ############ map END-->
                                     </div>
-
-
-
                                 </div>
                             </div>
-
-
-                            <!-- ############ Map START-->
-                            <h:panelGroup layout="block" id="table2" class="col-sm-12" style="margin-bottom: 20px;">
-                                    <div class="padding">
-                                        <div class="text-center m-b">
-                                            <h6 class="text-u-c">ՖԻՆԱՆՍՆԵՐԻ ՀՈՍՔ</h6>
-                                            <p class="text-muted">${mapForm.filterYearForFinancial} թվականի ֆինանսների հոսքը ըստ ամիսների</p>
-                                        </div>
-                                        <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="${mapForm.jsonForFinancial}" style="height:360px" ></div>
-                                        <div class="text-muted text-xs m-t"><span class="pull-right">${mapForm.filterYearForFinancial}</span>Դրամ</div>
-                                    </div>
-                            </h:panelGroup>
-
-                            <!-- ############ map END-->
-
-
-
-
-
-
-
-                            <!-- ############ PAGE END-->
-
                         </div>
                     </div>
-                    <!-- / -->
-
-                    <!-- ############ LAYOUT END-->
-
-                </div></div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -201,15 +201,11 @@
                 <div ui-include="'../views/blocks/navbar.form.right.html'"></div>
                 <!-- link and dropdown -->
                 <h:form>
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="" data-toggle="dropdown">
-                                <!--<i class="fa fa-fw fa-plus text-muted"></i>-->
-                                <հ:commandLink actionListener="#{dashboardForm.resetData}" action="#{HomeForm.resetData}">Թարմացնել տվյալները</հ:commandLink>
-                            </a>
-                            <div ui-include="'../views/blocks/dropdown.new.html'"></div>
-                        </li>
-                    </ul>
+                    <div class="de-btn-top">
+                        <button class="md-btn md-flat text-primary">
+                            <հ:commandLink actionListener="#{dashboardForm.resetData}" action="#{HomeForm.resetData}">Թարմացնել տվյալները</հ:commandLink>
+                        </button>
+                    </div>
                 </h:form>
 
                 <!-- / -->
@@ -236,26 +232,37 @@
                 <div class="tab-pane fade in active" id="world">
                     <div class="padding">
                         <div class="row-col">
-                            <div class="col-xs-4 v-m">
+                            <div class="col-xs-3 v-m">
                                 <h1 class="_800 l-s-n-4x inline m-r-sm">${dashboardForm.countTouristByYear}</h1>
-            <span class="inline l-h-1x">
-              Մարդ <br/>
-              <small class="text-muted">${dashboardForm.countriesCount} երկրից</small>
-            </span>
+                                <div class="clear"></div>
+                                <span class="inline l-h-1x">
+                                  Մարդ <br/>
+                                  <small class="text-muted">${dashboardForm.countriesCount} երկրից</small>
+                                </span>
                             </div>
-                            <div class="col-xs-4 v-m">
+                            <div class="col-xs-3 v-m">
                                 <h1 class="_800 l-s-n-4x inline m-r-sm text-primary">${dashboardForm.financeByYear}</h1>
-            <span class="inline l-h-1x">
-              Դրամ  <br/>
-              <small class="text-muted">${dashboardForm.countriesCount} երկրից</small>
-            </span>
+                                <div class="clear"></div>
+                                <span class="inline l-h-1x">
+                                  Դրամ  <br/>
+                                  <small class="text-muted">${dashboardForm.countriesCount} երկրից</small>
+                                </span>
                             </div>
-                            <div class="col-xs-4 v-m">
+                            <div class="col-xs-3 v-m">
                                 <h1 class="_800 l-s-n-4x inline m-r-sm text-primary">${dashboardForm.gdpByYear}</h1>
-            <span class="inline l-h-1x">
-             Դրամ    <br/>
-              <small class="text-muted"> Զբոսաշրջության ներդրումը ԼՂՀ ՀՆԱ-ի մեջ  #{HomeForm.selectedYear}</small>
-            </span>
+                                <div class="clear"></div>
+                                <span class="inline l-h-1x">
+                                 Դրամ    <br/>
+                                  <small class="text-muted"> Զբոսաշրջության ներդրումը ԼՂՀ ՀՆԱ-ի մեջ  #{HomeForm.selectedYear}</small>
+                                </span>
+                            </div>
+                            <div class="col-xs-3 v-m">
+                                <h1 class="_800 l-s-n-4x inline m-r-sm text-primary">${dashboardForm.gdpByYear}</h1>
+                                <div class="clear"></div>
+                                <span class="inline l-h-1x">
+                                 Դրամ    <br/>
+                                  <small class="text-muted"> Զբոսաշրջության ներդրումը ԼՂՀ ՀՆԱ-ի մեջ  #{HomeForm.selectedYear}</small>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -263,7 +270,7 @@
 
                     <!-- ############ Map START-->
                     <div class="col-sm-12">
-                        <div style="background-color:#E9E9E9;">
+                        <div style="background-color:#E8E8E8;">
                             <div class="box-body">
                                 <div ui-jp="chart" ui-options="#{HomeForm.json}"  style="height:600px">   <!--TODO-->
                                 </div>
@@ -272,9 +279,6 @@
                     </div>
 
                     <!-- ############ map END-->
-
-
-
                     <div class="row-col">
                         <div class="col-xs-3 v-m nav-active-primary">
                         </div>
@@ -283,14 +287,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row-col" style="background-color:#F0F0F0;">
+                <div class="row-col" style="background-color:#E8E8E8;">
                     <div class="col-md-5 col-lg-4">
                         <div class="padding">
-                            <div class="box" style="padding-bottom: 45px;">
+                            <div class="box">
                                 <div class="box-header b-b">
                                     <h3 class="text-u-c text-muted">Թոփ #{dashboardForm.topTenPortfolioCountriesCalculated.keySet().size()} տարածաշրջաներ</h3>
                                 </div>
-                                <ul class="list inset" style="height: 360px; overflow-y: auto">
+                                <ul class="list inset mrgb0" style="height: 360px; overflow-y: auto" >
                                     <ui:repeat value="#{dashboardForm.topTenPortfolioCountriesCalculated.keySet().toArray()}" var="topTenPortfolioCountry" varStatus="status">
                                         <li class="list-item">
                                             <div class="list-left">
@@ -310,26 +314,38 @@
                     </div>
                     <div class="col-md-7 col-lg-8 v-b">
                         <div class="padding">
-                            <div class="text-center m-b">
-                                <h6 class="text-u-c">Ֆինանսների հոսք</h6>
-                                <p class="text-muted">${dashboardForm.currentDate.year} թվականի ֆինանսների հոսքը ըստ ամիսների</p>
+                            <div class="box">
+                                <div class="text-center m-b">
+                                    <div class="box-header b-b">
+                                        <h6 class="text-u-c">Ֆինանսների հոսք</h6>
+                                        <p class="text-muted mrgb0">${dashboardForm.currentDate.year} թվականի ֆինանսների հոսքը ըստ ամիսների</p>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="${dashboardForm.finaniceChartData}" style="height:246px" >
+                                    </div>
+                                    <div class="text-muted text-xs m-t"><span class="pull-right">${dashboardForm.currentDate.year}</span>Դրամ</div>
+                                </div>
                             </div>
-                            <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="${dashboardForm.finaniceChartData}" style="height:360px" >
-                            </div>
-                            <div class="text-muted text-xs m-t"><span class="pull-right">${dashboardForm.currentDate.year}</span>Դրամ</div>
                         </div>
                     </div>
                 </div>
-                <div class="row-col" style="background-color:#F0F0F0;">
+                <div class="row-col" style="background-color:#E8E8E8;">
                     <div class="col-md-12 col-lg-12 v-b" >
                         <div class="padding">
-                            <div class="text-center m-b">
-                                <h6 class="text-u-c">Ընդհանուր զբոսաշրջիկների թիվը</h6>
-                                <p class="text-muted">${dashboardForm.currentDate.year} թվականի Ընդհանուր զբոսաշրջիկների թիվը ըստ ամիսների</p>
+                            <div class="box">
+                                <div class="box-header b-b">
+                                    <div class="text-center m-b">
+                                        <h6 class="text-u-c">Ընդհանուր զբոսաշրջիկների թիվը</h6>
+                                        <p class="text-muted">${dashboardForm.currentDate.year} թվականի Ընդհանուր զբոսաշրջիկների թիվը ըստ ամիսների</p>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="${dashboardForm.totalTuristChartData}" style="height:300px" >
+                                    </div>
+                                    <div class="text-muted text-xs m-t"><span class="pull-right">${dashboardForm.currentDate.year}</span>Զբոսաշրջիկների քանակ</div>
+                                </div>
                             </div>
-                            <div ui-jp="plot" ui-refresh="app.setting.color" ui-options="${dashboardForm.totalTuristChartData}" style="height:360px" >
-                            </div>
-                            <div class="text-muted text-xs m-t"><span class="pull-right">${dashboardForm.currentDate.year}</span>Զբոսաշրջիկների քանակ</div>
                         </div>
                     </div>
                     <!--<div class="col-sm-6">-->

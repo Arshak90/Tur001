@@ -94,6 +94,13 @@ sup {
   padding: 25px;
 }
 
+.clear3 {
+  clear: both;
+  margin: 0;
+  padding-top: 20px;
+
+}
+
 .label {
   display: inline-block;
   padding: 0.25em 0.5em;
@@ -5899,8 +5906,9 @@ textarea.md-input {
     text-align: right;
 }
 
-.mrgb28 {
-  margin-bottom: 28px !important; }
+.mrgb28 {margin-bottom: 28px !important; }
+
+.mrgb15 {margin-bottom: 15px !important; }
 
 /* -- DE Navigation Tabs -- */
 
@@ -5923,6 +5931,7 @@ textarea.md-input {
 .pddb0 {
     padding-bottom: 0 !important;
 }
+
 
 .tab-navigation {
     display: flex;
@@ -6056,6 +6065,7 @@ textarea.md-input {
 .ui-selectonemenu {
   display: block;
   width: 100% !important;
+  min-width: 100% !important;
   padding: 0;
   line-height: 1.25;
   color: #55595c;
@@ -6071,6 +6081,10 @@ textarea.md-input {
 .ui-selectonemenu-label {
   box-shadow: none;
   padding: .5rem .75rem;
+}
+
+.prog-input input {
+  max-width: 240px !important;
 }
 
 .ui-selectonemenu .ui-selectonemenu-trigger{

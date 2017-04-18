@@ -200,15 +200,12 @@
                         <div ui-include="'views/blocks/navbar.form.right.html'"></div>
                         <!-- link and dropdown -->
                         <h:form>
-                            <ul class="nav navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="" data-toggle="dropdown">
-                                        <!--<i class="fa fa-fw fa-plus text-muted"></i>-->
-                                        <հ:commandLink actionListener="#{dashboardForm.resetData}" action="#{HomeForm.resetData}">Թարմացնել տվյալները</հ:commandLink>
-                                    </a>
+                            <div class="de-btn-top">
+                                <button class="md-btn md-flat text-primary">
+                                    <հ:commandLink actionListener="#{dashboardForm.resetData}" action="#{HomeForm.resetData}">Թարմացնել տվյալները</հ:commandLink>
                                     <div ui-include="'views/blocks/dropdown.new.html'"></div>
-                                </li>
-                            </ul>
+                                </button>
+                            </div>
                         </h:form>
 
                         <!-- / -->
@@ -230,64 +227,53 @@
             <div ui-view="" class="app-body" id="view">
 
                 <!-- ############ PAGE START-->
-                <div class="dker">
+                <div class="">
                     <div class="tab-content tab-alt">
                         <div class="tab-pane fade in active" id="world">
                             <div class="padding">
-                                <div class="row-col">
-                                    <div class="col-xs-3 v-m">
-                                        <h:form id="mapForm" prependId="false">
-                                            <h4 >Մարդկանց թիվը ըստ երկրների</h4>
-                                            <div class="col-xs-12 col-sm-6 col-md-2 form-group">
-                                                <p:selectOneMenu id="filterFirstYear" value="#{mapForm.firstYear}" style="width:125px" styleClass="form-control input-c" required="true" >
-                                                    <f:selectItem itemLabel="Ընտրիր մեկը"  />
-                                                    <f:selectItems value="#{mapForm.years}" />
-                                                    <f:validateRequired />
-                                                </p:selectOneMenu>
-
-
-                                                <p:selectOneMenu id="filterLastYear" value="#{mapForm.lastYear}" style="width:125px" styleClass="form-control input-c" required="true" >
-                                                    <f:selectItem itemLabel="Ընտրիր մեկը"  />
-                                                    <f:selectItems value="#{mapForm.years}" />
-                                                    <f:validateRequired />
-                                                </p:selectOneMenu>
-
-                                                <p:commandButton action="#{mapForm.getFilter}" update="@form :table2"
-                                                                 styleClass="mrgt37"  value="Ֆիլտրել"></p:commandButton>
+                                <div class="box form-border">
+                                    <div class="box-body">
+                                        <div class="row-col">
+                                            <h:form id="mapForm" prependId="false">
+                                                <div class="col-xs-12">
+                                                    <h2 class="de-title">Մարդկանց թիվը ըստ երկրների</h2>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-2 form-group">
+                                                    <p:selectOneMenu id="filterFirstYear" value="#{mapForm.firstYear}" style="width:125px" styleClass="form-control input-c" required="true" >
+                                                        <f:selectItem itemLabel="Ընտրիր մեկը"  />
+                                                        <f:selectItems value="#{mapForm.years}" />
+                                                        <f:validateRequired />
+                                                    </p:selectOneMenu>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-2 form-group">
+                                                    <p:selectOneMenu id="filterLastYear" value="#{mapForm.lastYear}" style="width:125px" styleClass="form-control input-c" required="true" >
+                                                        <f:selectItem itemLabel="Ընտրիր մեկը"  />
+                                                        <f:selectItems value="#{mapForm.years}" />
+                                                        <f:validateRequired />
+                                                    </p:selectOneMenu>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-2 form-group">
+                                                    <p:commandButton action="#{mapForm.getFilter}" update="@form :table2" value="Ֆիլտրել"></p:commandButton>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                        <!-- ############ Map START-->
+                                        <h:panelGroup layout="block" id="table2" class="col-sm-12" >
+                                            <div style="background-color:#ffffff;">
+                                                <form id="map">
+                                                    <div class="box-body" >
+                                                        <div  ui-jp="chart" ui-options="#{mapForm.json}"   style="height:600px" >
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </h:form>
+                                        </h:panelGroup>
+                                        <div class="clear"></div>
                                     </div>
-
-
-
                                 </div>
                             </div>
-
-
-                            <!-- ############ Map START-->
-                            <h:panelGroup layout="block" id="table2" class="col-sm-12" >
-                                <div style="background-color:#E9E9E9;">
-                                    <form id="map">
-                                        <div class="box-body" >
-                                            <div  ui-jp="chart" ui-options="#{mapForm.json}"   style="height:600px" >
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </h:panelGroup>
-
-                            <!-- ############ map END-->
-
-
-
-
-
-
-
-                        <!-- ############ PAGE END-->
-
+                        </div>
                     </div>
-                </div>
                 <!-- / -->
 
                 <!-- ############ LAYOUT END-->
