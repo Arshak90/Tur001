@@ -6,7 +6,9 @@ import Core.Root;
 import Core.Util;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
@@ -121,6 +123,16 @@ public class TourOperatorForm implements Serializable, Form {
             }
         }
         this.tourOperators = null;
+        this.reloadPage();
+    }
+
+    private void reloadPage(){
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean deleteOldFile(Integer id) {
