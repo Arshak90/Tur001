@@ -189,20 +189,20 @@ public class HotelDao implements Dao<Hotel> {
             pstmt.setString(2, item.getAddress());
             pstmt.setString(3, item.getPhoneNumber());
             pstmt.setString(4, item.getMobilePhoneNumber());
-            pstmt.setInt(5, item.getSingleRoom());
-            pstmt.setInt(6, item.getDoubleRoom());
-            pstmt.setInt(7, item.getTripleRoom());
-            pstmt.setInt(8, item.getOtherRoom());
-            pstmt.setInt(9, item.getRoomCount());
-            pstmt.setInt(10, item.getBedCount());
+            pstmt.setInt(5, (item.getSingleRoom()==null)? 0 : item.getSingleRoom());
+            pstmt.setInt(6, (item.getDoubleRoom()==null)? 0 : item.getDoubleRoom());
+            pstmt.setInt(7, (item.getTripleRoom()==null)? 0 : item.getTripleRoom());
+            pstmt.setInt(8, (item.getOtherRoom()==null)? 0 : item.getOtherRoom());
+            pstmt.setInt(9, (item.getRoomCount()==null)? 0 : item.getRoomCount());
+            pstmt.setInt(10, (item.getBedCount()==null)? 0 : item.getBedCount());
             pstmt.setInt(11, item.getHotel());
             pstmt.setString(12, item.getPhotoWay());
-            pstmt.setInt(13, item.getHotelType());
+            pstmt.setInt(13, (item.getHotelType()==null)? 0 : item.getHotelType());
             pstmt.setString(14, item.getEmail());
             pstmt.setString(15, item.getSite());
             pstmt.setString(16, item.getDirectorFullName());
             pstmt.setString(17, item.getLegalName());
-            pstmt.setInt(18, item.getRate());
+            pstmt.setInt(18, (item.getRate()==null)? 0 : item.getRate());
             pstmt.setInt(19, item.getId());
 
 

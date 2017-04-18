@@ -301,7 +301,7 @@
                                     <div class="row-body">
                                         <h:panelGroup id="contentId" styleClass="row-inner" layout="block">
                                             <h:panelGroup layout="block" class="padding" style="max-width: 800px; margin: 0 auto;">
-                                                <h:form id="formId" enctype="multipart/form-data" prependId="false">
+                                                <h:form id="formId" enctype="multipart/form-data" prependId="false" onreset="return false">
                                                     <div class="row-col h-auto">
                                                         <div class="form-horizontal">
                                                             <h:messages  infoStyle="color:darkgreen" errorStyle="color:red" globalOnly="true"/>
@@ -323,9 +323,10 @@
                                                                 </div>
                                                                 <div class="col-sm-2">
                                                                     <h:outputLabel class="form-control-label">1-5 աստղ</h:outputLabel>
-                                                                    <h:inputText id="rateId" styleClass="form-control" value="#{hotelForm.hotel.rate}" validatorMessage="1-5 միջակայքում" converterMessage="1-5 միջակայքում">
-                                                                        <f:validateLength maximum="1"/>
-                                                                    </h:inputText>
+                                                                    <!--<h:inputText id="rateId" styleClass="form-control" value="#{hotelForm.hotel.rate}" validatorMessage="1-5 միջակայքում" converterMessage="1-5 միջակայքում">-->
+                                                                        <!--<f:validateLength maximum="1"/>-->
+                                                                    <!--</h:inputText>-->
+                                                                    <p:rating value="#{hotelForm.hotel.rate}" readonly="false" />
                                                                     <h:message for="rateId" style="color: red;" showDetail="false" showSummary="true"/>
                                                                 </div>
                                                                 <div class="col-sm-5">
@@ -437,8 +438,8 @@
                                                     </div>
 
                                                     <div class="de-btn-top">
-                                                        <h:commandLink  value="Պահպանել" styleClass="btn btn-fw primary"  action="#{hotelForm.save}" update="@form :hotelsListForm" >
-                                                        </h:commandLink>
+                                                        <p:commandButton ajax="false" value="Պահպանել" styleClass="btn btn-fw primary"  actionListener="#{hotelForm.save}" update="@form :hotelsListForm" >
+                                                        </p:commandButton>
                                                     </div>
                                                 </h:form>
                                             </h:panelGroup>
