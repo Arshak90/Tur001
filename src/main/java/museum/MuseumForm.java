@@ -125,6 +125,10 @@ public class MuseumForm implements Serializable, Form {
         this.reloadPage();
     }
 
+    public Integer total(){
+        return getRoot().getMuseumDao().getAll().size() ;
+    }
+
     private void reloadPage(){
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {

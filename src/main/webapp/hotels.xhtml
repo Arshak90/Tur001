@@ -244,7 +244,7 @@
                                             <span class="input-group-addon no-border no-bg"><i class="fa fa-search"></i></span>
                                             <h:selectOneMenu value="#{hotelForm.hotelTypeIdForFind}" styleClass="form-control" id="hotelTypeSelectId">
                                                 <f:selectItems value="#{hotelForm.hotelTypes}" var="hType" itemLabel="#{hType.name}" itemValue="#{hType.id}"/>
-                                                <f:ajax listener="#{hotelForm.changeHotelType}" render=":hotelsListForm"/>
+                                                <f:ajax listener="#{hotelForm.changeHotelType}" render=":hotelsListForm" />
                                             </h:selectOneMenu>
                                         </h:form>
                                     </div>
@@ -285,10 +285,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="p-a b-t text-center">
-                                    <h:form>
-                                        <p:commandLink  value="Ավելացնել նորը" styleClass="fa fa-plus fa-fw m-r-xs" style="width: 130px" action="#{hotelForm.addNew}" update=":formId"/>
-                                    </h:form>
+                                <div class="p-a b-t text-center" >
+                                    <div class="de-btn-top" style="margin-right: 131px">
+                                        <h:form>
+                                            <p:commandButton  value="Ավելացնել նորը" styleClass="btn btn-fw primary" action="#{hotelForm.addNew}" update=":formId"/>
+                                        </h:form>
+                                    </div>
+                                    <h:panelGroup layout="block" id="hotelTotalId">
+                                        <span>Ընդամենը : #{hotelForm.total()}</span><br/>
+                                        <span>Ընդանուր մահճակալների քանակը : #{hotelForm.totalBadCount()}</span>
+                                    </h:panelGroup>
                                 </div>
                             </div>
                         </div>
@@ -362,7 +368,7 @@
                                                                 <h:inputText styleClass="form-control" value="#{hotelForm.hotel.directorFullName}"/>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <h:outputLabel class="form-control-label">Փաստացի անվանում</h:outputLabel>
+                                                                <h:outputLabel class="form-control-label">Իրավաբանական անվանում</h:outputLabel>
                                                                 <h:inputText styleClass="form-control" value="#{hotelForm.hotel.legalName}"/>
                                                             </div>
                                                         </div>

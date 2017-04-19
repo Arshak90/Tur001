@@ -299,11 +299,12 @@
                                 </div>
                             </div>
                             <div class="p-a b-t text-center">
-                                <h:form>
-                                    <p:commandLink value="Ավելացնել նորը" styleClass="fa fa-plus fa-fw m-r-xs"
-                                                   style="width: 130px" action="#{restaurantForm.addNew}"
-                                                   update=":formId"/>
-                                </h:form>
+                                <div class="de-btn-top" style="margin-right: 131px">
+                                    <h:form>
+                                        <p:commandLink  value="Ավելացնել նորը" styleClass="btn btn-fw primary" action="#{restaurantForm.addNew}" update=":formId"/>
+                                    </h:form>
+                                </div>
+                                <span>Ընդամենը : #{restaurantForm.total()}</span>
                             </div>
                         </div>
                     </div>
@@ -342,6 +343,17 @@
                                                                 <h:message for="image-upload" id="messages"
                                                                            style="color: red;"/>
 
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <h:outputLabel
+                                                                        class="form-control-label">Նստատեղերի քանակը</h:outputLabel>
+                                                                <h:inputText styleClass="form-control"
+                                                                             value="#{restaurantForm.restaurant.seatsCount}" id="seatsCountId" converterMessage="*թիվ"/>
+                                                                <h:message for="seatsCountId" style="color: red;" showDetail="false" showSummary="true"/>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <h:outputLabel class="form-control-label">1-5 աստղ</h:outputLabel>
+                                                                <p:rating value="#{restaurantForm.restaurant.rate}" readonly="false" />
                                                             </div>
                                                         </div>
                                                     </div>

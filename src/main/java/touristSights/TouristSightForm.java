@@ -99,6 +99,10 @@ public class TouristSightForm implements Serializable, Form {
         this.reloadPage();
     }
 
+    public Integer total(){
+        return getRoot().getTouristSightDao().getAll().size() ;
+    }
+
     private void reloadPage(){
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {

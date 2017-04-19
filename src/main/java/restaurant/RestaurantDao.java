@@ -32,6 +32,8 @@ public class RestaurantDao implements Dao<Restaurant> {
                 restaurant.setEmail(res.getString("email"));
                 restaurant.setSite(res.getString("site"));
                 restaurant.setLegalName(res.getString("legalName"));
+                restaurant.setRate(res.getInt("rate"));
+                restaurant.setSeatsCount(res.getInt("seatsCount"));
                 restaurants.add(restaurant);
             }
         }catch (SQLException e) {
@@ -66,6 +68,8 @@ public class RestaurantDao implements Dao<Restaurant> {
                 restaurant.setEmail(rs.getString("email"));
                 restaurant.setSite(rs.getString("site"));
                 restaurant.setLegalName(rs.getString("legalName"));
+                restaurant.setRate(rs.getInt("rate"));
+                restaurant.setSeatsCount(rs.getInt("seatsCount"));
 
                 return restaurant;
             }
@@ -85,7 +89,7 @@ public class RestaurantDao implements Dao<Restaurant> {
     @Override
     public boolean update(Restaurant item) {
         String sql = "UPDATE Restaurant SET name = ?, address = ?, phoneNumber = ?, mobilePhoneNumber = ?, photoWay = ?," +
-                " email=?,site=?,legalName=? WHERE id = ?";
+                " email=?,site=?,legalName=?,rate=?,seatsCount=? WHERE id = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -99,7 +103,9 @@ public class RestaurantDao implements Dao<Restaurant> {
             pstmt.setString(6, item.getEmail());
             pstmt.setString(7, item.getSite());
             pstmt.setString(8, item.getLegalName());
-            pstmt.setInt(9, item.getId());
+            pstmt.setInt(9, (item.getRate()==null)? 0 : item.getRate());
+            pstmt.setInt(10, (item.getSeatsCount()==null)? 0 : item.getSeatsCount());
+            pstmt.setInt(11, item.getId());
 
 
             // update
@@ -115,7 +121,7 @@ public class RestaurantDao implements Dao<Restaurant> {
     @Override
     public boolean insert(Restaurant item) {
         String sql = "INSERT INTO Restaurant(name,address,phoneNumber,mobilePhoneNumber," +
-                "photoWay,email,site,legalName) VALUES (?,?,?,?,?,?,?,?)";
+                "photoWay,email,site,legalName,rate,seatsCount) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -127,6 +133,8 @@ public class RestaurantDao implements Dao<Restaurant> {
             pstmt.setString(6, item.getEmail());
             pstmt.setString(7, item.getSite());
             pstmt.setString(8, item.getLegalName());
+            pstmt.setInt(9, (item.getRate()==null)? 0 : item.getRate());
+            pstmt.setInt(10, (item.getSeatsCount()==null)? 0 : item.getSeatsCount());
             pstmt.executeUpdate();
 
             return true;

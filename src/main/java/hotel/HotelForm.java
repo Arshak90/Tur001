@@ -4,6 +4,7 @@ import Core.FileUpload;
 import Core.Interface.Form;
 import Core.Root;
 import Core.Util;
+import org.primefaces.context.RequestContext;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -14,9 +15,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * Created by arshak.askaryan on 1/25/2017.
@@ -84,7 +87,7 @@ public class HotelForm implements Form, Serializable {
         if (this.hotelsWithType == null) {
             this.hotelsWithType = getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind);
         }
-        return hotelsWithType;
+        return hotelsWithType.stream().sorted(Comparator.comparing(Hotel::getRate).reversed()).collect(Collectors.toList());
     }
 
     public void setHotelsWithType(List<Hotel> hotelsWithType) {
@@ -134,6 +137,18 @@ public class HotelForm implements Form, Serializable {
 
     }
 
+    public Integer total(){
+        return getRoot().getHotelDao().getHotelsByTypeId(this.getHotelTypeIdForFind()).size() ;
+    }
+
+    public Integer totalBadCount(){
+        Integer count =0;
+        for (Hotel item:getRoot().getHotelDao().getHotelsByTypeId(this.getHotelTypeIdForFind())) {
+            count += item.getBedCount();
+        }
+        return count;
+    }
+
     private void reloadPage(){
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {
@@ -172,6 +187,9 @@ public class HotelForm implements Form, Serializable {
 
     public void changeHotelType() {
         this.hotelsWithType = getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind);
+        this.total();
+        RequestContext.getCurrentInstance().update("hotelTotalId");
+        RequestContext.getCurrentInstance().execute("reload_js('scripts/app.js')");
 //        this.hotelsWithType.clear();
 //        this.hotelsWithType.addAll(getRoot().getHotelDao().getHotelsByTypeId(this.hotelTypeIdForFind));
     }

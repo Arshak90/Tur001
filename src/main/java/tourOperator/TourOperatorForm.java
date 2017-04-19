@@ -126,6 +126,10 @@ public class TourOperatorForm implements Serializable, Form {
         this.reloadPage();
     }
 
+    public Integer total(){
+        return getRoot().getTourOperatorDao().getAll().size() ;
+    }
+
     private void reloadPage(){
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {

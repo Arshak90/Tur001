@@ -13,6 +13,8 @@ public class Restaurant {
     private String email;
     private String site;
     private String legalName;
+    private Integer rate;
+    private Integer seatsCount;
 
     public Integer getId() {
         return id;
@@ -84,5 +86,21 @@ public class Restaurant {
 
     public void setLegalName(String legalName) {
         this.legalName = legalName;
+    }
+
+    public Integer getSeatsCount() {
+        return seatsCount;
+    }
+
+    public void setSeatsCount(Integer seatsCount) {
+        this.seatsCount = seatsCount;
+    }
+
+    public Integer getRate() {
+        return rate;
+    }
+
+    public void setRate(Integer rate) {
+        this.rate = rate;
     }
 }

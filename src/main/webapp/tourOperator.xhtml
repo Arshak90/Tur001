@@ -299,11 +299,12 @@
                                 </div>
                             </div>
                             <div class="p-a b-t text-center">
-                                <h:form>
-                                    <p:commandLink value="Ավելացնել նորը" styleClass="fa fa-plus fa-fw m-r-xs"
-                                                   style="width: 130px" action="#{tourOperatorForm.addNew}"
-                                                   update=":formId"/>
-                                </h:form>
+                                <div class="de-btn-top" style="margin-right: 131px">
+                                    <h:form>
+                                        <p:commandLink  value="Ավելացնել նորը" styleClass="btn btn-fw primary" action="#{tourOperatorForm.addNew}" update=":formId"/>
+                                    </h:form>
+                                </div>
+                                <span>Ընդամենը : #{tourOperatorForm.total()}</span>
                             </div>
                         </div>
                     </div>

@@ -299,11 +299,12 @@
                                 </div>
                             </div>
                             <div class="p-a b-t text-center">
-                                <h:form>
-                                    <p:commandLink value="Ավելացնել նորը" styleClass="fa fa-plus fa-fw m-r-xs"
-                                                   style="width: 130px" action="#{museumForm.addNew}"
-                                                   update=":formId"/>
-                                </h:form>
+                                <div class="de-btn-top" style="margin-right: 131px">
+                                    <h:form>
+                                        <p:commandButton  value="Ավելացնել նորը" styleClass="btn btn-fw primary" action="#{museumForm.addNew}" update=":formId"/>
+                                    </h:form>
+                                </div>
+                                <span>Ընդամենը : #{museumForm.total()}</span>
                             </div>
                         </div>
                     </div>
@@ -409,11 +410,11 @@
 
                                                 </div>
                                                 <div class="de-btn-top">
-                                                    <h:commandLink value="Պահպանել" styleClass="btn btn-fw primary"
-                                                                   action="#{museumForm.save}"
+                                                    <h:commandButton value="Պահպանել" styleClass="btn btn-fw primary"
+                                                                     actionListener="#{museumForm.save}"
                                                                    update="@form :museumsListForm">
 
-                                                    </h:commandLink>
+                                                    </h:commandButton>
                                                 </div>
                                             </h:form>
                                         </h:panelGroup>

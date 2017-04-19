@@ -14,8 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * Created by gev on 19.02.2017.
@@ -38,7 +40,7 @@ public class RestaurantForm implements Serializable, Form {
         if (this.restaurants == null) {
             this.restaurants = getRoot().getRestaurantDao().getAll();
         }
-        return restaurants;
+        return restaurants.stream().sorted(Comparator.comparing(Restaurant::getRate).reversed()).collect(Collectors.toList());
     }
 
     public void setRestaurants(List<Restaurant> restaurants) {
@@ -123,6 +125,10 @@ public class RestaurantForm implements Serializable, Form {
         }
         this.restaurants = null;
         this.reloadPage();
+    }
+
+    public Integer total(){
+        return getRoot().getRestaurantDao().getAll().size() ;
     }
 
     private void reloadPage(){
