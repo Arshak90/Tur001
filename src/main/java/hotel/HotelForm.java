@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -181,7 +182,7 @@ public class HotelForm implements Form, Serializable {
     }
 
     public void delete(Integer id) {
-        if (this.getHotel().getId().equals(id)) {
+        if (Objects.equals(this.getHotel().getId(),id)) {
             this.hotel = new Hotel();
         }
         this.hotelsWithType = null;
