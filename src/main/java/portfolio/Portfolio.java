@@ -32,6 +32,14 @@ public class Portfolio {
   private BigDecimal program5;
   private BigDecimal program6;
   private BigDecimal total;
+  private BigDecimal financeArm;
+  private BigDecimal financeForeign;
+  private BigDecimal totalFinanceArm;
+  private BigDecimal totalFinanceForeign;
+  private Integer icStepanakert;
+  private Integer icShushi;
+  private Integer icTigranakert;
+  private Integer icTsaxkashat;
 
 
   public Integer getId() {
@@ -51,6 +59,7 @@ public class Portfolio {
   }
 
   public Integer getTotaltouristcount() {
+    this.totaltouristcount = armtouristcount + othertouristcount;
     return totaltouristcount;
   }
 
@@ -75,6 +84,7 @@ public class Portfolio {
   }
 
   public BigDecimal getFinances() {
+    finances = totalFinanceArm.add(totalFinanceForeign);
     return finances;
   }
 
@@ -236,6 +246,72 @@ public class Portfolio {
 
   public void setTotal(BigDecimal total) {
     this.total = total;
+  }
+
+  public BigDecimal getFinanceArm() {
+    return financeArm;
+  }
+
+  public void setFinanceArm(BigDecimal financeArm) {
+    this.financeArm = financeArm;
+  }
+
+  public BigDecimal getFinanceForeign() {
+    return financeForeign;
+  }
+
+  public void setFinanceForeign(BigDecimal financeForeign) {
+    this.financeForeign = financeForeign;
+  }
+
+  public BigDecimal getTotalFinanceArm() {
+    totalFinanceArm = financeArm.multiply(new BigDecimal(armtouristcount));
+    return totalFinanceArm;
+  }
+
+  public void setTotalFinanceArm(BigDecimal totalFinanceArm) {
+    this.totalFinanceArm = totalFinanceArm;
+  }
+
+  public BigDecimal getTotalFinanceForeign() {
+    totalFinanceForeign = financeForeign.multiply(new BigDecimal(othertouristcount));
+    return totalFinanceForeign;
+  }
+
+  public void setTotalFinanceForeign(BigDecimal totalFinanceForeign) {
+    this.totalFinanceForeign = totalFinanceForeign;
+  }
+
+  public Integer getIcStepanakert() {
+    return icStepanakert;
+  }
+
+  public void setIcStepanakert(Integer icStepanakert) {
+    this.icStepanakert = icStepanakert;
+  }
+
+  public Integer getIcShushi() {
+    return icShushi;
+  }
+
+  public void setIcShushi(Integer icShushi) {
+    this.icShushi = icShushi;
+  }
+
+  public Integer getIcTigranakert() {
+    return icTigranakert;
+  }
+
+  public void setIcTigranakert(Integer icTigranakert) {
+    this.icTigranakert = icTigranakert;
+  }
+
+  public Integer getIcTsaxkashat() {
+    return icTsaxkashat;
+  }
+
+  public void setIcTsaxkashat(Integer icTsaxkashat) {
+    this.icTsaxkashat = icTsaxkashat;
   }
 
   public String getTotal() {

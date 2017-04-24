@@ -4,10 +4,15 @@ import Core.Models.Month;
 
 import javax.el.ELContext;
 import javax.faces.context.FacesContext;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Created by arshak.askaryan on 1/26/2017.
@@ -69,5 +74,27 @@ public class Util {
         doubleMap.put(11,0);
         doubleMap.put(12,0);
         return doubleMap;
+    }
+
+    public static void logMessage(String s){
+        Logger logger = Logger.getLogger("MyLog");
+        FileHandler fh;
+
+        try {
+
+            // This block configure the logger with handler and formatter
+            fh = new FileHandler("C:/log/MyLogFile.log");
+            logger.addHandler(fh);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+
+            // the following statement is used to log any messages
+            logger.info(s);
+
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

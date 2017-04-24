@@ -5,6 +5,7 @@ import Core.Root;
 import Core.Util;
 import portfolio.Portfolio;
 import portfolio.Portfoliocountry;
+import portfolio.Yearlyinforamtion;
 
 import javax.mail.internet.InternetAddress;
 import java.io.IOException;
@@ -281,7 +282,12 @@ public class DashboardForm {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Util.logMessage(String.valueOf(thisIp.getHostAddress()));
+//        return prop.getProperty(String.valueOf(thisIp.getHostAddress())) != null ? true : false;
+        return true;
+    }
 
-        return prop.getProperty(String.valueOf(thisIp.getHostAddress())) != null ? true : false;
+    public Yearlyinforamtion getYearlyinforamtion (){
+        return getRoot().getPortfolioDao().getYearlyinforamtions().stream().filter(x-> x.getYearId().equals(currentDate.getYear())).findFirst().get();
     }
 }

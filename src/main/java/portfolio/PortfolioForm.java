@@ -346,7 +346,7 @@ public class PortfolioForm {
     }
 
     public List<Transportsyear> getTransportsyears() {
-        return this.getRoot().getPortfolioDao().getTransportsyearByYear(Integer.parseInt(this.selectedYear));
+        return this.getRoot().getPortfolioDao().getTransportsyearByYear(getSelectedPortfolio().getId());
     }
 
     public void setTransportsyears(List<Transportsyear> transportsyears) {
@@ -359,7 +359,7 @@ public class PortfolioForm {
 
     public void addTransportsyear(){
         if(getTransportsyear().getTransportid() != null && getTransportsyear().getCountnumber() != null){
-            getTransportsyear().setYearId(Integer.parseInt(getSelectedYear()));
+            getTransportsyear().setYearId(getSelectedPortfolio().getId());
             getRoot().getPortfolioDao().insertTransportsyear(getTransportsyear());
             this.transportsyear = new Transportsyear();
         }
@@ -459,5 +459,14 @@ public class PortfolioForm {
 
     public void setTotalBalance(BigDecimal totalBalance) {
         this.totalBalance = totalBalance;
+    }
+
+    public BigDecimal getTotalFinances() {
+        BigDecimal totalFinances = BigDecimal.ZERO;
+        for(Portfolio portfolio: getPortfolios()){
+            totalFinances = totalFinances.add(portfolio.getTotalFinanceArm()).add(portfolio.getTotalFinanceForeign());
+        }
+
+        return totalFinances.divide(yearlyinforamtion.getGdp()).multiply(new BigDecimal(100));
     }
 }

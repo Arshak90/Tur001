@@ -47,6 +47,14 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfolio.setProgram4(rs.getBigDecimal("program4"));
                 portfolio.setProgram5(rs.getBigDecimal("program5"));
                 portfolio.setProgram6(rs.getBigDecimal("program6"));
+                portfolio.setFinanceArm(rs.getBigDecimal("financeArm"));
+                portfolio.setFinanceForeign(rs.getBigDecimal("financeForeign"));
+                portfolio.setTotalFinanceArm(rs.getBigDecimal("totalFinanceArm"));
+                portfolio.setTotalFinanceForeign(rs.getBigDecimal("totalFinanceForeign"));
+                portfolio.setIcStepanakert(rs.getInt("icStepanakert"));
+                portfolio.setIcShushi(rs.getInt("icShushi"));
+                portfolio.setIcTigranakert(rs.getInt("icTigranakert"));
+                portfolio.setIcTsaxkashat(rs.getInt("icTsaxkashat"));
 
                 portfolios.add(portfolio);
             }
@@ -96,6 +104,14 @@ public class PortfolioDao implements Dao<Portfolio>{
                 portfolio.setProgram4(rs.getBigDecimal("program4"));
                 portfolio.setProgram5(rs.getBigDecimal("program5"));
                 portfolio.setProgram6(rs.getBigDecimal("program6"));
+                portfolio.setFinanceArm(rs.getBigDecimal("financeArm"));
+                portfolio.setFinanceForeign(rs.getBigDecimal("financeForeign"));
+                portfolio.setTotalFinanceArm(rs.getBigDecimal("totalFinanceArm"));
+                portfolio.setTotalFinanceForeign(rs.getBigDecimal("totalFinanceForeign"));
+                portfolio.setIcStepanakert(rs.getInt("icStepanakert"));
+                portfolio.setIcShushi(rs.getInt("icShushi"));
+                portfolio.setIcTigranakert(rs.getInt("icTigranakert"));
+                portfolio.setIcTsaxkashat(rs.getInt("icTsaxkashat"));
 
                 return portfolio;
             }
@@ -115,7 +131,7 @@ public class PortfolioDao implements Dao<Portfolio>{
     @Override
     public boolean insert(Portfolio item) {
         String sql = "INSERT INTO Portfolio(quarter,totaltouristcount,armtouristcount,othertouristcount,finances,ictouristcount,icmalecount," +
-                "icfemalecount,icvisitdecription,socialpackagecount,column_12,istouroperator,age15,age30,age50,age51,year,program1,program2,program3,program4,program5,program6) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "icfemalecount,icvisitdecription,socialpackagecount,column_12,istouroperator,age15,age30,age50,age51,year,program1,program2,program3,program4,program5,program6,financeArm,financeForeign,totalFinanceArm,totalFinanceForeign,icStepanakert,icShushi,icTigranakert,icTsaxkashat) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -143,6 +159,14 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setBigDecimal(21, item.getProgram4());
             pstmt.setBigDecimal(22, item.getProgram5());
             pstmt.setBigDecimal(23, item.getProgram6());
+            pstmt.setBigDecimal(24, item.getFinanceArm());
+            pstmt.setBigDecimal(25, item.getFinanceForeign());
+            pstmt.setBigDecimal(26, item.getTotalFinanceArm());
+            pstmt.setBigDecimal(27, item.getTotalFinanceForeign());
+            pstmt.setInt(28, item.getIcStepanakert());
+            pstmt.setInt(29, item.getIcShushi());
+            pstmt.setInt(30, item.getIcTigranakert());
+            pstmt.setInt(31, item.getIcTsaxkashat());
 
 
             pstmt.executeUpdate();
@@ -158,7 +182,7 @@ public class PortfolioDao implements Dao<Portfolio>{
     public boolean update(Portfolio item) {
         String sql = "UPDATE Portfolio SET quarter = ?, totaltouristcount = ?, armtouristcount = ?, othertouristcount = ?, finances = ?," +
                 " ictouristcount = ?, icmalecount = ?, icfemalecount = ?, icvisitdecription = ?, socialpackagecount = ?, column_12 = ?," +
-                " istouroperator = ?, age15=?,age30=?,age50=?,age51=?,year=?, program1=?, program2 =?, program3 =?, program4 =? , program5 =?, program6 =? WHERE id = ?";
+                " istouroperator = ?, age15=?,age30=?,age50=?,age51=?,year=?, program1=?, program2 =?, program3 =?, program4 =? , program5 =?, program6 =?, financeArm =?, financeForeign =?, totalFinanceArm =?, totalFinanceForeign =?, icStepanakert =? ,icShushi =?, icTigranakert =?, icTsaxkashat =? WHERE id = ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -185,7 +209,15 @@ public class PortfolioDao implements Dao<Portfolio>{
             pstmt.setBigDecimal(21, item.getProgram4());
             pstmt.setBigDecimal(22, item.getProgram5());
             pstmt.setBigDecimal(23, item.getProgram6());
-            pstmt.setInt(24, item.getId());
+            pstmt.setBigDecimal(24, item.getFinanceArm());
+            pstmt.setBigDecimal(25, item.getFinanceForeign());
+            pstmt.setBigDecimal(26, item.getTotalFinanceArm());
+            pstmt.setBigDecimal(27, item.getTotalFinanceForeign());
+            pstmt.setInt(28, item.getIcStepanakert());
+            pstmt.setInt(29, item.getIcShushi());
+            pstmt.setInt(30, item.getIcTigranakert());
+            pstmt.setInt(31, item.getIcTsaxkashat());
+            pstmt.setInt(32, item.getId());
 
             pstmt.executeUpdate();
             return true;
@@ -568,7 +600,7 @@ public class PortfolioDao implements Dao<Portfolio>{
 
     public List<Transportsyear> getTransportsyearByYear(Integer year){
 
-        String sql = "SELECT * FROM TransportsYear WHERE yearId = ?";
+        String sql = "SELECT * FROM TransportsYear WHERE portfolioId = ?";
         ResultSet rs = null;
         List<Transportsyear> transportsyears = new ArrayList<>();
         try (Connection conn = this.connect();
@@ -582,7 +614,7 @@ public class PortfolioDao implements Dao<Portfolio>{
             while ( rs.next() ) {
                 Transportsyear transportsyear = new Transportsyear();
                 transportsyear.setId(rs.getInt("id"));
-                transportsyear.setYearId(rs.getInt("yearId"));
+                transportsyear.setYearId(rs.getInt("portfolioId"));
                 transportsyear.setTransportid(rs.getInt("transportId"));
                 transportsyear.setCountnumber(rs.getInt("countNumber"));
                 transportsyears.add(transportsyear);
@@ -617,7 +649,7 @@ public class PortfolioDao implements Dao<Portfolio>{
     }
 
     public boolean insertTransportsyear(Transportsyear transportsyear) {
-        String sql = "INSERT INTO TransportsYear(yearId,transportId,countNumber) VALUES (?,?,?)";
+        String sql = "INSERT INTO TransportsYear(portfolioId,transportId,countNumber) VALUES (?,?,?)";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
