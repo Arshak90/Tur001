@@ -253,7 +253,9 @@
                                             <h:panelGroup layout="block" rendered="#{portfolioForm.selectedYear != null}">
                                                 <div class="col-xs-12 col-sm-6 col-md-3 form-group">
                                                     <p:outputLabel for="yearlyinforamtionGdpId" value="ՀՆԱ" styleClass="form-control-label"/>
-                                                    <p:inputNumber id="yearlyinforamtionGdpId" styleClass="" value="#{portfolioForm.yearlyinforamtion.gdp}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s"></p:inputNumber>
+                                                    <p:inputNumber id="yearlyinforamtionGdpId" styleClass="" value="#{portfolioForm.yearlyinforamtion.gdp}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                        <p:ajax event="change" update="yearlyinforamtionGdpPercentId" process="@this"></p:ajax>
+                                                    </p:inputNumber>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6 col-md-3 form-group">
                                                     <p:outputLabel for="yearlyinforamtionGdpPercentId" value="Ընդհանուր տուրիզմի տեսակարար կշիռը" styleClass="form-control-label"/>

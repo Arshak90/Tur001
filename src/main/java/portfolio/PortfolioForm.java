@@ -14,6 +14,8 @@ import org.primefaces.event.RowEditEvent;
 
 import javax.faces.application.FacesMessage;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
@@ -466,7 +468,6 @@ public class PortfolioForm {
         for(Portfolio portfolio: getPortfolios()){
             totalFinances = totalFinances.add(portfolio.getTotalFinanceArm()).add(portfolio.getTotalFinanceForeign());
         }
-
-        return totalFinances.divide(yearlyinforamtion.getGdp()).multiply(new BigDecimal(100));
+        return yearlyinforamtion.getGdp() != null ? totalFinances.divide(yearlyinforamtion.getGdp(), 4,  RoundingMode.CEILING).multiply(new BigDecimal(100)): new BigDecimal(0);
     }
 }
