@@ -703,6 +703,32 @@ public class PortfolioDao implements Dao<Portfolio>{
         return null;
     }
 
+    public List<Portfoliohotels> getPortfoliohotels(){
+
+        List<Portfoliohotels> portfoliohoteles = new ArrayList<>();
+        String sql = "SELECT * FROM PortfolioHotels";
+
+        try(Connection conn = this.connect();
+            Statement stat = conn.createStatement();
+            ResultSet res = stat.executeQuery(sql)) {
+
+            while ( res.next() ){
+                Portfoliohotels portfoliohotels = new Portfoliohotels();
+                portfoliohotels.setId(res.getInt("id"));
+                portfoliohotels.setPortfolioid(res.getInt("portfolioId"));
+                portfoliohotels.setHotelid(res.getInt("hotelId"));
+                portfoliohotels.setFinance(res.getDouble("finance"));
+                portfoliohotels.setTotaltouristcount(res.getInt("totalTouristCount"));
+                portfoliohoteles.add(portfoliohotels);
+            }
+        }catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return portfoliohoteles;
+    }
+
     public boolean deletePortfoliohotels(Integer id){
         String sql = "DELETE FROM PortfolioHotels WHERE id = ?";
 

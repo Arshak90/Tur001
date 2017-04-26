@@ -42,7 +42,12 @@
 
 </h:head>
 <h:body>
-
+    <style>
+        .ui-growl {
+            right: 30px;
+            top: 15%;
+        }
+    </style>
     <div class="app" id="app">
         <!-- ############ LAYOUT START-->
 
@@ -230,8 +235,13 @@
                     <h:panelGroup id="savePanelId" layout="block" class="app-header white box-shadow">
                         <div class="float-right">
                             <p:commandButton actionListener="#{portfolioForm.updatetYearlyinforamtion}"
-                                             value="Պահպանել" rendered="#{portfolioForm.selectedPortfolio == null}" style="margin: 9px 24px;"></p:commandButton>
+                                             value="Պահպանել" rendered="#{portfolioForm.selectedPortfolio == null}" style="margin: 9px 24px;" update="growl"></p:commandButton>
                         </div>
+                        <div style="margin-top: 50px;" id="growId">
+                            <p:growl id="growl" sticky="false" />
+                        </div>
+
+
                     </h:panelGroup>
                     <div class="app-body">
                         <div class="padding">
@@ -858,7 +868,7 @@
                                                     <div class="clear"></div>
                                                     <div class="de-btn-top">
                                                         <p:commandLink styleClass="btn btn-fw primary" style="margin-right: 15px"
-                                                                       actionListener="#{portfolioForm.save}" update="table2" value="Պահպանել"
+                                                                       actionListener="#{portfolioForm.save}" update="table2 growl" value="Պահպանել"
                                                                        rendered="#{portfolioForm.selectedPortfolio != null}"></p:commandLink>
                                                         <p:commandLink styleClass="btn btn-fw dark" actionListener="#{portfolioForm.cancel}"
                                                                        process="panelGroupView" update="@form" value="Փակել"

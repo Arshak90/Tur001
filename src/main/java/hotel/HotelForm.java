@@ -5,6 +5,7 @@ import Core.Interface.Form;
 import Core.Root;
 import Core.Util;
 import org.primefaces.context.RequestContext;
+import portfolio.Portfoliohotels;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -206,6 +207,11 @@ public class HotelForm implements Form, Serializable {
         this.hotelsWithType = null;
         if (deleteOldFile(id)) {
             if (this.getRoot().getHotelDao().delete(id)) {
+                for(Portfoliohotels portfoliohotels: getRoot().getPortfolioDao().getPortfoliohotels()){
+                    if(portfoliohotels.getHotelid().equals(id)){
+                        this.getRoot().getPortfolioDao().deletePortfoliohotels(portfoliohotels.getId());
+                    }
+                }
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 FacesMessage facesMessage = new FacesMessage("Հաջողությամբ ջնջվել է");
                 facesContext.addMessage(null, facesMessage);

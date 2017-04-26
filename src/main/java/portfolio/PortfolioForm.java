@@ -13,6 +13,7 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -147,6 +148,8 @@ public class PortfolioForm {
             logger.info("Saved successfully " + selectedPortfolio.toString());
             RequestContext.getCurrentInstance().update("panelGroupView");
             Util.getBean("HomeForm", HomeForm.class).setJson(null);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Տվյալները հաջողությամբ պահպանվել են",  "Your message: " ) );
         }else{
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Սխալ", "ՀՀ զբոսաշրջիկների թիվի և Արտերկրյա զբոսաշրջիկների թիվի գումարը պիտի հավասար լինի Ընդհանուր զբոսաշրջիկների թիվին");
 
@@ -254,6 +257,8 @@ public class PortfolioForm {
 
     public void updatetYearlyinforamtion(){
         getRoot().getPortfolioDao().updateYearlyinforamtion(yearlyinforamtion);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Տվյալները հաջողությամբ պահպանվել են",  "Your message: " ) );
     }
 
     public Yearlyinforamtion getYearlyinforamtion() {
