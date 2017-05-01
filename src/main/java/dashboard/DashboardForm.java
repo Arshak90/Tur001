@@ -282,7 +282,7 @@ public class DashboardForm {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Util.logMessage(String.valueOf(thisIp.getHostAddress()));
+//        Util.logMessage(String.valueOf(thisIp.getHostAddress()));
 //        return prop.getProperty(String.valueOf(thisIp.getHostAddress())) != null ? true : false;
         return true;
     }
