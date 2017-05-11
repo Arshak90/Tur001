@@ -247,10 +247,11 @@
                         <div class="padding">
                             <div class="box form-border">
                                 <div class="box-body">
-                                    <div class="col-xs-12">
-                                        <h2 class="de-title">Բաժնի անուն</h2>
-                                    </div>
                                     <h:panelGroup id="yearlyPanelId" rendered="#{portfolioForm.selectedPortfolio == null}">
+
+                                        <div class="col-xs-12">
+                                            <h2 class="de-title">Տարվա տվյալներ</h2>
+                                        </div>
                                         <div class="col-xs-12 col-sm-6 col-md-3 form-group">
                                             <p:selectOneMenu id="portfolioYear" value="#{portfolioForm.selectedYear}" style="width:125px" styleClass="form-control input-c">
                                                 <f:selectItem itemLabel="Ընտրիր մեկը" itemValue="" />
@@ -437,17 +438,17 @@
                                                     <h2 class="de-title">Ընդամենը</h2>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6 col-md-6">
-                                                    <p:outputLabel for="totalProgramsId" value="նախատեսված" styleClass="form-control-label"/>
+                                                    <p:outputLabel for="totalProgramsId" value="Նախատեսված" styleClass="form-control-label"/>
                                                     <h:outputText id="totalProgramsId" value="  #{portfolioForm.yearlyinforamtion.total} դրամ">
                                                     </h:outputText>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6 col-md-3">
-                                                    <p:outputLabel for="totalSpentProgramsId" value="ծախսված" styleClass="form-control-label"/>
+                                                    <p:outputLabel for="totalSpentProgramsId" value="Ծախսված" styleClass="form-control-label"/>
                                                     <h:outputText id="totalSpentProgramsId" value="  #{portfolioForm.totalSpent} դրամ">
                                                     </h:outputText>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6 col-md-3">
-                                                    <p:outputLabel for="totalBalanceProgramsId" value="մնացորդ" styleClass="form-control-label"/>
+                                                    <p:outputLabel for="totalBalanceProgramsId" value="Մնացորդ" styleClass="form-control-label"/>
                                                     <h:outputText id="totalBalanceProgramsId" value="  #{portfolioForm.totalBalance} դրամ">
                                                     </h:outputText>
                                                 </div>
@@ -490,6 +491,9 @@
                                         <div class="clear"></div>
                                             <h:panelGroup id="panelGroupView" >
                                                 <h:panelGroup rendered="#{portfolioForm.selectedPortfolio != null}">
+                                                    <div class="col-xs-12">
+                                                        <h2 class="de-title">Եռամսյակի տվյալներ</h2>
+                                                    </div>
                                                     <div class="col-xs-12 col-sm-6 col-md-3 form-group">
                                                         <p:outputLabel for="armtouristcountId" value="ՀՀ զբոսաշրջիկների թիվը" styleClass="form-control-label"/>
                                                         <p:inputNumber id="armtouristcountId" value="#{portfolioForm.selectedPortfolio.armtouristcount}" decimalPlaces="0">
@@ -741,49 +745,167 @@
                                                     </h:panelGroup>
                                                     <h:panelGroup layout="block" rendered="#{portfolioForm.selectedPortfolio != null}">
                                                         <div class="col-xs-12">
-                                                            <h2 class="de-title">Տարվա ծրագիր</h2>
+                                                            <h2 class="de-title">Եռամսյակի ծրագիր</h2>
                                                         </div>
-                                                        <div class="col-xs-12 form-group">
-                                                            <p:outputLabel for="program1Id" value="Հայաստանի Հանրապետությունում տեղի ունեցող միջոցառումներին ԼՂՀ  մասնակցության ծախսեր" styleClass="form-control-label"/>
-                                                            <p:inputNumber styleClass="prog-input" id="program1Id" value="#{portfolioForm.selectedPortfolio.program1}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
-                                                                <p:ajax event="change" update="totalQuarterProgramsId"></p:ajax>
-                                                            </p:inputNumber>
-                                                        </div>
-                                                        <div class="col-xs-12 form-group">
-                                                            <p:outputLabel for="program2Id" value="Զբոսաշրջագրավչության օբյեկտները բազմալեզու տեղեկատվական ցուցանակներով ապահովում" styleClass="form-control-label"/>
-                                                            <p:inputNumber styleClass="prog-input" id="program2Id" value="#{portfolioForm.selectedPortfolio.program2}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
-                                                                <p:ajax event="change" update="totalQuarterProgramsId"></p:ajax>
-                                                            </p:inputNumber>
-                                                        </div>
-                                                        <div class="col-xs-12 form-group">
-                                                            <p:outputLabel for="program3Id" value="Էլեկտրոնային քարոզչություն" styleClass="form-control-label"/>
-                                                            <p:inputNumber styleClass="prog-input" id="program3Id" value="#{portfolioForm.selectedPortfolio.program3}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
-                                                                <p:ajax event="change" update="totalQuarterProgramsId"></p:ajax>
-                                                            </p:inputNumber>
-                                                        </div>
-                                                        <div class="col-xs-12 form-group">
-                                                            <p:outputLabel for="program4Id" value="Քարոզչական աշխատանքների իրականացում" styleClass="form-control-label"/>
-                                                            <p:inputNumber styleClass="prog-input" id="program4Id" value="#{portfolioForm.selectedPortfolio.program4}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
-                                                                <p:ajax event="change" update="totalQuarterProgramsId"></p:ajax>
-                                                            </p:inputNumber>
-                                                        </div>
-                                                        <div class="col-xs-12 form-group">
-                                                            <p:outputLabel for="program5Id" value="Փառատոնների կազմակերպում" styleClass="form-control-label"/>
-                                                            <p:inputNumber styleClass="prog-input" id="program5Id" value="#{portfolioForm.selectedPortfolio.program5}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
-                                                                <p:ajax event="change" update="totalQuarterProgramsId"></p:ajax>
-                                                            </p:inputNumber>
-                                                        </div>
-                                                        <div class="col-xs-12 form-group">
-                                                            <p:outputLabel for="program6Id" value="Միջազգային կազմակերպություններում ԼՂՀ մասնակցության հետ կապված  անդամավճարներ" styleClass="form-control-label"/>
-                                                            <p:inputNumber styleClass="prog-input" id="program6Id" value="#{portfolioForm.selectedPortfolio.program6}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
-                                                                <p:ajax event="change" update="totalQuarterProgramsId"></p:ajax>
-                                                            </p:inputNumber>
-                                                        </div>
-                                                        <div class="col-xs-12 form-group">
-                                                            <p:outputLabel for="totalQuarterProgramsId" value="Ընդամենը" styleClass="form-control-label"/>
-                                                            <h:outputText id="totalQuarterProgramsId" value="  #{portfolioForm.selectedPortfolio.total} դրամ">
-                                                            </h:outputText>
-                                                        </div>
+                                                        <h:panelGroup layout="block" rendered="#{portfolioForm.selectedYear != null}">
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <p:outputLabel for="yearlyinforamtionProgram1Id" value="ՀՀ-ում տեղի ունեցող միջոցառումներին ԼՂՀ  մասնակցության ծախսեր" styleClass="fw-600"/>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                                                                <p:outputLabel for="program1Id" value="Նախատեսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber styleClass="prog-input" id="program1Id" value="#{portfolioForm.selectedPortfolio.providedProgram1}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance11Id totalQuarterBalanceProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="program11Id" value="Ծախսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="program11Id"  value="#{portfolioForm.selectedPortfolio.program1}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance11Id totalQuarterSpentProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="programBalance11Id" value="Մնացորդ" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="programBalance11Id" disabled="true" value="#{portfolioForm.selectedPortfolio.providedProgram1 - portfolioForm.selectedPortfolio.program1}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                </p:inputNumber>
+                                                            </div>
+
+
+                                                            <div class="clear3"></div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <p:outputLabel for="yearlyinforamtionProgram1Id" value="Զբոսաշրջագրավչության օբյեկտները բազմալեզու տեղեկատվական ցուցանակներով ապահովում" styleClass="fw-600"/>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                                                                <p:outputLabel for="program2Id" value="Նախատեսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber styleClass="prog-input" id="program2Id" value="#{portfolioForm.selectedPortfolio.providedProgram2}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance2Id totalQuarterBalanceProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="program22Id" value="Ծախսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="program22Id"  value="#{portfolioForm.selectedPortfolio.program2}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance2Id totalQuarterSpentProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="programBalance2Id" value="Մնացորդ" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="programBalance2Id" disabled="true" value="#{portfolioForm.selectedPortfolio.providedProgram2 - portfolioForm.selectedPortfolio.program2}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                </p:inputNumber>
+                                                            </div>
+
+
+                                                            <div class="clear3"></div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <p:outputLabel for="yearlyinforamtionProgram1Id" value="Էլեկտրոնային քարոզչություն" styleClass="fw-600"/>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                                                                <p:outputLabel for="program3Id" value="Նախատեսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber styleClass="prog-input" id="program3Id" value="#{portfolioForm.selectedPortfolio.providedProgram3}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance3Id totalQuarterBalanceProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="program33Id" value="Ծախսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="program33Id"  value="#{portfolioForm.selectedPortfolio.program3}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance3Id totalQuarterSpentProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="programBalance3Id" value="Մնացորդ" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="programBalance3Id" value="#{portfolioForm.selectedPortfolio.providedProgram3 - portfolioForm.selectedPortfolio.program3}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                </p:inputNumber>
+                                                            </div>
+
+
+                                                            <div class="clear3"></div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <p:outputLabel for="yearlyinforamtionProgram1Id" value="Քարոզչական աշխատանքների իրականացում"/>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                                                                <p:outputLabel for="program4Id" value="Նախատեսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber styleClass="prog-input" id="program4Id" value="#{portfolioForm.selectedPortfolio.providedProgram4}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance4Id totalQuarterBalanceProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="program44Id" value="Ծախսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="program44Id" value="#{portfolioForm.selectedPortfolio.program4}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance4Id totalQuarterSpentProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="programBalance4Id" value="Մնացորդ" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="programBalance4Id" disabled="true" value="#{portfolioForm.selectedPortfolio.providedProgram4 - portfolioForm.selectedPortfolio.program4}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                </p:inputNumber>
+                                                            </div>
+
+
+                                                            <div class="clear3"></div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <p:outputLabel for="yearlyinforamtionProgram1Id" value="Փառատոնների կազմակերպում" styleClass="fw-600"/>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                                                                <p:outputLabel for="program5Id" value="Նախատեսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber styleClass="prog-input" id="program5Id" value="#{portfolioForm.selectedPortfolio.providedProgram5}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance5Id totalQuarterBalanceProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="program55Id" value="Ծախսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="program55Id"  value="#{portfolioForm.selectedPortfolio.program5}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance5Id totalQuarterSpentProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="programBalance5Id" value="Մնացորդ" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="programBalance5Id" disabled="true" value="#{portfolioForm.selectedPortfolio.providedProgram5 - portfolioForm.selectedPortfolio.program5}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                </p:inputNumber>
+                                                            </div>
+
+                                                            <div class="clear3"></div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <p:outputLabel for="yearlyinforamtionProgram1Id" value="Միջազգային կազմակերպություններում ԼՂՀ մասնակցության հետ կապված  անդամավճարներ" styleClass="fw-600"/>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6 form-group">
+                                                                <p:outputLabel for="program6Id" value="Նախատեսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber styleClass="prog-input" id="program6Id" value="#{portfolioForm.selectedPortfolio.providedProgram6}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance6Id totalQuarterBalanceProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="program65Id" value="Ծախսված" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="program65Id"  value="#{portfolioForm.selectedPortfolio.program6}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                    <p:ajax event="change" update="totalQuarterProgramsId programBalance6Id totalQuarterSpentProgramsId totalQuarterBalanceProgramsId"></p:ajax>
+                                                                </p:inputNumber>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3 form-group">
+                                                                <p:outputLabel for="programBalance6Id" value="Մնացորդ" styleClass="form-control-label"/>
+                                                                <p:inputNumber id="programBalance6Id" disabled="true" value="#{portfolioForm.selectedPortfolio.providedProgram6 - portfolioForm.selectedPortfolio.program6}" decimalPlaces="2" symbol=" դրամ" symbolPosition="s">
+                                                                </p:inputNumber>
+                                                            </div>
+
+                                                            <div class="clear3"></div>
+                                                            <div class="col-xs-12">
+                                                                <h2 class="de-title">Ընդամենը</h2>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                                <p:outputLabel for="totalQuarterProgramsId" value="Ընդամենը" styleClass="form-control-label"/>
+                                                                <h:outputText id="totalQuarterProgramsId" value="  #{portfolioForm.selectedPortfolio.providedTotal} դրամ">
+                                                                </h:outputText>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                                <p:outputLabel for="totalQuarterSpentProgramsId" value="Ծախսված" styleClass="form-control-label"/>
+                                                                <h:outputText id="totalQuarterSpentProgramsId" value="  #{portfolioForm.selectedPortfolio.total} դրամ">
+                                                                </h:outputText>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                                <p:outputLabel for="totalQuarterBalanceProgramsId" value="Մնացորդ" styleClass="form-control-label"/>
+                                                                <h:outputText id="totalQuarterBalanceProgramsId" value="  #{portfolioForm.selectedPortfolio.totalBalance} դրամ">
+                                                                </h:outputText>
+                                                            </div>
+
+                                                        </h:panelGroup>
+
+
                                                     </h:panelGroup>
                                                 </h:panelGroup>
                                                 <div class="clear"></div>

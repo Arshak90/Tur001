@@ -40,6 +40,12 @@ public class Portfolio {
   private Integer icShushi;
   private Integer icTigranakert;
   private Integer icTsaxkashat;
+  private BigDecimal providedProgram1;
+  private BigDecimal providedProgram2;
+  private BigDecimal providedProgram3;
+  private BigDecimal providedProgram4;
+  private BigDecimal providedProgram5;
+  private BigDecimal providedProgram6;
 
 
   public Integer getId() {
@@ -314,11 +320,73 @@ public class Portfolio {
     this.icTsaxkashat = icTsaxkashat;
   }
 
+  public BigDecimal getProvidedProgram1() {
+    return providedProgram1;
+  }
+
+  public void setProvidedProgram1(BigDecimal providedProgram1) {
+    this.providedProgram1 = providedProgram1;
+  }
+
+  public BigDecimal getProvidedProgram2() {
+    return providedProgram2;
+  }
+
+  public void setProvidedProgram2(BigDecimal providedProgram2) {
+    this.providedProgram2 = providedProgram2;
+  }
+
+  public BigDecimal getProvidedProgram3() {
+    return providedProgram3;
+  }
+
+  public void setProvidedProgram3(BigDecimal providedProgram3) {
+    this.providedProgram3 = providedProgram3;
+  }
+
+  public BigDecimal getProvidedProgram4() {
+    return providedProgram4;
+  }
+
+  public void setProvidedProgram4(BigDecimal providedProgram4) {
+    this.providedProgram4 = providedProgram4;
+  }
+
+  public BigDecimal getProvidedProgram5() {
+    return providedProgram5;
+  }
+
+  public void setProvidedProgram5(BigDecimal providedProgram5) {
+    this.providedProgram5 = providedProgram5;
+  }
+
+  public BigDecimal getProvidedProgram6() {
+    return providedProgram6;
+  }
+
+  public void setProvidedProgram6(BigDecimal providedProgram6) {
+    this.providedProgram6 = providedProgram6;
+  }
+
   public String getTotal() {
     NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
     DecimalFormat df = (DecimalFormat) nf;
     df.applyPattern("#,##0.00");
     return df.format(program1.add(program2).add(program3).add(program4).add(program5).add(program6));
+  }
+
+  public String getProvidedTotal() {
+    NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+    DecimalFormat df = (DecimalFormat) nf;
+    df.applyPattern("#,##0.00");
+    return df.format(providedProgram1.add(providedProgram2).add(providedProgram3).add(providedProgram4).add(providedProgram5).add(providedProgram6));
+  }
+
+  public String getTotalBalance() {
+    NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+    DecimalFormat df = (DecimalFormat) nf;
+    df.applyPattern("#,##0.00");
+    return  df.format((providedProgram1.add(providedProgram2).add(providedProgram3).add(providedProgram4).add(providedProgram5).add(providedProgram6)).subtract(program1.add(program2).add(program3).add(program4).add(program5).add(program6)));
   }
 
   @Override
