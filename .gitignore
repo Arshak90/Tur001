@@ -8,3 +8,4 @@ WebContent/
 /src/main/resources/
 src/main/webapp/upload/
 /src/main/resources/db.sqlite
+/lib/
