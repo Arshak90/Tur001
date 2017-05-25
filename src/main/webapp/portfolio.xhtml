@@ -42,6 +42,18 @@
 
 </h:head>
 <h:body>
+
+    <!--Authorisation-->
+    <div class="valign-wrapper" id="login-page">
+        <div class="container">
+            <div class="center-align">
+                <f:metadata>
+                    <f:event type="preRenderView" listener="#{authorisationUtil.onLoad}" />
+                </f:metadata>
+            </div>
+        </div>
+    </div>
+
     <style>
         .ui-growl {
             right: 30px;
@@ -233,10 +245,20 @@
 
                     <!-- ############ PAGE START-->
                     <h:panelGroup id="savePanelId" layout="block" class="app-header white box-shadow">
-                        <div class="float-right">
+                        <div class="float-right" style="margin-right: 105px">
                             <p:commandButton actionListener="#{portfolioForm.updatetYearlyinforamtion}"
                                              value="Պահպանել" rendered="#{portfolioForm.selectedPortfolio == null}" style="margin: 9px 24px;" update="growl"></p:commandButton>
                         </div>
+                        <c:if test="#{!authorisationUtil.authorisedUser}">
+                            <div class="de-btn-top">
+                                <h:commandLink immediate="true" value="Մուտք" styleClass="btn " actionListener="#{authorisationUtil.signIn}"/>
+                            </div>
+                        </c:if>
+                        <c:if test="#{authorisationUtil.authorisedUser}">
+                            <div class="de-btn-top">
+                                <h:commandLink immediate="true" value="Դուրս գալ" styleClass="btn " actionListener="#{authorisationUtil.signout}"/>
+                            </div>
+                        </c:if>
                         <div style="margin-top: 50px;" id="growId">
                             <p:growl id="growl" sticky="false" />
                         </div>

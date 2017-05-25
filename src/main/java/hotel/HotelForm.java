@@ -139,7 +139,7 @@ public class HotelForm implements Form, Serializable {
     }
 
     public Integer total(){
-        return getRoot().getHotelDao().getHotelsByTypeId(this.getHotelTypeIdForFind()).size() ;
+        return getRoot().getHotelDao().getAll().size() ;
     }
 
     public Integer totalBadCount(){

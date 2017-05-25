@@ -79,6 +79,7 @@
                         </li>
 
                         <h:panelGroup rendered="#{dashboardForm.admin}">
+			<c:if test="#{authorisationUtil.authorisedUser}">
                             <li>
                                 <a href="portfolio.xhtml">
                             <span class="nav-icon">
@@ -89,6 +90,7 @@
                                     <span class="nav-text">Թղթապանակ</span>
                                 </a>
                             </li>
+			    </c:if>
                         </h:panelGroup>
 
                         <li>
@@ -276,6 +278,7 @@
                                                             <div class="list-body">
                                                                 <h:outputText value="#{restaurant.name}"/>
                                                                 <div style="float: right">
+								<c:if test="#{authorisationUtil.authorisedUser}">
                                                                     <h:commandLink
                                                                             styleClass="glyphicon glyphicon-trash"
                                                                             immediate="true"
@@ -284,6 +287,7 @@
                                                                                 event="click"
                                                                                 render="@this :restaurantsListForm :formId"/>
                                                                     </h:commandLink>
+								</c:if>
                                                                 </div>
                                                                 <small class="block"><i
                                                                         class="fa fa-phone m-r-sm text-muted"></i><h:outputText
@@ -299,11 +303,13 @@
                                 </div>
                             </div>
                             <div class="p-a b-t text-center">
-                                <div class="de-btn-top" style="margin-right: 131px">
+                                    <c:if test="#{authorisationUtil.authorisedUser}">
+                                <div class="de-btn-top" style="margin-right: 230px; margin-top: 2px; ">
                                     <h:form>
                                         <p:commandLink  value="Ավելացնել նորը" styleClass="btn btn-fw primary" action="#{restaurantForm.addNew}" update=":formId"/>
                                     </h:form>
                                 </div>
+                                    </c:if>
                                 <span>Ընդամենը : #{restaurantForm.total()}</span>
                             </div>
                         </div>
@@ -422,13 +428,20 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="de-btn-top">
-                                                    <h:commandLink value="Պահպանել" styleClass="btn btn-fw primary"
-                                                                   action="#{restaurantForm.save}"
-                                                                   update="@form :restaurantsListForm">
-
-                                                    </h:commandLink>
-                                                </div>
+						<c:if test="#{authorisationUtil.authorisedUser}">
+                                                        <div class="de-btn-top">
+                                                            <p:commandButton ajax="false" value="Պահպանել" styleClass="btn btn-fw primary"  action="#{restaurantForm.save}" update="@form :restaurantsListForm" >
+        
+                                                            </p:commandButton>
+                                                            <h:commandLink immediate="true" value="Դուրս գալ" styleClass="btn " actionListener="#{authorisationUtil.signout}"/>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="#{!authorisationUtil.authorisedUser}">
+                                                        <div class="de-btn-top">
+                                                            <h:commandLink immediate="true" value="Մուտք" styleClass="btn " actionListener="#{authorisationUtil.signIn}"/>
+                                                        </div>
+                                                    </c:if>
+                                                
                                             </h:form>
                                         </h:panelGroup>
                                         <!-- / fields -->

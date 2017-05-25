@@ -3,6 +3,7 @@ package Core;
 import Core.Dao.CountryDao;
 import Core.Dao.YearDao;
 import hotel.HotelDao;
+import login.UserDao;
 import museum.MuseumDao;
 import portfolio.PortfolioDao;
 import restaurant.RestaurantDao;
@@ -22,6 +23,18 @@ public class Root {
     private TourOperatorDao tourOperatorDao;
     private CountryDao countryDao;
     private home.CountryDao countryDaoForHome;
+    private UserDao userDao;
+
+    public UserDao getUserDao() {
+        if(this.userDao == null){
+            userDao = new UserDao();
+        }
+        return userDao;
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public YearDao getYearDao() {
         if(this.yearDao == null){

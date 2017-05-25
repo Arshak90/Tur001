@@ -76,6 +76,7 @@
                             </li>
 
                             <h:panelGroup rendered="#{dashboardForm.admin}">
+                                <c:if test="#{authorisationUtil.authorisedUser}">
                                 <li>
                                     <a href="portfolio.xhtml">
                             <span class="nav-icon">
@@ -86,6 +87,7 @@
                                         <span class="nav-text">Թղթապանակ</span>
                                     </a>
                                 </li>
+                                </c:if>
                             </h:panelGroup>
 
                             <li>
@@ -200,12 +202,22 @@
                         <div ui-include="'views/blocks/navbar.form.right.html'"></div>
                         <!-- link and dropdown -->
                         <h:form>
-                            <div class="de-btn-top">
+                            <div class="de-btn-top" style="margin-right: 118px;margin-top: 3px">
                                 <button class="md-btn md-flat text-primary">
                                     <հ:commandLink actionListener="#{dashboardForm.resetData}" action="#{HomeForm.resetData}">Թարմացնել տվյալները</հ:commandLink>
                                     <div ui-include="'views/blocks/dropdown.new.html'"></div>
                                 </button>
                             </div>
+                            <c:if test="#{!authorisationUtil.authorisedUser}">
+                                <div class="de-btn-top">
+                                    <h:commandLink immediate="true" value="Մուտք" styleClass="btn " actionListener="#{authorisationUtil.signIn}"/>
+                                </div>
+                            </c:if>
+                            <c:if test="#{authorisationUtil.authorisedUser}">
+                                <div class="de-btn-top">
+                                    <h:commandLink immediate="true" value="Դուրս գալ" styleClass="btn " actionListener="#{authorisationUtil.signout}"/>
+                                </div>
+                            </c:if>
                         </h:form>
 
                         <!-- / -->

@@ -76,16 +76,18 @@
                             </a>
                         </li>
                         <h:panelGroup rendered="#{dashboardForm.admin}">
-                            <li>
-                                <a href="portfolio.xhtml">
-                            <span class="nav-icon">
-                              <i class="material-icons">&#xe896;
-                                <span ui-include="'assets/images/i_7.svg'"></span>
-                              </i>
-                            </span>
-                                    <span class="nav-text">Թղթապանակ</span>
-                                </a>
-                            </li>
+                            <c:if test="#{authorisationUtil.authorisedUser}">
+                                <li>
+                                    <a href="portfolio.xhtml">
+                                <span class="nav-icon">
+                                  <i class="material-icons">&#xe896;
+                                    <span ui-include="'assets/images/i_7.svg'"></span>
+                                  </i>
+                                </span>
+                                        <span class="nav-text">Թղթապանակ</span>
+                                    </a>
+                                </li>
+                            </c:if>
                         </h:panelGroup>
 
 
@@ -201,11 +203,21 @@
                 <div ui-include="'views/blocks/navbar.form.right.html'"></div>
                 <!-- link and dropdown -->
                 <h:form>
-                    <div class="de-btn-top">
+                    <div class="de-btn-top" style="margin-top:3px;margin-right: 120px">
                         <button class="md-btn md-flat text-primary">
                             <հ:commandLink actionListener="#{dashboardForm.resetData}" action="#{HomeForm.resetData}">Թարմացնել տվյալները</հ:commandLink>
                         </button>
                     </div>
+                    <c:if test="#{!authorisationUtil.authorisedUser}">
+                        <div class="de-btn-top">
+                            <h:commandLink immediate="true" value="Մուտք" styleClass="btn " actionListener="#{authorisationUtil.signIn}"/>
+                        </div>
+                    </c:if>
+                    <c:if test="#{authorisationUtil.authorisedUser}">
+                        <div class="de-btn-top">
+                            <h:commandLink immediate="true" value="Դուրս գալ" styleClass="btn " actionListener="#{authorisationUtil.signout}"/>
+                        </div>
+                    </c:if>
                 </h:form>
 
                 <!-- / -->

@@ -11,6 +11,8 @@
 
     <bean id="fileUpload" class="Core.FileUpload" scope="session"/>
 
+    <bean id="authorisationUtil" class="Core.AuthorisationUtil" scope="session"/>
+
     <bean id="projectEditForm" class="Beans.ProjectEditForm" scope="session">
         <property name="root" ref="root"/>
     </bean>
@@ -75,6 +77,14 @@
     <!--Map form-->
     <bean id="mapForm" class="analytics.MapForm" scope="session" >
         <property name="root" ref="root"/>
+    </bean>
+
+    <!-- Login Form -->
+    <bean id="user" class="login.User" scope="session"/>
+
+    <bean id="loginForm" class="login.LoginForm" scope="session" >
+        <property name="root" ref="root"/>
+        <property name="user" ref="user"/>
     </bean>
 
 

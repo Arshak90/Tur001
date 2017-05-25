@@ -45,6 +45,8 @@
 </h:head>
 <body>
 
+
+
     <div class="app" id="app">
 
 
@@ -79,6 +81,7 @@
                             </li>
 
                             <h:panelGroup rendered="#{dashboardForm.admin}">
+                                <c:if test="#{authorisationUtil.authorisedUser}">
                                 <li>
                                     <a href="portfolio.xhtml">
                             <span class="nav-icon">
@@ -89,6 +92,7 @@
                                         <span class="nav-text">Թղթապանակ</span>
                                     </a>
                                 </li>
+                                </c:if>
                             </h:panelGroup>
 
                             <li>
@@ -257,27 +261,29 @@
                                                 <h:form id="hotelsListForm">
                                                     <div class="list-item pointer">
                                                         <c:forEach var="hotel" items="#{hotelForm.hotelsWithType}">
-                                                            <p:commandLink actionListener="#{hotelForm.edit(hotel.id)}" immediate="true" update=":formId">
-                                                                    <div class="list-left" >
-                                                                        <span class="w-40 avatar">
-                                                                            <c:if test="#{not empty hotel.photoWay}">
-                                                                                <h:graphicImage url="upload/#{hotel.photoWay}"/>
-                                                                            </c:if>
-                                                                            <c:if test="#{empty hotel.photoWay}">
-                                                                                <img src="assets/images/p0.svg" class="img-circle"></img>
-                                                                            </c:if>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="list-body">
-                                                                        <h:outputText value="#{hotel.name}"/>
-                                                                        <div style="float: right">
-                                                                            <h:commandLink styleClass="glyphicon glyphicon-trash" immediate="true" onclick="return confirm('Ջնջել');">
-                                                                                <f:ajax listener="#{hotelForm.delete(hotel.id)}" event="click" render="@this :hotelsListForm :formId"/>
-                                                                            </h:commandLink>
+                                                                <p:commandLink actionListener="#{hotelForm.edit(hotel.id)}" immediate="true" update=":formId">
+                                                                        <div class="list-left" >
+                                                                            <span class="w-40 avatar">
+                                                                                <c:if test="#{not empty hotel.photoWay}">
+                                                                                    <h:graphicImage url="upload/#{hotel.photoWay}"/>
+                                                                                </c:if>
+                                                                                <c:if test="#{empty hotel.photoWay}">
+                                                                                    <img src="assets/images/p0.svg" class="img-circle"></img>
+                                                                                </c:if>
+                                                                            </span>
                                                                         </div>
-                                                                        <small class="block"><i class="fa fa-phone m-r-sm text-muted"></i><h:outputText value="#{hotel.mobilePhoneNumber}"/> </small>
-                                                                    </div>
-                                                            </p:commandLink>
+                                                                        <div class="list-body">
+                                                                            <h:outputText value="#{hotel.name}"/>
+                                                                            <div style="float: right">
+                                                                                <c:if test="#{authorisationUtil.authorisedUser}">
+                                                                                    <h:commandLink styleClass="glyphicon glyphicon-trash" immediate="true" onclick="return confirm('Ջնջել');">
+                                                                                        <f:ajax listener="#{hotelForm.delete(hotel.id)}" event="click" render="@this :hotelsListForm :formId"/>
+                                                                                    </h:commandLink>
+                                                                                </c:if>
+                                                                            </div>
+                                                                            <small class="block"><i class="fa fa-phone m-r-sm text-muted"></i><h:outputText value="#{hotel.mobilePhoneNumber}"/> </small>
+                                                                        </div>
+                                                                </p:commandLink>
                                                         </c:forEach>
                                                     </div>
                                                 </h:form>
@@ -286,11 +292,13 @@
                                     </div>
                                 </div>
                                 <div class="p-a b-t text-center" >
-                                    <div class="de-btn-top" style="margin-right: 131px">
-                                        <h:form>
-                                            <p:commandButton  value="Ավելացնել նորը" styleClass="btn btn-fw primary" action="#{hotelForm.addNew}" update=":formId"/>
-                                        </h:form>
-                                    </div>
+                                    <c:if test="#{authorisationUtil.authorisedUser}">
+                                        <div class="de-btn-top" style="margin-right: 230px; margin-top: 2px; ">
+                                            <h:form>
+                                                <p:commandButton  value="Ավելացնել նորը" styleClass="btn btn-fw primary" action="#{hotelForm.addNew}" update=":formId"/>
+                                            </h:form>
+                                        </div>
+                                    </c:if>
                                     <h:panelGroup layout="block" id="hotelTotalId">
                                         <span>Ընդամենը : #{hotelForm.total()}</span><br/>
                                         <span>Ընդանուր մահճակալների քանակը : #{hotelForm.totalBadCount()}</span>
@@ -443,10 +451,18 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="de-btn-top">
-                                                        <p:commandButton ajax="false" value="Պահպանել" styleClass="btn btn-fw primary"  actionListener="#{hotelForm.save}" update="@form :hotelsListForm" >
-                                                        </p:commandButton>
-                                                    </div>
+                                                    <c:if test="#{authorisationUtil.authorisedUser}">
+                                                        <div class="de-btn-top">
+                                                            <p:commandButton ajax="false" value="Պահպանել" styleClass="btn btn-fw primary"  actionListener="#{hotelForm.save}" update="@form :hotelsListForm" >
+                                                            </p:commandButton>
+                                                            <h:commandLink immediate="true" value="Դուրս գալ" styleClass="btn " actionListener="#{authorisationUtil.signout}"/>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="#{!authorisationUtil.authorisedUser}">
+                                                        <div class="de-btn-top">
+                                                            <h:commandLink immediate="true" value="Մուտք" styleClass="btn " actionListener="#{authorisationUtil.signIn}"/>
+                                                        </div>
+                                                    </c:if>
                                                 </h:form>
                                             </h:panelGroup>
                                                 <!-- / fields -->
