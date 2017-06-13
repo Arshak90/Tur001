@@ -13,50 +13,33 @@
       xmlns:g="http://java.sun.com/jsf/html">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Login</title>
-
+    <title>Մուտք գործել</title>
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="materialize/css/materialize.min.css"/>
-
+    <link rel="stylesheet" href="assets/styles/app.css"/>
     <!-- style -->
     <link rel="stylesheet" href="assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
 
 </h:head>
-<h:body styleClass="cyan lighten-5">
-    <div class="valign-wrapper" id="login-page">
-        <div class="container">
-            <div class="center-align">
-                <div class="row">
-                    <div class="col s6 offset-s3">
-                        <div class="card">
-                            <div class="card-content">
-                                <img class="responsive-img" style="max-width: 64px;" src="images/login-page-logo.png"/>
-                                <div class="left-align">
-                                    <h:form id="login-form">
-                                        <p:growl autoUpdate="true" id="growl" showDetail="true" sticky="true" />
-                                        <div class="row">
-                                            <div class="col s12 input-field">
-                                                <h:inputText value="#{loginForm.user.username}" id="username" required="true" requiredMessage="Username is required"/>
-                                                <h:outputLabel for="username" value="Անուն"/>
-                                            </div>
-                                            <div class="col s12 input-field">
-                                                <p:password value="#{loginForm.user.password}" id="password" required="true" requiredMessage="Password is required"/>
-                                                <h:outputLabel for="password" value="Գաղտնաբառ"/>
-                                            </div>
-                                            <div class="col s7 input-field">
-                                                <h:commandButton value="Մուտք" styleClass="btn " action="#{loginForm.login}"/>
-                                            </div>
-                                            <div class="col s5 input-field">
-                                                <h:commandButton value="Գլխավոր էջ" styleClass="btn " immediate="true" action="#{loginForm.toHomePage}"/>
-                                            </div>
-
-                                        </div>
-                                    </h:form>
-                                </div>
-                            </div>
-                        </div>
+<h:body styleClass="login-body">
+    <div class="dark-block">
+        <div class="valign-wrapper" id="login-page">
+            <div class="login-container">
+                <h:form id="login-form">
+                    <p:growl autoUpdate="true" id="growl" showDetail="true" sticky="true" />
+                    <h3>Մուտք գործել</h3>
+                    <div class="col s12 input-field">
+                        <p:inputText value="#{loginForm.user.username}" styleClass="form-control" required="true" requiredMessage="Անունը պարտադիր դաշտ է" placeholder="Անուն"/>
                     </div>
-                </div>
+                    <div class="col s12 input-field">
+                        <p:password value="#{loginForm.user.password}" styleClass="form-control"  required="true" requiredMessage="Գաղտնաբառը պարտադիր դաշտ է" placeholder="Գաղտնաբառ"/>
+                    </div>
+                    <div class="col s7 input-field">
+                        <h:commandButton value="Մուտք" styleClass="login-btn" style="margin-top: 15px;" action="#{loginForm.login}"/>
+                    </div>
+                    <div class="col s5 input-field">
+                        <h:commandButton value="Գլխավոր էջ" styleClass="login-btn dark" immediate="true" action="#{loginForm.toHomePage}"/>
+                    </div>
+                </h:form>
             </div>
         </div>
     </div>
@@ -66,8 +49,6 @@
             $('#login-page').css({'height':window.innerHeight+'px'});
         })
     </script>
-
-
     <!-- build:js scripts/app.html.js -->
     <!-- jQuery -->
     <script type="text/javascript" src="javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=6.0"></script>
@@ -82,9 +63,6 @@
     <script src="libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
     <script src="libs/jquery/PACE/pace.min.js"></script>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="materialize/js/materialize.min.js"></script>
-    <!-- ajax -->
     <!--<script src="libs/jquery/jquery-pjax/jquery.pjax.js"></script>-->
     <!--<script src="scripts/ajax.js"></script>-->
     <!-- endbuild -->

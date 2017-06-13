@@ -6180,3 +6180,134 @@ textarea.md-input {
   right: 26px;
   z-index: 9999;
 }
+
+.login-body {
+  background: #F0F0F0 url("../../images/0.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.login-container {
+  width: 410px;
+  background: #fff;
+  padding: 45px 40px;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 -1px 0px rgba(0, 0, 0, 0.02);
+}
+
+.login-container h3 {
+  color: #0cc2aa;
+  font-size: 28px;
+  font-weight: 700;
+  border-left: 5px solid #0cc2aa;
+  padding-left: 35px;
+  position: relative;
+  left: -40px;
+  line-height: 36px;
+  margin-bottom: 45px;
+}
+
+.login-btn {
+  color: #fff;
+  background: #0cc2aa !important;
+  box-shadow: none !important;
+  display: inline-block;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 12px;
+  border-radius: 3px;
+  font-weight: 400;
+  text-shadow: none;
+  font-size: 18px;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  margin-bottom: 15px;
+}
+
+.login-btn:hover {
+  background: #0dceb4 !important;
+}
+
+.login-btn.dark {
+  background: #fff !important;
+  color: #2e3e4e;
+  padding: 0;
+  font-weight: 400;
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+
+.login-btn.dark:hover {
+  background: #fff !important;
+  color: #2e3e4e;
+  text-decoration: none;
+}
+
+.dark-block {
+  height: 100%;
+  /*background: linear-gradient(150deg, rgba(12,197,1194,.5), rgba(12,225,197,.5));*/
+  background: rgba(0,0,0,0);
+}
+.login-container .form-control {
+
+  margin-bottom: 15px !important;
+  box-shadow: none;
+  padding: 15px;
+  border: none !important;
+  border-radius: 3px;
+  background: #F2F2F2 !important;
+}
+
+.valign-wrapper {
+  padding-top: 11%;
+}
+
+.ui-growl-item {
+  background: #fff !important;
+  background-color: #fff !important;
+}
+
+.ui-growl-item  .ui-growl-title {
+  color: #333 !important;
+  text-shadow: none !important;
+}
+
+.ui-growl-item p {
+  color: #333 !important;
+  text-shadow: none !important;
+}
+
+.ui-growl-item .ui-growl-image.ui-growl-image-error {
+  display: none;
+}
+
+.ui-growl-item .ui-growl-message {
+  float: left !important;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.ui-growl-item-container {
+  opacity: 1 !important;
+  width: 400px;
+}
+
+.ui-growl {
+  width: 405px;
+}
+
+.ui-state-highlight {
+  border: none !important;
+}
+
+.ui-shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.02) !important;
+}
